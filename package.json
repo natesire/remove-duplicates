@@ -1,0 +1,27 @@
+{
+  "name": "chatbot-trainer",
+  "version": "1.0.0",
+  "description": "Train team on learning repeat solutions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natesire/chatbot-trainer.git"
+  },
+  "author": "Nate Sire",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/natesire/chatbot-trainer/issues"
+  },
+  "homepage": "https://github.com/natesire/chatbot-trainer#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "prompt-sync": "^4.2.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "readline": "^1.3.0"
+  }
+}
