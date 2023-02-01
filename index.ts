@@ -1,7 +1,41 @@
 const readline = require("readline");
 const mongoose = require("mongoose");
-import fs from 'fs';
+import * as fs from 'fs';
+import { NodeTree } from './types';
 
+export class Question {
+    public tree;
+    private treeFilename;
+
+    constructor(treeFilename?: string) {
+        this.tree = 1;
+        this.treeFilename = treeFilename;
+    }
+
+    loadTree() {
+        // load tree from file
+        this.tree = JSON.parse(fs.readFileSync(this.treeFilename, 'utf8'));
+    }
+
+    search() {
+
+    }
+
+    getTree() {
+        //return questionsAnswersTree;
+        return { test: 'test' }
+    }
+
+}
+ 
+class FileManager {
+    writeObjToFile(obj: Node, fileName: string) {
+        fs.writeFile('tree.txt', JSON.stringify(obj), function (err) {
+            if (err) return console.log(err);
+            //console.log('file written');
+        });
+    }
+}
 
 const commandLine = readline.createInterface({
     input: process.stdin,
@@ -10,37 +44,25 @@ const commandLine = readline.createInterface({
 
 let rootQuestion : string = '';
 
-interface Node {
-    question: string,
-    yes?: Node,
-    no?: Node
-}
-
-let questionsAnswersTree : Node = {
-    "question": "question",
+let questionsAnswersTree : NodeTree = {
+    "statement": "I am here to help you find the answer to your question",
+    "question": "what are you searching for?",
     "yes": {
+        "statement": "This expression is not callable",
         "question": "javascript",
         "yes": {
-            "question": "imports",
+            "statement": "This expression is not callable",
+            "question": "is it defined as a function?",
             "yes": {
-            "question": "imports",
-        },
-        "no": {
-            "question": "browser",
+                "statement": "This expression is not callable",
+                "question": "imports",
             },
-        },
+
         "no": {
-            "question": "bottom",
-        },
-    },
-    "no": {
-        "question": "typescript",
-        "yes": {
-            "question": "types",
-        },
-        "no": {
-            "question": "transpile",
-        },
+            "statement": "This expression is not callable",
+            "question": "is it defined as a function?",
+            },
+        } 
     }
 }
 
@@ -91,51 +113,41 @@ let searchForQuestionNode = function(search: string, currentNode: Node) : Node {
     return currentNode;
 }
 
-// optional question since recursive called
-var waitForUserInput = function(question: string, currentNode: Node, i) {
-    console.log(question);
-    
-    commandLine.question("User Response: ", function(userInput: string) { // this actually gets the user input
+var nextNode = function (currentNode: Node, userInput: string) : Node {
+    return currentNode[userInput] as Node;
+}
 
-        if (userInput == "exit") {
-          commandLine.close();
-        }
+function waitForUserInput(nodeTree?: Node) {
+    if (nodeTree === undefined) {
+        console.log('currentNode is undefined');
+        commandLine.close();
+    } else {
+        let question: string = nodeTree.question;
+        console.log(question);
 
-        // search for best node, Breadth First Search, if first input
-        // breadthFirstSearch(userInput, questionsAnswersTree);
-        if(i === 0) {
-            let nextNode : Node = searchForQuestionNode(userInput, questionsAnswersTree);
-            let question = nextNode.question;
-            waitForUserInput(question, nextNode, i++);
-        }
+        commandLine.question("User Response: ", function (userInput: string) {
 
-        if(userInput === 'yes') {
-            let nextNode : Node = currentNode['yes'] || currentNode; // yes or no
-            let question = nextNode.question;
-            waitForUserInput(question, nextNode, i++);
-        } else if(userInput === 'no') {
-            let nextNode : Node = currentNode['no'] || currentNode; // yes or no
-            let question = nextNode.question;
-            waitForUserInput(question, nextNode, i++);
-        }
-        
-    });
-  }
+            if (userInput == "exit") {
+                commandLine.close();
+            }
 
-waitForUserInput('What are you searching for?', questionsAnswersTree, 0);
+            if (userInput === 'yes' || userInput === 'no') {
+                waitForUserInput(nodeTree[userInput]);
+            }
+
+            let nextNode: Node = searchForQuestionNode(userInput, questionsAnswersTree);
+            waitForUserInput(nextNode);
+        });
+    }
+}
+
+waitForUserInput(questionsAnswersTree);
 
 commandLine.on("close", function() {
     console.log("\nBYE BYE !!!");
     process.exit(0);
 });
 
-// convert to string
-// flatten object to string
-
-let tree = String(questionsAnswersTree);
-
-fs.writeFile('tree.txt', tree, function (err) {
-    if (err) return console.log(err);
-    //console.log('Questions and Answers in tree written to tree.txt');
-});
+let writer = new FileManager();
+writer.writeObjToFile(questionsAnswersTree, 'tree.txt');
 
