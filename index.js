@@ -4,14 +4,15 @@ exports.Question = void 0;
 var readline = require("readline");
 var mongoose = require("mongoose");
 var fs = require("fs");
+var fileManager_1 = require("./fileManager");
 var Question = /** @class */ (function () {
-    function Question(treeFilename) {
+    function Question(file) {
         this.tree = { statement: 'test', question: '' };
-        this.treeFilename = treeFilename;
+        this.file = file;
     }
     Question.prototype.loadTree = function () {
         // load tree from file
-        this.tree = JSON.parse(fs.readFileSync(this.treeFilename, 'utf8'));
+        this.tree = JSON.parse(fs.readFileSync('js.tree.json', 'utf8'));
     };
     Question.prototype.search = function () {
     };
@@ -22,18 +23,6 @@ var Question = /** @class */ (function () {
     return Question;
 }());
 exports.Question = Question;
-var FileManager = /** @class */ (function () {
-    function FileManager() {
-    }
-    FileManager.prototype.writeStringToFile = function (str, fileName) {
-        fs.writeFile('tree.txt', JSON.stringify(str), function (err) {
-            if (err)
-                return console.log(err);
-            //console.log('file written');
-        });
-    };
-    return FileManager;
-}());
 var commandLine = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -103,7 +92,8 @@ var searchForQuestionNode = function (search, currentNode) {
     return currentNode;
 };
 var nextNode = function (currentNode, userInput) {
-    return currentNode[userInput];
+    //return currentNode[userInput] as NodeTree;
+    return currentNode;
 };
 function waitForCommandLine(nodeTree) {
     if (nodeTree === undefined) {
@@ -130,5 +120,5 @@ commandLine.on("close", function () {
     console.log("\nBYE BYE !!!");
     process.exit(0);
 });
-var writer = new FileManager();
-writer.writeStringToFile(JSON.stringify(dataTree), 'tree.txt');
+var file = new fileManager_1["default"]('tree.txt');
+file.writeToFile(JSON.stringify(dataTree), 'tree.txt');

@@ -2,19 +2,20 @@ const readline = require("readline");
 const mongoose = require("mongoose");
 import * as fs from 'fs';
 import { NodeTree } from './types';
+import FileManager from './fileManager';
 
 export class Question {
     public tree : NodeTree;
-    private treeFilename;
+    private file;
 
-    constructor(treeFilename?: string) {
+    constructor(file?: FileManager) {
         this.tree = { statement: 'test', question: '' };
-        this.treeFilename = treeFilename;
+        this.file = file;
     }
 
     loadTree() {
         // load tree from file
-        this.tree = JSON.parse(fs.readFileSync('js.tree.json', 'utf8'));
+        this.tree = JSON.parse(file.read());
     }
 
     search() {
@@ -26,15 +27,6 @@ export class Question {
         return { test: 'test' }
     }
 
-}
- 
-class FileManager {
-    writeStringToFile(str: string, fileName: string) {
-        fs.writeFile('tree.txt', JSON.stringify(str), function (err) {
-            if (err) return console.log(err);
-            //console.log('file written');
-        });
-    }
 }
 
 const commandLine = readline.createInterface({
@@ -149,6 +141,6 @@ commandLine.on("close", function() {
     process.exit(0);
 });
 
-let writer = new FileManager();
-writer.writeStringToFile(JSON.stringify(dataTree), 'tree.txt');
+let file = new FileManager('tree.txt');
+file.writeToFile(JSON.stringify(dataTree), 'tree.txt');
 
