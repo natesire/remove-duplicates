@@ -3,7 +3,6 @@ exports.__esModule = true;
 exports.Question = void 0;
 var readline = require("readline");
 var mongoose = require("mongoose");
-var fs = require("fs");
 var fileManager_1 = require("./fileManager");
 var Question = /** @class */ (function () {
     function Question(file) {
@@ -11,8 +10,7 @@ var Question = /** @class */ (function () {
         this.file = file;
     }
     Question.prototype.loadTree = function () {
-        // load tree from file
-        this.tree = JSON.parse(fs.readFileSync('js.tree.json', 'utf8'));
+        this.tree = JSON.parse(file.read());
     };
     Question.prototype.search = function () {
     };
@@ -120,5 +118,5 @@ commandLine.on("close", function () {
     console.log("\nBYE BYE !!!");
     process.exit(0);
 });
-var file = new fileManager_1["default"]('tree.txt');
-file.writeToFile(JSON.stringify(dataTree), 'tree.txt');
+var file = new fileManager_1["default"]('js.tree.json');
+file.writeToFile(JSON.stringify(dataTree));

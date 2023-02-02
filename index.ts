@@ -14,7 +14,6 @@ export class Question {
     }
 
     loadTree() {
-        // load tree from file
         this.tree = JSON.parse(file.read());
     }
 
@@ -141,6 +140,6 @@ commandLine.on("close", function() {
     process.exit(0);
 });
 
-let file = new FileManager('tree.txt');
-file.writeToFile(JSON.stringify(dataTree), 'tree.txt');
+let file = new FileManager('js.tree.json');
+file.writeToFile(JSON.stringify(dataTree));
 

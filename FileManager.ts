@@ -8,15 +8,15 @@ export default class FileManager {
     }
 
     read() : string {
-        return fs.readFileSync(this.fileName, 'utf8');
+        return fs.readFileSync('js.tree.json', 'utf8');
     }
 
-    writeToFile(data: any, fileName: string) {
+    writeToFile(data: any) {
         let dataFormatted : string = 'default data';
         if(typeof data == 'object') {
             dataFormatted = JSON.stringify(data);
         }
-        fs.writeFile(fileName, dataFormatted, function (err) {
+        fs.writeFile('js.tree.json', dataFormatted, function (err) {
             if (err) return console.log(err);
         });
     }
