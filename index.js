@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 var fs = require("fs");
 var Question = /** @class */ (function () {
     function Question(treeFilename) {
-        this.tree = 1;
+        this.tree = { statement: 'test', question: '' };
         this.treeFilename = treeFilename;
     }
     Question.prototype.loadTree = function () {
@@ -25,8 +25,8 @@ exports.Question = Question;
 var FileManager = /** @class */ (function () {
     function FileManager() {
     }
-    FileManager.prototype.writeObjToFile = function (obj, fileName) {
-        fs.writeFile('tree.txt', JSON.stringify(obj), function (err) {
+    FileManager.prototype.writeStringToFile = function (str, fileName) {
+        fs.writeFile('tree.txt', JSON.stringify(str), function (err) {
             if (err)
                 return console.log(err);
             //console.log('file written');
@@ -39,7 +39,7 @@ var commandLine = readline.createInterface({
     output: process.stdout
 });
 var rootQuestion = '';
-var questionsAnswersTree = {
+var dataTree = {
     "statement": "I am here to help you find the answer to your question",
     "question": "what are you searching for?",
     "yes": {
@@ -105,30 +105,30 @@ var searchForQuestionNode = function (search, currentNode) {
 var nextNode = function (currentNode, userInput) {
     return currentNode[userInput];
 };
-var waitForUserInput = function (currentNode) {
-    if (currentNode === undefined) {
+function waitForCommandLine(nodeTree) {
+    if (nodeTree === undefined) {
         console.log('currentNode is undefined');
         commandLine.close();
     }
     else {
-        var question = currentNode.question;
+        var question = nodeTree.question;
         console.log(question);
         commandLine.question("User Response: ", function (userInput) {
             if (userInput == "exit") {
                 commandLine.close();
             }
             if (userInput === 'yes' || userInput === 'no') {
-                waitForUserInput(currentNode[userInput]);
+                waitForCommandLine(nodeTree[userInput]);
             }
-            var nextNode = searchForQuestionNode(userInput, questionsAnswersTree);
-            waitForUserInput(nextNode);
+            var nextNode = searchForQuestionNode(userInput, dataTree);
+            waitForCommandLine(nextNode);
         });
     }
-};
-waitForUserInput(questionsAnswersTree);
+}
+waitForCommandLine(dataTree);
 commandLine.on("close", function () {
     console.log("\nBYE BYE !!!");
     process.exit(0);
 });
 var writer = new FileManager();
-writer.writeObjToFile(questionsAnswersTree, 'tree.txt');
+writer.writeStringToFile(JSON.stringify(dataTree), 'tree.txt');
