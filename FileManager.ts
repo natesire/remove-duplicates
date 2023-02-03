@@ -1,5 +1,4 @@
 import * as fs from 'fs';
-import { TreeLiteral } from './types';
 
 export default class FileManager {
     fileName: string = 'js.tree.json';

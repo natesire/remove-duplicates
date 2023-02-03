@@ -5,7 +5,8 @@ var Tree = /** @class */ (function () {
     function Tree(treeFileOrLiteral) {
         // if function exists on object
         if (typeof treeFileOrLiteral.read == 'function') {
-            this.data = treeFileOrLiteral.read(); // read from file
+            // who is responsible to convert string rep to object?
+            this.data = this.toObject(treeFileOrLiteral.read()); // read from file
         }
         else {
             this.data = treeFileOrLiteral; // read from literal
@@ -13,6 +14,9 @@ var Tree = /** @class */ (function () {
     }
     Tree.prototype.toString = function () {
         return JSON.stringify(this);
+    };
+    Tree.prototype.toObject = function (data) {
+        return JSON.parse(data);
     };
     Tree.prototype.getTree = function () {
         //return questionsAnswersTree;
