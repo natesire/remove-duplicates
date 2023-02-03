@@ -1,0 +1,36 @@
+{
+  "statement": "I am here to help you find the answer to your question",
+  "question": "Are you currently employed?",
+  "yes": {
+    "statement": "It appears like you are an internal recruiter. That is fantastic!",
+    "question": "Are you an interal recruiter?",
+    "yes": {
+      "statement": "I will read over the role to see if it's a match :)",
+      "question": "Do I have experience in this role?",
+      "yes": {
+        "statement": "I might know someone too.",
+        "question": "Can I refer a friend for the role?"
+      },
+      "no": {
+        "statement": "I might know the perfect match for this role.",
+        "question": "Can I refer a friend of a friend?"
+      }
+    }
+  },
+  "no": {
+    "statement": "It appears like you are an external recruiter. That is fantastic!",
+    "question": "Are you an external recruiter?",
+    "yes": {
+      "statement": "I will read over the role to see if it's a match :)",
+      "question": "Do you know about the code test assessment for this role from previous placements?",
+      "yes": {
+        "statement": "That is fantastic",
+        "question": "I will send my latest resume."
+      },
+      "no": {
+        "statement": "Ahh, you must be an internal recruiter which is even better.",
+        "question": "Can I research the types of code questions they ask in the interview?"
+      }
+    }
+  }
+}

@@ -1,21 +1,10 @@
-import { Question } from "../index";
-jest.mock("../index");
-
-it("should mock class B", () => {
-    const functionNameMock = jest.fn();
-    jest.spyOn(Question.prototype, "search").mockImplementation(functionNameMock);
-});
+import { Tree } from "../tree";
+import FileManager from '../fileManager';
 
 describe("class", () => {
     it("should return property", () => {
-        const question = new Question();
-        expect(question.tree).toEqual(1);
-        
+        const treeFile = new FileManager('js.tree.json');
+        const tree = new Tree(treeFile);
+        expect(tree.data).toMatch(/what are you searching for/)
     });
-
-    /*
-    it("should get tree node", () => {
-        const question = new Question();
-        expect(question.getTree()).toEqual({ test: 'test' });
-    });*/
 });

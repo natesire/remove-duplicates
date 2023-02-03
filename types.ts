@@ -1,7 +1,8 @@
-export interface NodeTree {
+export interface TreeType {
     statement: string,
     question: string,
     solution?: string,
-    yes?: NodeTree,
-    no?: NodeTree
+    yes?: TreeType,
+    no?: TreeType,
+    getTree?: () => TreeType
 }

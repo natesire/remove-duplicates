@@ -1,32 +1,8 @@
 const readline = require("readline");
 const mongoose = require("mongoose");
-import * as fs from 'fs';
-import { NodeTree } from './types';
+import { TreeType } from './types';
 import FileManager from './fileManager';
-
-export class Question {
-    public tree : NodeTree;
-    private file;
-
-    constructor(file?: FileManager) {
-        this.tree = { statement: 'test', question: '' };
-        this.file = file;
-    }
-
-    loadTree() {
-        this.tree = JSON.parse(file.read());
-    }
-
-    search() {
-
-    }
-
-    getTree() {
-        //return questionsAnswersTree;
-        return { test: 'test' }
-    }
-
-}
+import { Tree } from './tree';
 
 const commandLine = readline.createInterface({
     input: process.stdin,
@@ -35,7 +11,7 @@ const commandLine = readline.createInterface({
 
 let rootQuestion : string = '';
 
-let dataTree : NodeTree = {
+let dataTreeLiteral : TreeType = {
     "statement": "I am here to help you find the answer to your question",
     "question": "what are you searching for?",
     "yes": {
@@ -57,9 +33,9 @@ let dataTree : NodeTree = {
     }
 }
 
-let myShift = function(queue : Array<NodeTree>) : Array<NodeTree> {
+let myShift = function(queue : Array<Tree>) : Array<Tree> {
     queue.shift();
-    return queue as Array<NodeTree>;
+    return queue as Array<Tree>;
 }
 
 let fuzzyMatch = function(userInput: string, question: string) : number {
@@ -75,46 +51,46 @@ let fuzzyMatch = function(userInput: string, question: string) : number {
 
 // x nodes per y level 1, 2, 4, 8
 // lets start from root node
-let breadthFirstSearch = function(userInput: string, startTree: NodeTree) : NodeTree {
-    let foundNode : NodeTree = startTree;
-    let queue : Array<NodeTree> = [foundNode]; // one level of the tree
+let breadthFirstSearch = function(userInput: string, startTree: Tree) : Tree {
+    let firstTreeNode : Tree = startTree;
+    let queue : Array<Tree> = [firstTreeNode]; // one level of the tree
     //let nextNode = 1;
     //queue.push({});
 
     while(queue.length > 0) {
         //node = myShift; // what if on last in queue?
-        if(fuzzyMatch(userInput, foundNode.question) === 1) { // 100% match
-            console.log('found node: ' + foundNode.question);
-            foundNode = foundNode;
+        if(fuzzyMatch(userInput, firstTreeNode.question) === 1) { // 100% match
+            console.log('found node: ' + firstTreeNode.question);
+            firstTreeNode = firstTreeNode;
         }
     }
-    return foundNode as NodeTree;
+    return firstTreeNode as Tree;
 }
 
-let searchForQuestionNode = function(search: string, currentNode: NodeTree) : NodeTree {
-    let yesNode : NodeTree = currentNode['yes'] || currentNode; // yes or no
-    let noNode : NodeTree = currentNode['no'] || currentNode; // yes or no
-    if(fuzzyMatch(search, yesNode.question) === 1) { // 100% match
-        console.log('found node: ' + yesNode.question);
-        return yesNode;
-    } else if(fuzzyMatch(search, noNode.question) === 1) { // 100% match
-        console.log('found node: ' + noNode.question);
-        return noNode;
+let searchForQuestionNode = function(search: string, currentNode: Tree) : Tree {
+    let yay = currentNode['yes'];
+    let nay = currentNode['no'];
+    if(fuzzyMatch(search, yay.question) === 1) { // 100% match
+        console.log('found node: ' + yay.question);
+        return yay as Tree;
+    } else if(fuzzyMatch(search, nay.question) === 1) { // 100% match
+        console.log('found node: ' + nay.question);
+        return nay as Tree;
     }
     return currentNode;
 }
 
-var nextNode = function (currentNode: NodeTree, userInput: string) : NodeTree {
+var nextNode = function (currentNode: Tree, userInput: string) : Tree {
     //return currentNode[userInput] as NodeTree;
     return currentNode;
 }
 
-function waitForCommandLine(nodeTree?: NodeTree) {
-    if (nodeTree === undefined) {
+function waitForCommandLine(tree?: Tree) {
+    if (tree === undefined) {
         console.log('currentNode is undefined');
         commandLine.close();
     } else {
-        let question: string = nodeTree.question;
+        let question: string = tree.question;
         console.log(question);
 
         commandLine.question("User Response: ", function (userInput: string) {
@@ -124,22 +100,23 @@ function waitForCommandLine(nodeTree?: NodeTree) {
             }
 
             if (userInput === 'yes' || userInput === 'no') {
-                waitForCommandLine(nodeTree[userInput]);
+                waitForCommandLine(tree[userInput]);
             }
 
-            let nextNode : NodeTree = searchForQuestionNode(userInput, dataTree);
+            let nextNode : Tree = searchForQuestionNode(userInput, tree);
             waitForCommandLine(nextNode);
         });
     }
 }
 
-waitForCommandLine(dataTree);
+waitForCommandLine(dataTreeLiteral);
 
 commandLine.on("close", function() {
     console.log("\nBYE BYE !!!");
     process.exit(0);
 });
 
+let tree = new Tree(dataTreeLiteral);
 let file = new FileManager('js.tree.json');
-file.writeToFile(JSON.stringify(dataTree));
+file.writeToFile(tree.toString());
 

@@ -5,5 +5,5 @@ var index_1 = require("../index");
 jest.mock("../index");
 it("should mock class B", function () {
     var functionNameMock = jest.fn();
-    jest.spyOn(index_1.Question.prototype, "search").mockImplementation(functionNameMock);
+    //jest.spyOn(index_1.Question.prototype, "search").mockImplementation(functionNameMock);
 });

@@ -8,14 +8,10 @@ var FileManager = /** @class */ (function () {
         this.fileName = fileName;
     }
     FileManager.prototype.read = function () {
-        return fs.readFileSync('js.tree.json', 'utf8');
+        return fs.readFileSync(this.fileName, 'utf8');
     };
     FileManager.prototype.writeToFile = function (data) {
-        var dataFormatted = 'default data';
-        if (typeof data == 'object') {
-            dataFormatted = JSON.stringify(data);
-        }
-        fs.writeFile('js.tree.json', dataFormatted, function (err) {
+        fs.writeFile('js.tree.json', data, function (err) {
             if (err)
                 return console.log(err);
         });

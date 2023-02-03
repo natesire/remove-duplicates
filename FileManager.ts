@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { NodeTree } from './types';
+import { TreeType } from './types';
 
 export default class FileManager {
     fileName: string = 'js.tree.json';
@@ -8,15 +8,11 @@ export default class FileManager {
     }
 
     read() : string {
-        return fs.readFileSync('js.tree.json', 'utf8');
+        return fs.readFileSync(this.fileName, 'utf8');
     }
 
-    writeToFile(data: any) {
-        let dataFormatted : string = 'default data';
-        if(typeof data == 'object') {
-            dataFormatted = JSON.stringify(data);
-        }
-        fs.writeFile('js.tree.json', dataFormatted, function (err) {
+    writeToFile(data: string) {
+        fs.writeFile('js.tree.json', data, function (err) {
             if (err) return console.log(err);
         });
     }
