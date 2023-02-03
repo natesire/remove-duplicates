@@ -1,6 +1,6 @@
 const readline = require("readline");
 const mongoose = require("mongoose");
-import { TreeType } from './types';
+import TreeLiteral from './types';
 import FileManager from './fileManager';
 import { Tree } from './tree';
 
@@ -9,23 +9,21 @@ const commandLine = readline.createInterface({
     output: process.stdout
 });
 
-let rootQuestion : string = '';
-
-let dataTreeLiteral : TreeType = {
+let dataTreeLiteral : TreeLiteral = {
     "statement": "I am here to help you find the answer to your question",
     "question": "what are you searching for?",
-    "yes": {
+    "yay": {
         "statement": "This expression is not callable",
         "question": "javascript",
-        "yes": {
+        "yay": {
             "statement": "This expression is not callable",
             "question": "is it defined as a function?",
-            "yes": {
+            "yay": {
                 "statement": "This expression is not callable",
                 "question": "imports",
             },
 
-        "no": {
+        "nay": {
             "statement": "This expression is not callable",
             "question": "is it defined as a function?",
             },
@@ -38,11 +36,13 @@ let myShift = function(queue : Array<Tree>) : Array<Tree> {
     return queue as Array<Tree>;
 }
 
-let fuzzyMatch = function(userInput: string, question: string) : number {
+let fuzzyMatch = function(userInput: string, tree: Tree | TreeLiteral) : number {
     let count = 0;
-    // for each string in userInput, check if it is in question
+    let str = 'This expression is not callable'
+    let queue = str.split('')
+    // for each string in userInput, match in tree node
     userInput.split(' ').forEach(function(word) {
-        if(question.includes(word)) {
+        if(queue.includes(word)) {
             count++;
         }
     });
@@ -67,17 +67,17 @@ let breadthFirstSearch = function(userInput: string, startTree: Tree) : Tree {
     return firstTreeNode as Tree;
 }
 
-let searchForQuestionNode = function(search: string, currentNode: Tree) : Tree {
-    let yay = currentNode['yes'];
-    let nay = currentNode['no'];
-    if(fuzzyMatch(search, yay.question) === 1) { // 100% match
-        console.log('found node: ' + yay.question);
+let searchForQuestionNode = function(search: string, tree: Tree | TreeLiteral) : Tree {
+    let yay = tree['yay'];
+    let nay = tree['nay'];
+    if(fuzzyMatch(search, yay?.question) === 1) { // 100% match
+        console.log('found node: ' + yay?.question);
         return yay as Tree;
-    } else if(fuzzyMatch(search, nay.question) === 1) { // 100% match
-        console.log('found node: ' + nay.question);
+    } else if(fuzzyMatch(search, nay?.question) === 1) { // 100% match
+        console.log('found node: ' + nay?.question);
         return nay as Tree;
     }
-    return currentNode;
+    return tree as unknown as Tree;
 }
 
 var nextNode = function (currentNode: Tree, userInput: string) : Tree {
@@ -85,7 +85,7 @@ var nextNode = function (currentNode: Tree, userInput: string) : Tree {
     return currentNode;
 }
 
-function waitForCommandLine(tree?: Tree) {
+function waitForCommandLine(tree?: Tree | TreeLiteral) {
     if (tree === undefined) {
         console.log('currentNode is undefined');
         commandLine.close();
@@ -99,8 +99,10 @@ function waitForCommandLine(tree?: Tree) {
                 commandLine.close();
             }
 
-            if (userInput === 'yes' || userInput === 'no') {
-                waitForCommandLine(tree[userInput]);
+            // sentiment analysis
+            if (userInput.match(/y/i) || userInput.match(/n/i)) {
+                let key = "yay";
+                waitForCommandLine(tree[key as keyof TreeLiteral] as Tree);
             }
 
             let nextNode : Tree = searchForQuestionNode(userInput, tree);

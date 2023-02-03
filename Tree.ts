@@ -1,19 +1,21 @@
 
 
-import { TreeType } from './types';
+import { TreeLiteral } from './types';
 
 export class Tree {
     public statement : string;
     public question : string;
-    public yes : Tree;
-    public no : Tree;
+    public solution : string;
+    public yay : Tree; // sentiment, not boolean
+    public nay : Tree; // and both three letters looks pretty
 
     public data;
 
     constructor(treeFileOrLiteral: any) {
         // if function exists on object
         if (typeof treeFileOrLiteral.read == 'function') {
-            this.data = treeFileOrLiteral.read(); // read from file
+            // who is responsible to convert string rep to object?
+            this.data = this.toObject(treeFileOrLiteral.read()); // read from file
         } else {
             this.data = treeFileOrLiteral; // read from literal
         }
@@ -21,6 +23,10 @@ export class Tree {
 
     toString() {
         return JSON.stringify(this);
+    }
+
+    toObject(data:string) : Object {
+        return JSON.parse(data);
     }
 
     getTree() {

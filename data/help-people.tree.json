@@ -1,0 +1,20 @@
+{
+  "statement": "I am here to help you find the answer to your question",
+  "question": "Should I try helping this person?",
+  "yes": {
+    "statement": "This expression is not callable",
+    "question": "are they an acquitaned",
+    "yes": {
+      "statement": "This expression is not callable",
+      "question": "is it defined as a function?",
+      "yes": {
+        "statement": "This expression is not callable",
+        "question": "imports"
+      },
+      "no": {
+        "statement": "This expression is not callable",
+        "question": "is it defined as a function?"
+      }
+    }
+  }
+}

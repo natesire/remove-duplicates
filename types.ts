@@ -1,8 +1,9 @@
-export interface TreeType {
+// class Tree
+export default interface TreeLiteral {
     statement: string,
     question: string,
     solution?: string,
-    yes?: TreeType,
-    no?: TreeType,
-    getTree?: () => TreeType
+    yay?: TreeLiteral,
+    nay?: TreeLiteral,
+    getTree?: () => TreeLiteral
 }

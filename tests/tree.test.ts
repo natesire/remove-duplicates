@@ -1,22 +1,22 @@
 import { Tree } from '../tree';
 import FileManager from '../fileManager';
-import { TreeType } from '../types';
+import TreeLiteral from '../types';
 
-let dataTreeLiteral : TreeType = {
+let dataTreeJS : TreeLiteral = {
     "statement": "I am here to help you find the answer to your question",
-    "question": "what are you searching for?",
-    "yes": {
+    "question": "what question do you have about JS?",
+    "yay": {
         "statement": "This expression is not callable",
         "question": "javascript",
-        "yes": {
+        "yay": {
             "statement": "This expression is not callable",
             "question": "is it defined as a function?",
-            "yes": {
+            "yay": {
                 "statement": "This expression is not callable",
                 "question": "imports",
             },
 
-        "no": {
+        "nay": {
             "statement": "This expression is not callable",
             "question": "is it defined as a function?",
             },
@@ -24,15 +24,15 @@ let dataTreeLiteral : TreeType = {
     }
 }
 
-describe("class Question", () => {
+describe("class Tree", () => {
     it("should load tree from file", () => {
         const treeFile = new FileManager('js.tree.json');
         const tree = new Tree(treeFile);
-        expect(tree.data).toMatch(/what are you searching for/)
+        expect(tree.data).toMatch(/question/)
     });
 
     it("should load tree from literal", () => {
-        const tree = new Tree(dataTreeLiteral); // returning object
-        expect(tree.data).toMatchObject({"question": "what are you searching for?"});
+        const tree = new Tree(dataTreeJS); // returning object
+        expect(tree.data).toMatchObject({"question": "what question do you have about JS?"});
     });
 });
