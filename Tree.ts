@@ -9,15 +9,10 @@ export class Tree {
     public nay : Tree; // and both three letters looks pretty
 
     public data;
+    public root;
 
     constructor(treeFileOrLiteral: any) {
-        // if function exists on object
-        if (typeof treeFileOrLiteral.read == 'function') {
-            // who is responsible to convert string rep to object?
-            this.data = this.toObject(treeFileOrLiteral.read()); // read from file
-        } else {
-            this.data = treeFileOrLiteral['data']; // read from literal
-        }
+        this.root = treeFileOrLiteral;
     }
 
     toString() {
@@ -29,11 +24,10 @@ export class Tree {
     }
 
     getTree() {
-        //return questionsAnswersTree;
         return { test: 'test' }
     }
 
     search(str:string) {
-        return this.data['yay'];
+        return this.root['yay'];
     }
 }
