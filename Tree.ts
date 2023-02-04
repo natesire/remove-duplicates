@@ -1,6 +1,5 @@
 
 
-import { TreeLiteral } from './types';
 
 export class Tree {
     public statement : string;
@@ -17,7 +16,7 @@ export class Tree {
             // who is responsible to convert string rep to object?
             this.data = this.toObject(treeFileOrLiteral.read()); // read from file
         } else {
-            this.data = treeFileOrLiteral; // read from literal
+            this.data = treeFileOrLiteral['data']; // read from literal
         }
     }
 
@@ -32,5 +31,9 @@ export class Tree {
     getTree() {
         //return questionsAnswersTree;
         return { test: 'test' }
+    }
+
+    search(str:string) {
+        return this.data['yay'];
     }
 }

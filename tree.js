@@ -22,6 +22,9 @@ var Tree = /** @class */ (function () {
         //return questionsAnswersTree;
         return { test: 'test' };
     };
+    Tree.prototype.search = function (str) {
+        return this.data['yay'];
+    };
     return Tree;
 }());
 exports.Tree = Tree;

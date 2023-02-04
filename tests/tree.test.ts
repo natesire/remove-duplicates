@@ -35,4 +35,16 @@ describe("class Tree", () => {
         const tree = new Tree(dataTreeJS);
         expect(tree.data).toMatchObject({"question": "what question do you have about JS?"});
     });
+
+    it("should return tree data", () => {
+        const tree = new Tree(dataTreeJS);
+        let treeData = tree['data'];
+        expect(treeData['statement']).toEqual('I am here to help you find the answer to your question');
+    });
+
+    it("should search first level", () => {
+        const tree = new Tree(dataTreeJS);
+        let search = tree.search('expression');
+        expect(search).toMatchObject({"question": "javascript"});
+    });
 });
