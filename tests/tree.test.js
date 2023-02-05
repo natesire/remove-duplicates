@@ -27,17 +27,18 @@ let dataTreeJS = {
     }
 };
 describe("class Tree", () => {
-    it("should load tree from file", () => {
+    it("DEBUG should load tree from file", () => {
         const treeFile = new FileManager_1.default('js.tree.json');
-        const tree = new Tree_1.Tree(treeFile);
-        expect(tree.root['data']).toMatchObject({ "question": "what are you searching for?" });
+        let data = treeFile.read();
+        const tree = new Tree_1.Tree(data);
+        let treeObj = tree.toObject(tree.root);
+        expect(treeObj.root).toMatchObject({ "question": "what are you searching for?" });
+    });
+    it("should load tree from literal", () => {
+        const tree = new Tree_1.Tree(dataTreeJS);
+        expect(tree).toMatchObject({ "question": "question0" });
     });
     /*
-    it("should load tree from literal", () => {
-        const tree = new Tree(dataTreeJS);
-        expect(tree.data).toMatchObject({"question": "question0"});
-    });
-
     it("should return tree data", () => {
         const tree = new Tree(dataTreeJS);
         let treeData = tree['data'];
