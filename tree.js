@@ -1,30 +1,21 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.Tree = void 0;
-var Tree = /** @class */ (function () {
-    function Tree(treeFileOrLiteral) {
-        // if function exists on object
-        if (typeof treeFileOrLiteral.read == 'function') {
-            // who is responsible to convert string rep to object?
-            this.data = this.toObject(treeFileOrLiteral.read()); // read from file
-        }
-        else {
-            this.data = treeFileOrLiteral; // read from literal
-        }
+class Tree {
+    constructor(treeFileOrLiteral) {
+        this.root = treeFileOrLiteral;
     }
-    Tree.prototype.toString = function () {
+    toString() {
         return JSON.stringify(this);
-    };
-    Tree.prototype.toObject = function (data) {
+    }
+    toObject(data) {
         return JSON.parse(data);
-    };
-    Tree.prototype.getTree = function () {
-        //return questionsAnswersTree;
+    }
+    getTree() {
         return { test: 'test' };
-    };
-    Tree.prototype.search = function (str) {
-        return this.data['yay'];
-    };
-    return Tree;
-}());
+    }
+    search(str) {
+        return this.root['yay'];
+    }
+}
 exports.Tree = Tree;

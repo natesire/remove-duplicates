@@ -2,13 +2,12 @@
 
 
 export class Tree {
-    public statement : string;
-    public question : string;
-    public solution : string;
-    public yay : Tree; // sentiment, not boolean
-    public nay : Tree; // and both three letters looks pretty
+    public statement? : string;
+    public question? : string;
+    public solution? : string;
+    public yay? : Tree; // sentiment, not boolean
+    public nay? : Tree; // and both three letters looks pretty
 
-    public data;
     public root;
 
     constructor(treeFileOrLiteral: any) {

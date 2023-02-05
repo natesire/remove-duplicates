@@ -4,7 +4,10 @@
   "description": "Train team on learning repeat solutions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretests": "tsc",
+    "pretest": "tsc",
+    "tests": "jest",
+    "test": "jest -t DEBUG"
   },
   "repository": {
     "type": "git",

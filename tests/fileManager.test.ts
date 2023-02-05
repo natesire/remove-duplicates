@@ -1,5 +1,4 @@
-import { Tree } from "../tree";
-import FileManager from '../fileManager';
+import FileManager from '../FileManager';
 
 describe("class", () => {
     it("should return property", () => {

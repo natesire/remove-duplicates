@@ -1,10 +1,9 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.Question = void 0;
-var Question = /** @class */ (function () {
-    function Question() {
+class Question {
+    constructor() {
         this.tree = 1;
     }
-    return Question;
-}());
+}
 exports.Question = Question;

@@ -1,8 +1,8 @@
 const readline = require("readline");
 const mongoose = require("mongoose");
-import TreeLiteral from './types';
-import FileManager from './fileManager';
-import { Tree } from './tree';
+import TreeLiteral from './Types';
+import FileManager from './FileManager';
+import { Tree } from './Tree';
 
 const commandLine = readline.createInterface({
     input: process.stdin,
@@ -36,7 +36,8 @@ let myShift = function(queue : Array<Tree>) : Array<Tree> {
     return queue as Array<Tree>;
 }
 
-let fuzzyMatch = function(userInput: string, tree: Tree | TreeLiteral) : number {
+let fuzzyMatch = function(userInput: string, tree: string | undefined) : number {
+    if(!tree) return 0;
     let count = 0;
     let str = 'This expression is not callable'
     let queue = str.split('')
@@ -90,7 +91,7 @@ function waitForCommandLine(tree?: Tree | TreeLiteral) {
         console.log('currentNode is undefined');
         commandLine.close();
     } else {
-        let question: string = tree.question;
+        let question = tree.question;
         console.log(question);
 
         commandLine.question("User Response: ", function (userInput: string) {

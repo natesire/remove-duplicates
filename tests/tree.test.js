@@ -1,9 +1,12 @@
-import { Tree } from '../Tree';
-import FileManager from '../FileManager';
-import TreeLiteral from '../Types';
-
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const Tree_1 = require("../Tree");
+const FileManager_1 = __importDefault(require("../FileManager"));
 // in case we want to deal with code
-let dataTreeJS : TreeLiteral = {
+let dataTreeJS = {
     "statement": "statement0",
     "question": "question0",
     "yay": {
@@ -16,22 +19,19 @@ let dataTreeJS : TreeLiteral = {
                 "statement": "statement3",
                 "question": "question3",
             },
-
-        "nay": {
-            "statement": "statement4",
-            "question": "question4",
+            "nay": {
+                "statement": "statement4",
+                "question": "question4",
             },
-        } 
+        }
     }
-}
-
+};
 describe("class Tree", () => {
     it("should load tree from file", () => {
-        const treeFile = new FileManager('js.tree.json');
-        const tree = new Tree(treeFile);
-        expect(tree.root['data']).toMatchObject({"question": "what are you searching for?"});
+        const treeFile = new FileManager_1.default('js.tree.json');
+        const tree = new Tree_1.Tree(treeFile);
+        expect(tree.root['data']).toMatchObject({ "question": "what are you searching for?" });
     });
-
     /*
     it("should load tree from literal", () => {
         const tree = new Tree(dataTreeJS);
