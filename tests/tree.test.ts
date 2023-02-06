@@ -37,7 +37,7 @@ describe("class Tree", () => {
 
     it("should load tree from literal", () => {
         const tree = new Tree(dataTreeJS);
-        expect(tree).toMatchObject({"question": "question0"});
+        expect(tree.root).toMatchObject({"question": "question0"});
     });
 
     /*

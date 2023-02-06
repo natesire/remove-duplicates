@@ -31,12 +31,12 @@ describe("class Tree", () => {
         const treeFile = new FileManager_1.default('js.tree.json');
         let data = treeFile.read();
         const tree = new Tree_1.Tree(data);
-        let treeObj = tree.toObject(tree.root);
+        let treeObj = tree.toObject(tree.root); // cast to Tree so root is defined, solves: Property 'root' does not exist on type 'Object'
         expect(treeObj.root).toMatchObject({ "question": "what are you searching for?" });
     });
     it("should load tree from literal", () => {
         const tree = new Tree_1.Tree(dataTreeJS);
-        expect(tree).toMatchObject({ "question": "question0" });
+        expect(tree.root).toMatchObject({ "question": "question0" });
     });
     /*
     it("should return tree data", () => {
