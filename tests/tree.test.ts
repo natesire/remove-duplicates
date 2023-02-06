@@ -26,7 +26,7 @@ let dataTreeJS : TreeLiteral = {
 }
 
 describe("class Tree", () => {
-    it("DEBUG should load tree from file", () => {
+    it("should load tree from file", () => {
         const treeFile = new FileManager('js.tree.json');
         let data = treeFile.read();
 
@@ -35,19 +35,23 @@ describe("class Tree", () => {
         expect(treeObj.root).toMatchObject({"question": "what are you searching for?"});
     });
 
-    it("should load tree from literal", () => {
-        const tree = new Tree(dataTreeJS);
-        expect(tree.root).toMatchObject({"question": "question0"});
-    });
+    describe('from literal', () => {
+        let tree : Tree;
+        beforeEach(() => {
+            tree = new Tree(dataTreeJS);
+        });
 
-    /*
-    it("should return tree data", () => {
-        const tree = new Tree(dataTreeJS);
-        let treeData = tree['data'];
-        expect(treeData['statement']).toMatch('statement0');
+        it("should load tree from literal", () => {
+            expect(tree.root).toMatchObject({"question": "question0"});
+        });
+
+    
+        it("should return tree data", () => {
+            expect(tree.root['statement']).toMatch('statement0');
+        });
     });
     
-
+    /*
     it("should search first level", () => {
         const tree = new Tree(dataTreeJS);
         let search = tree.search('statement1');
