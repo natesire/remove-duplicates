@@ -7,3 +7,12 @@ export default interface TreeLiteral {
     nay?: TreeLiteral,
     getTree?: () => TreeLiteral
 }
+
+export interface TreeNode {
+    statement: string,
+    question: string,
+    solution?: string,
+    yay?: TreeNode,
+    nay?: TreeNode,
+    getTree?: () => TreeNode
+}

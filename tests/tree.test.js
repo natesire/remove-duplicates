@@ -27,23 +27,34 @@ let dataTreeJS = {
     }
 };
 describe("class Tree", () => {
-    it("should load tree from file", () => {
-        const treeFile = new FileManager_1.default('js.tree.json');
-        let data = treeFile.read();
-        const tree = new Tree_1.Tree(data);
-        let treeObj = tree.toObject(tree.root); // cast to Tree so root is defined, solves: Property 'root' does not exist on type 'Object'
-        expect(treeObj.root).toMatchObject({ "question": "what are you searching for?" });
+    describe('from file', () => {
+        let treeFile;
+        let data;
+        let tree;
+        let treeRoot;
+        beforeEach(() => {
+            treeFile = new FileManager_1.default('js.tree.json');
+            data = treeFile.read();
+            tree = new Tree_1.Tree(data);
+            treeRoot = tree.root;
+        });
+        it("should load tree from file", () => {
+            let treeObj = tree.toObject(tree.root); // cast to Tree so root is defined, solves: Property 'root' does not exist on type 'Object'
+            expect(treeObj.root).toMatchObject({ "question": "what are you searching for?" });
+        });
     });
     describe('from literal', () => {
         let tree;
+        let treeRoot;
         beforeEach(() => {
             tree = new Tree_1.Tree(dataTreeJS);
+            treeRoot = tree.root;
         });
         it("should load tree from literal", () => {
-            expect(tree.root).toMatchObject({ "question": "question0" });
+            expect(treeRoot).toMatchObject({ "question": "question0" });
         });
         it("should return tree data", () => {
-            expect(tree.root['statement']).toMatch('statement0');
+            expect(treeRoot['statement']).toMatch('statement0');
         });
     });
     /*
