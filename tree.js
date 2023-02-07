@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tree = void 0;
 class Tree {
     constructor(treeFileOrLiteral) {
         this.root = treeFileOrLiteral;
@@ -8,14 +7,21 @@ class Tree {
     toString() {
         return JSON.stringify(this);
     }
-    toObject(data) {
-        return JSON.parse(data);
+    JSONToObject(jsonData) {
+        return JSON.parse(jsonData);
+    }
+    YAMLToJSON(yamlData) {
+        return JSON.parse(yamlData);
     }
     getTree() {
         return { test: 'test' };
     }
+    addChildrenToQueue(queue, children) {
+        //merge two arrays
+        return queue.concat(children);
+    }
     search(str) {
-        return this.root['yay'];
+        return this.root['statement'];
     }
 }
-exports.Tree = Tree;
+exports.default = Tree;

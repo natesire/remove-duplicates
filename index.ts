@@ -2,7 +2,7 @@ const readline = require("readline");
 const mongoose = require("mongoose");
 import TreeLiteral from './Types';
 import FileManager from './FileManager';
-import { Tree } from './Tree';
+import Tree from './Tree';
 
 const commandLine = readline.createInterface({
     input: process.stdin,

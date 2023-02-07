@@ -24,19 +24,38 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
+const yaml = require('js-yaml');
 class FileManager {
     constructor(fileName = 'js.tree.json') {
+        this.contents = {};
         this.fileName = 'js.tree.json';
         this.fileName = fileName;
+        this.read();
+    }
+    fileType(filename) {
+        return this.fileName.split('.').pop() || '';
     }
     read() {
+        if (this.fileType(this.fileName) == 'yaml')
+            this.contents = this.readYAMLToObject();
+        if (this.fileType(this.fileName) == 'json')
+            this.contents = this.readJsonToString();
+        return this.contents;
+    }
+    readJsonToString() {
         return fs.readFileSync(this.fileName, 'utf8');
+    }
+    readYAMLToObject() {
+        return yaml.load(fs.readFileSync(this.fileName, { encoding: 'utf-8' }));
     }
     writeToFile(data) {
         fs.writeFile('js.tree.json', data, function (err) {
             if (err)
                 return console.log(err);
         });
+    }
+    yamlToObject(data) {
+        return JSON.parse(data);
     }
 }
 exports.default = FileManager;

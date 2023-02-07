@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const readline = require("readline");
 const mongoose = require("mongoose");
 const FileManager_1 = __importDefault(require("./FileManager"));
-const Tree_1 = require("./Tree");
+const Tree_1 = __importDefault(require("./Tree"));
 const commandLine = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -109,6 +109,6 @@ commandLine.on("close", function () {
     console.log("\nBYE BYE !!!");
     process.exit(0);
 });
-let tree = new Tree_1.Tree(dataTreeLiteral);
+let tree = new Tree_1.default(dataTreeLiteral);
 let file = new FileManager_1.default('js.tree.json');
 file.writeToFile(tree.toString());

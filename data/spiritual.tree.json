@@ -1,0 +1,43 @@
+{
+  "statement": "statement0",
+  "question": "Are 100% of businesses controlled by a central entity?",
+  "children": [
+    {
+      "statement": "statement1",
+      "question": "Is power from a central source?",
+      "children": [
+        {
+          "statement": "statement2",
+          "question": "Does money flow from a central source?",
+          "children": [
+            {
+              "statement": "the fed",
+              "question": "question3"
+            },
+            {
+              "statement": "statement4",
+              "question": "question4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "yes": {
+    "statement": "statement1",
+    "question": "Is power from a central source?",
+    "yes": {
+      "statement": "statement2",
+      "question": "Does money flow from a central source?",
+      "yes": {
+        "statement": "the fed",
+        "question": "question3"
+      },
+      "no": {
+        "statement": "statement4",
+        "question": "question4"
+      }
+    }
+  },
+  "question2": "can I connect to a flow from people?"
+}

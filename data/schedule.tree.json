@@ -1,0 +1,24 @@
+statement: I am here to help you find the answer to your question
+question: what are you searching for?
+q1:
+  statement: debugger not stopping on breakpoint
+  question: is the debugger running in the cli?
+  nay:
+    question: how do I keep the debugger running in the cli?
+    solution: 'In VSCode, open command pallete, and type ''Debug: Javascript Debug
+      Terminal'''
+q2:
+  statement: prettier not adding semicolon
+  question: how to run prettier continuously?
+'yes':
+  statement: This expression is not callable
+  question: javascript
+  'yes':
+    statement: This expression is not callable
+    question: is it defined as a function?
+    'yes':
+      statement: This expression is not callable
+      question: imports
+    'no':
+      statement: This expression is not callable
+      question: is it defined as a function?

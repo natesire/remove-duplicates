@@ -1,13 +1,16 @@
 import FileManager from '../FileManager';
+import Tree from '../Tree';
 
 describe("class", () => {
-    it("should return property", () => {
-        const treeFile = new FileManager('js.tree.json');
-        expect(treeFile.read()).toMatch(/what are you searching for/)
+    let treeFile : FileManager;
+
+    beforeAll(() => {
+        treeFile = new FileManager('data/schedule.tree.yaml');
     });
 
-    it("should write", () => {
-        const treeFile = new FileManager('js.tree.json');
-        expect(treeFile.read()).toMatch(/what are you searching for/)
+    it("should return property", () => {
+        let fileContents = treeFile.read();
+        let tree = new Tree(fileContents);
+        expect(tree['root']['statement']).toMatch(/schedule/)
     });
 });

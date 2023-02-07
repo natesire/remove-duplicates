@@ -1,7 +1,7 @@
 
 
 
-export class Tree {
+export default class Tree {
     public statement? : string;
     public question? : string;
     public solution? : string;
@@ -18,15 +18,24 @@ export class Tree {
         return JSON.stringify(this);
     }
 
-    toObject(data:string) : Object {
-        return JSON.parse(data);
+    JSONToObject(jsonData:string) : Object {
+        return JSON.parse(jsonData);
+    }
+
+    YAMLToJSON(yamlData:string) : Object {
+        return JSON.parse(yamlData);
     }
 
     getTree() {
         return { test: 'test' }
     }
 
+    addChildrenToQueue(queue : Array<Tree>, children : Array<Tree>) : unknown {
+        //merge two arrays
+        return queue.concat(children);
+    }
+
     search(str:string) {
-        return this.root['yay'];
+        return this.root['statement'];
     }
 }

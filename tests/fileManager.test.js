@@ -4,13 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const FileManager_1 = __importDefault(require("../FileManager"));
+const Tree_1 = __importDefault(require("../Tree"));
 describe("class", () => {
-    it("should return property", () => {
-        const treeFile = new FileManager_1.default('js.tree.json');
-        expect(treeFile.read()).toMatch(/what are you searching for/);
+    let treeFile;
+    beforeAll(() => {
+        treeFile = new FileManager_1.default('data/schedule.tree.yaml');
     });
-    it("should write", () => {
-        const treeFile = new FileManager_1.default('js.tree.json');
-        expect(treeFile.read()).toMatch(/what are you searching for/);
+    it("should return property", () => {
+        let fileContents = treeFile.read();
+        let tree = new Tree_1.default(fileContents);
+        expect(tree['root']['statement']).toMatch(/schedule/);
     });
 });

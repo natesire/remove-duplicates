@@ -1,4 +1,4 @@
-import { Tree } from '../Tree';
+import Tree from '../Tree';
 import FileManager from '../FileManager';
 import TreeLiteral from '../Types';
 import TreeNode from '../Types';
@@ -6,7 +6,7 @@ import TreeNode from '../Types';
 // in case we want to deal with code
 let dataTreeJS : TreeLiteral = {
     "statement": "statement0",
-    "question": "question0",
+    "question": "question0 what are you searching for?",
     "yay": {
         "statement": "statement1",
         "question": "question1",
@@ -29,19 +29,19 @@ let dataTreeJS : TreeLiteral = {
 describe("class Tree", () => {
     describe('from file', () => {
         let treeFile : FileManager;
-        let data : string;
+        let dataObj : Object;
         let tree : Tree;
         let treeRoot : TreeNode; 
+
         beforeEach(() => {
-            treeFile = new FileManager('js.tree.json');
-            data = treeFile.read();
-            tree = new Tree(data);
+            treeFile = new FileManager('data/schedule.tree.yaml');
+            dataObj = treeFile.read();
+            tree = new Tree(dataObj);
             treeRoot = tree.root;
         });
 
         it("should load tree from file", () => {
-            let treeObj = tree.toObject(tree.root) as Tree; // cast to Tree so root is defined, solves: Property 'root' does not exist on type 'Object'
-            expect(treeObj.root).toMatchObject({"question": "what are you searching for?"});
+            expect(tree.root).toMatchObject({"question": "what are you searching for?"});
         });
     });
 
@@ -54,25 +54,27 @@ describe("class Tree", () => {
         });
 
         it("should load tree from literal", () => {
-            expect(treeRoot).toMatchObject({"question": "question0"});
+            expect(treeRoot['question']).toMatch('question0')
         });
 
     
         it("should return tree data", () => {
-            expect(treeRoot['statement']).toMatch('statement0');
+            expect(treeRoot['statement']).toMatch('statement0')
         });
     });
     
     /*
     it("should search first level", () => {
         const tree = new Tree(dataTreeJS);
-        let search = tree.search('statement1');
-        expect(search).toMatchObject({"question": "question1"});
+        let search = tree.search('statement1')
+        expect(search['question']).toMatch('question0')
     });
 
-    it("should search second level", () => {
+    /*
+    it("DEBUG should search zero level", () => {
         const tree = new Tree(dataTreeJS);
-        let search = tree.search('statement2');
-        expect(search).toMatchObject({"question": "question2"});
-    });*/
+        let search = tree.getChildren()
+        expect(search).toMatch('')
+    });
+    */
 });
