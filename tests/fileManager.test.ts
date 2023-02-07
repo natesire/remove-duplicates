@@ -1,16 +1,22 @@
 import FileManager from '../FileManager';
 import Tree from '../Tree';
 
-describe("class", () => {
+describe(".FileManager", () => {
     let treeFile : FileManager;
 
     beforeAll(() => {
         treeFile = new FileManager('data/schedule.tree.yaml');
     });
 
-    it("should return property", () => {
+    it("should return value for statement", () => {
         let fileContents = treeFile.read();
         let tree = new Tree(fileContents);
         expect(tree['root']['statement']).toMatch(/schedule/)
+    });
+
+    it("should return value for question", () => {
+        let fileContents = treeFile.read();
+        let tree = new Tree(fileContents);
+        expect(tree['root']['question']).toMatch(/schedule/)
     });
 });

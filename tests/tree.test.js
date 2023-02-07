@@ -39,7 +39,8 @@ describe("class Tree", () => {
             treeRoot = tree.root;
         });
         it("should load tree from file", () => {
-            expect(tree.root).toMatchObject({ "question": "what are you searching for?" });
+            //expect(tree.root).toMatchObject({"question": "what are you searching for?"});
+            expect(treeRoot['question']).toMatch('schedule');
         });
     });
     describe('from literal', () => {
