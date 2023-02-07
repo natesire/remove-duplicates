@@ -20,4 +20,9 @@ describe(".FileManager", () => {
         let tree = new Tree_1.default(fileContents);
         expect(tree['root']['question']).toMatch(/schedule/);
     });
+    it("should return value for first node", () => {
+        let fileContents = treeFile.read();
+        let tree = new Tree_1.default(fileContents);
+        expect(tree['root']['q1']['question']).toMatch(/hours/);
+    });
 });

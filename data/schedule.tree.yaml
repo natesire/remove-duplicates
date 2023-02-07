@@ -1,10 +1,10 @@
 statement: When is the best time to schedule an interview? 
 question: what would you like to schedule?
 q1:
-  statement: debugger not stopping on breakpoint
-  question: is the debugger running in the cli?
+  statement: let's not disturb your work time
+  question: which hours are you available?
   nay:
-    question: how do I keep the debugger running in the cli?
+    question: do you prefer interviews towards the end of the day? 
     solution: 'In VSCode, open command pallete, and type ''Debug: Javascript Debug
       Terminal'''
 q2:
