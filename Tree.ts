@@ -31,7 +31,8 @@ export default class Tree {
     }
 
     addChildrenToQueue(children : Array<Tree>) : Array<Tree> {
-        return this.queue.concat(children);
+        this.queue = this.queue.concat(children);
+        return this.queue;
     }
 
     search(str:string) {

@@ -20,7 +20,8 @@ class Tree {
         return { test: 'test' };
     }
     addChildrenToQueue(children) {
-        return this.queue.concat(children);
+        this.queue = this.queue.concat(children);
+        return this.queue;
     }
     search(str) {
         return this.root['statement'];

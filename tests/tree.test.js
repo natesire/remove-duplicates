@@ -6,9 +6,49 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Tree_1 = __importDefault(require("../Tree"));
 const FileManager_1 = __importDefault(require("../FileManager"));
 // in case we want to deal with code
-let dataTreeJS = {
+let dataTreeJS0 = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
+    "yay": {
+        "statement": "statement1",
+        "question": "question1",
+        "yay": {
+            "statement": "statement2",
+            "question": "question2",
+            "yay": {
+                "statement": "statement3",
+                "question": "question3",
+            },
+            "nay": {
+                "statement": "statement4",
+                "question": "question4",
+            },
+        }
+    }
+};
+let dataTreeJS1 = {
+    "statement": "statementA",
+    "question": "question0 what would you like to schedule?",
+    "yay": {
+        "statement": "statement1",
+        "question": "question1",
+        "yay": {
+            "statement": "statement2",
+            "question": "question2",
+            "yay": {
+                "statement": "statement3",
+                "question": "question3",
+            },
+            "nay": {
+                "statement": "statement4",
+                "question": "question4",
+            },
+        }
+    }
+};
+let dataTreeJS2 = {
+    "statement": "Cannot set property '0' of undefined : trees[0] = new Tree(dataTreeJS0)",
+    "question": "try using push?",
     "yay": {
         "statement": "statement1",
         "question": "question1",
@@ -46,7 +86,7 @@ describe("class Tree", () => {
         let tree;
         let treeRoot;
         beforeEach(() => {
-            tree = new Tree_1.default(dataTreeJS);
+            tree = new Tree_1.default(dataTreeJS0);
             treeRoot = tree.root;
         });
         it("should load tree from literal", () => {
@@ -57,16 +97,29 @@ describe("class Tree", () => {
         });
     });
     describe('breadth first search', () => {
-        let tree1, tree2;
-        beforeAll(() => {
-            tree1 = new Tree_1.default(dataTreeJS);
-            tree2 = new Tree_1.default(dataTreeJS);
+        //let trees : Array<Tree>;
+        let trees = [];
+        beforeEach(() => {
+            trees = [];
+            trees.push(new Tree_1.default(dataTreeJS0));
+            trees.push(new Tree_1.default(dataTreeJS1));
+            trees.push(new Tree_1.default(dataTreeJS2));
         });
         it('should add children to queue for breadth first search', () => {
-            // I thought tree1 was in scope ?
-            let queue = tree1.addChildrenToQueue([tree2]); // queue for breadth first search
+            let queue = trees[0].addChildrenToQueue([trees[1]]); // queue for breadth first search
             expect(queue.length).toBe(1);
         });
+        it('should add children to queue for breadth first search', () => {
+            trees[0].addChildrenToQueue([trees[1]]);
+            let queue = trees[0].addChildrenToQueue([trees[2]]); // queue for breadth first search
+            expect(queue.length).toBe(2);
+        });
+        /*it('should match concatenated TreeNode', () => {
+            trees[0].addChildrenToQueue([trees[1]]);
+            let queue = trees[0].addChildrenToQueue([trees[2]]); // queue for breadth first search
+
+            expect(queue.length).toBe(2);
+        });*/
     });
     /*
     it("should search first level", () => {
