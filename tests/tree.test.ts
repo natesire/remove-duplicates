@@ -62,6 +62,16 @@ describe("class Tree", () => {
             expect(treeRoot['statement']).toMatch('statement0')
         });
     });
+
+    it('DEBUG should add children to queue for breadth first search', () => {
+        let queue :     Array<Tree> = [];
+
+        const tree1 = new Tree(dataTreeJS);
+        const tree2 = new Tree(dataTreeJS);
+
+        queue = tree1.addChildrenToQueue([tree2]); // queue for breadth first search
+        expect(queue.length).toBe(2);
+    });
     
     /*
     it("should search first level", () => {

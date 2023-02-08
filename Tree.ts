@@ -1,17 +1,19 @@
 
 
-
+// should this class handle the whole Tree? or per node?
 export default class Tree {
     public statement? : string;
     public question? : string;
     public solution? : string;
     public yay? : Tree; // sentiment, not boolean
     public nay? : Tree; // and both three letters looks pretty
+    public queue : Array<Tree>;
 
     public root;
 
     constructor(treeFileOrLiteral: any) {
         this.root = treeFileOrLiteral;
+        this.queue = [this.root]; // for the whole tree
     }
 
     toString() {
@@ -30,9 +32,8 @@ export default class Tree {
         return { test: 'test' }
     }
 
-    addChildrenToQueue(queue : Array<Tree>, children : Array<Tree>) : unknown {
-        //merge two arrays
-        return queue.concat(children);
+    addChildrenToQueue(children : Array<Tree>) : Array<Tree> {
+        return this.queue.concat(children);
     }
 
     search(str:string) {

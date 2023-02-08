@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// should this class handle the whole Tree? or per node?
 class Tree {
     constructor(treeFileOrLiteral) {
         this.root = treeFileOrLiteral;
+        this.queue = [this.root]; // for the whole tree
     }
     toString() {
         return JSON.stringify(this);
@@ -16,9 +18,8 @@ class Tree {
     getTree() {
         return { test: 'test' };
     }
-    addChildrenToQueue(queue, children) {
-        //merge two arrays
-        return queue.concat(children);
+    addChildrenToQueue(children) {
+        return this.queue.concat(children);
     }
     search(str) {
         return this.root['statement'];
