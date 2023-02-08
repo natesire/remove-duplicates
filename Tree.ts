@@ -1,6 +1,5 @@
-
-
-// should this class handle the whole Tree? or per node?
+// handle the tree data structure and algorithms
+// covers all the Tree Nodes
 export default class Tree {
     public statement? : string;
     public question? : string;
@@ -8,12 +7,11 @@ export default class Tree {
     public yay? : Tree; // sentiment, not boolean
     public nay? : Tree; // and both three letters looks pretty
     public queue : Array<Tree>;
-
     public root;
 
     constructor(treeFileOrLiteral: any) {
         this.root = treeFileOrLiteral;
-        this.queue = [this.root]; // for the whole tree
+        this.queue = []; // breadth first search
     }
 
     toString() {

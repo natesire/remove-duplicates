@@ -56,12 +56,17 @@ describe("class Tree", () => {
             expect(treeRoot['statement']).toMatch('statement0');
         });
     });
-    it('DEBUG should add children to queue for breadth first search', () => {
-        let queue = [];
-        const tree1 = new Tree_1.default(dataTreeJS);
-        const tree2 = new Tree_1.default(dataTreeJS);
-        queue = tree1.addChildrenToQueue([tree2]); // queue for breadth first search
-        expect(queue.length).toBe(2);
+    describe('breadth first search', () => {
+        let tree1, tree2;
+        beforeAll(() => {
+            tree1 = new Tree_1.default(dataTreeJS);
+            tree2 = new Tree_1.default(dataTreeJS);
+        });
+        it('should add children to queue for breadth first search', () => {
+            // I thought tree1 was in scope ?
+            let queue = tree1.addChildrenToQueue([tree2]); // queue for breadth first search
+            expect(queue.length).toBe(1);
+        });
     });
     /*
     it("should search first level", () => {

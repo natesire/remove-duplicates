@@ -47,7 +47,8 @@ describe("class Tree", () => {
 
     describe('from literal', () => {
         let tree : Tree;
-        let treeRoot : TreeNode; 
+        let treeRoot : TreeNode;
+
         beforeEach(() => {
             tree = new Tree(dataTreeJS);
             treeRoot = tree.root;
@@ -63,14 +64,19 @@ describe("class Tree", () => {
         });
     });
 
-    it('DEBUG should add children to queue for breadth first search', () => {
-        let queue :     Array<Tree> = [];
+    describe('breadth first search', () => {
+        let tree1 : Tree, tree2 : Tree;
 
-        const tree1 = new Tree(dataTreeJS);
-        const tree2 = new Tree(dataTreeJS);
+        beforeAll(() => {
+            tree1 = new Tree(dataTreeJS);
+            tree2 = new Tree(dataTreeJS);
+        });
 
-        queue = tree1.addChildrenToQueue([tree2]); // queue for breadth first search
-        expect(queue.length).toBe(2);
+        it('should add children to queue for breadth first search', () => {
+            // I thought tree1 was in scope ?
+            let queue = tree1.addChildrenToQueue([tree2]); // queue for breadth first search
+            expect(queue.length).toBe(1);
+        });
     });
     
     /*

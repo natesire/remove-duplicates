@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// should this class handle the whole Tree? or per node?
+// handle the tree data structure and algorithms
+// covers all the Tree Nodes
 class Tree {
     constructor(treeFileOrLiteral) {
         this.root = treeFileOrLiteral;
-        this.queue = [this.root]; // for the whole tree
+        this.queue = []; // breadth first search
     }
     toString() {
         return JSON.stringify(this);
