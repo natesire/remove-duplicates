@@ -30,7 +30,7 @@ export default class Tree {
         return { test: 'test' }
     }
 
-    addChildrenToQueue(children : Array<Tree>) : Array<Tree> {
+    addChildrenToQueue(children : Array<Tree> | Tree) : Array<Tree> {
         this.queue = this.queue.concat(children);
         return this.queue;
     }

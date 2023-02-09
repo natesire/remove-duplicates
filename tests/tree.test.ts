@@ -70,6 +70,38 @@ let dataTreeJS2 : TreeLiteral = {
     }
 }
 
+let dataTreeJS3 : TreeLiteral = {
+    "statement": "Cannot set property '0' of undefined : trees[0] = new Tree(dataTreeJS0)",
+    "question": "try using push?",
+    "yay": {
+        "statement": "statement1",
+        "question": "question1",
+        "yay": {
+            "statement": "statement2",
+            "question": "question2",
+            "yay": {
+                "statement": "statement3",
+                "question": "question3",
+            },
+
+        "nay": {
+            "statement": "statement4",
+            "question": "question4",
+            },
+        } 
+    }
+}
+
+declare global { // this spec is inside a module
+    interface Array<T> {
+        first(): T;
+    }
+}
+
+Array.prototype.first = function () {
+    return this[0];
+}
+
 describe("class Tree", () => {
     describe('from file', () => {
         let treeFile : FileManager;
@@ -116,16 +148,22 @@ describe("class Tree", () => {
             trees.push(new Tree(dataTreeJS0));
             trees.push(new Tree(dataTreeJS1));
             trees.push(new Tree(dataTreeJS2));
+            trees.push(new Tree(dataTreeJS3)); // what if one is a copy?
         });
 
-        it('should add one children to queue for breadth first search', () => {
-            let queue = trees[0].addChildrenToQueue([trees[1]]); // queue for breadth first search
+        it('DEBUG should add one SOLO children to queue for breadth first search', () => {
+            let queue = trees.first().addChildrenToQueue(trees[1]); // queue for breadth first search
+            expect(queue.length).toBe(1);
+        });
+
+        it('should add children Array to queue for breadth first search', () => {
+            let queue = trees.first().addChildrenToQueue([trees[2]]); // queue for breadth first search
             expect(queue.length).toBe(1);
         });
 
         it('should add two children to queue for breadth first search', () => {
             trees[0].addChildrenToQueue([trees[1]]);
-            let queue = trees[0].addChildrenToQueue([trees[2]]); // queue for breadth first search
+            let queue = trees.first().addChildrenToQueue([trees[2]]); // queue for breadth first search
             expect(queue.length).toBe(2);
         });
 
