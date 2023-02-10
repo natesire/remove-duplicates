@@ -144,19 +144,25 @@ describe("class Tree", () => {
             trees.push(new Tree(dataTreeJS3)); // what if one is a copy?
         });
 
-        it('DEBUG should add one SOLO children to queue for breadth first search', () => {
-            let queue = trees.first().addChildrenToQueue(trees[1]); // queue for breadth first search
-            expect(queue.length).toBe(1);
+        it('should add one child to queue for breadth first search BFS', () => {
+            let treeAlgoOn = trees.first();
+            let firstChildNode = trees[1]
+            let queueBFS = treeAlgoOn.addChildrenToQueue(firstChildNode); 
+            expect(queueBFS.length).toBe(1);
         });
 
         it('should add children Array to queue for breadth first search', () => {
-            let queue = trees.first().addChildrenToQueue([trees[2]]); // queue for breadth first search
+            let treeAlgoOn = trees.first();
+            let secondChildNode = trees[2]
+            let queue = treeAlgoOn.addChildrenToQueue([secondChildNode]); // queue for breadth first search
             expect(queue.length).toBe(1);
         });
 
-        it('should add two children to queue for breadth first search', () => {
-            trees[0].addChildrenToQueue([trees[1]]);
-            let queue = trees.first().addChildrenToQueue([trees[2]]); // queue for breadth first search
+        it('should add two children to queue for breadth first search BFS', () => {
+            let treeAlgoOn = trees.first();
+            let thirdChildNode = trees[3];
+            treeAlgoOn.addChildrenToQueue([trees[1]]);
+            let queue = treeAlgoOn.addChildrenToQueue([thirdChildNode]); // queue for breadth first search
             expect(queue.length).toBe(2);
         });
 
