@@ -155,6 +155,13 @@ describe("class Tree", () => {
             subNode1.addSubNode(trees[2]);
             expect(wholeTree.subNodes.length).toBe(1);
         });
+        it('add 2 sub nodes to sub node', () => {
+            let wholeTree = new Tree_1.default({});
+            let subNode1 = wholeTree.addSubNode(trees[1]);
+            subNode1.addSubNode(trees[2]);
+            //subNode1.addSubNode(trees[3]);
+            expect(subNode1.subNodes.length).toBe(2);
+        });
         /*it('should match concatenated TreeNode', () => {
             trees[0].addChildrenToQueue([trees[1]]);
             let queue = trees[0].addChildrenToQueue([trees[2]]); // queue for breadth first search
