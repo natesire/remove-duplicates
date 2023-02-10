@@ -2,6 +2,7 @@ import Tree from '../Tree';
 import FileManager from '../FileManager';
 import TreeLiteral from '../Types';
 import TreeNode from '../Types';
+import '../Array'; // bad practice modiying global array prototype
 
 // in case we want to deal with code
 let dataTreeJS0 : TreeLiteral = {
@@ -92,15 +93,7 @@ let dataTreeJS3 : TreeLiteral = {
     }
 }
 
-declare global { // this spec is inside a module
-    interface Array<T> {
-        first(): T;
-    }
-}
 
-Array.prototype.first = function () {
-    return this[0];
-}
 
 describe("class Tree", () => {
     describe('from file', () => {

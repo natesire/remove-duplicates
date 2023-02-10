@@ -28,5 +28,9 @@
         "question": "is it defined as a function?"
       }
     }
+  },
+  "q3": {
+    "statement": "Augmentations for the global scope can only be directly nested in external modules or ambient module declarations.prettier not adding semicolon",
+    "question": "how to import my own Array class?"
   }
 }

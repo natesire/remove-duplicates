@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Tree_1 = __importDefault(require("../Tree"));
 const FileManager_1 = __importDefault(require("../FileManager"));
+require("../Array"); // bad practice modiying global array prototype
 // in case we want to deal with code
 let dataTreeJS0 = {
     "statement": "statement0",
@@ -85,9 +86,6 @@ let dataTreeJS3 = {
             },
         }
     }
-};
-Array.prototype.first = function () {
-    return this[0];
 };
 describe("class Tree", () => {
     describe('from file', () => {
