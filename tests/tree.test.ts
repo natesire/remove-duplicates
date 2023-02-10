@@ -8,92 +8,70 @@ import '../Array'; // bad practice modiying global array prototype
 let dataTreeJS0 : TreeLiteral = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "yay": {
-        "statement": "statement1",
-        "question": "question1",
-        "yay": {
+    "children": {
+        1: {
+            "statement": "statement1",
+            "question": "question1",
+            "children": { }
+        },
+        2: {
             "statement": "statement2",
             "question": "question2",
-            "yay": {
-                "statement": "statement3",
-                "question": "question3",
-            },
-
-        "nay": {
-            "statement": "statement4",
-            "question": "question4",
-            },
-        } 
+            "children": { }
+        },
     }
 }
 
 let dataTreeJS1 : TreeLiteral = {
-    "statement": "statementA",
-    "question": "question0 what would you like to schedule?",
-    "yay": {
-        "statement": "statement1",
-        "question": "question1",
-        "yay": {
+    "statement": "statement0",
+    "question": "question0 what are you searching for?",
+    "children": {
+        1: {
+            "statement": "statement1",
+            "question": "question1",
+            "children": { }
+        },
+        2: {
             "statement": "statement2",
             "question": "question2",
-            "yay": {
-                "statement": "statement3",
-                "question": "question3",
-            },
-
-        "nay": {
-            "statement": "statement4",
-            "question": "question4",
-            },
-        } 
+            "children": { }
+        },
     }
 }
 
 let dataTreeJS2 : TreeLiteral = {
-    "statement": "Cannot set property '0' of undefined : trees[0] = new Tree(dataTreeJS0)",
-    "question": "try using push?",
-    "yay": {
-        "statement": "statement1",
-        "question": "question1",
-        "yay": {
+    "statement": "statement0",
+    "question": "question0 what are you searching for?",
+    "children": {
+        1: {
+            "statement": "statement1",
+            "question": "question1",
+            "children": { }
+        },
+        2: {
             "statement": "statement2",
             "question": "question2",
-            "yay": {
-                "statement": "statement3",
-                "question": "question3",
-            },
-
-        "nay": {
-            "statement": "statement4",
-            "question": "question4",
-            },
-        } 
+            "children": { }
+        },
     }
 }
 
 let dataTreeJS3 : TreeLiteral = {
-    "statement": "Cannot set property '0' of undefined : trees[0] = new Tree(dataTreeJS0)",
-    "question": "try using push?",
-    "yay": {
-        "statement": "statement1",
-        "question": "question1",
-        "yay": {
+    "statement": "statement0",
+    "question": "question0 what are you searching for?",
+    "children": {
+        1: {
+            "statement": "statement1",
+            "question": "question1",
+            "children": { }
+        },
+        2: {
             "statement": "statement2",
             "question": "question2",
-            "yay": {
-                "statement": "statement3",
-                "question": "question3",
-            },
-
-        "nay": {
-            "statement": "statement4",
-            "question": "question4",
-            },
-        } 
+            "children": { }
+        },
     }
 }
-
-
 
 describe("class Tree", () => {
     describe('from file', () => {
@@ -145,26 +123,51 @@ describe("class Tree", () => {
         });
 
         it('should add one child to queue for breadth first search BFS', () => {
-            let treeAlgoOn = trees.first();
+            let treeAlgoOn = trees.root();
             let firstChildNode = trees[1]
             let queueBFS = treeAlgoOn.addChildrenToQueue(firstChildNode); 
             expect(queueBFS.length).toBe(1);
         });
 
         it('should add children Array to queue for breadth first search', () => {
-            let treeAlgoOn = trees.first();
+            let treeAlgoOn = trees.root();
             let secondChildNode = trees[2]
             let queue = treeAlgoOn.addChildrenToQueue([secondChildNode]); // queue for breadth first search
             expect(queue.length).toBe(1);
         });
 
         it('should add two children to queue for breadth first search BFS', () => {
-            let treeAlgoOn = trees.first();
+            let treeAlgoOn = trees.root();
             let thirdChildNode = trees[3];
             treeAlgoOn.addChildrenToQueue([trees[1]]);
             let queue = treeAlgoOn.addChildrenToQueue([thirdChildNode]); // queue for breadth first search
             expect(queue.length).toBe(2);
         });
+
+        //               0
+        //          /          \
+        //        1             2
+        //     3    4        5    6
+        //   7 8    9 10  11 12   13 14
+
+        // queue: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+
+        // when searched or next level is complete, keep two levels in memory
+        it('should remove first child from queue when ???', () => {
+            let treeAlgoOn = trees.root();
+            let firstChildNode = trees[1];
+            let secondChildNode = trees[2];
+            treeAlgoOn.addChildrenToQueue(firstChildNode);
+            let queue = treeAlgoOn.addChildrenToQueue(secondChildNode); // queue for breadth first search
+            expect(queue.length).toBe(2);
+        });
+
+        it('add child node under node', () => {
+            let treeAlgoOn = new Tree({});
+            treeAlgoOn.addChild(trees[1])
+            expect(treeAlgoOn.children.length).toBe(1);
+        });
+
 
         /*it('should match concatenated TreeNode', () => {
             trees[0].addChildrenToQueue([trees[1]]);
@@ -182,7 +185,7 @@ describe("class Tree", () => {
     });
 
     /*
-    it("DEBUG should search zero level", () => {
+    it("should search zero level", () => {
         const tree = new Tree(dataTreeJS);
         let search = tree.getChildren()
         expect(search).toMatch('')

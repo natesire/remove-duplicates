@@ -12,23 +12,19 @@ const commandLine = readline.createInterface({
     output: process.stdout
 });
 let dataTreeLiteral = {
-    "statement": "I am here to help you find the answer to your question",
-    "question": "what are you searching for?",
-    "yay": {
-        "statement": "This expression is not callable",
-        "question": "javascript",
-        "yay": {
-            "statement": "This expression is not callable",
-            "question": "is it defined as a function?",
-            "yay": {
-                "statement": "This expression is not callable",
-                "question": "imports",
-            },
-            "nay": {
-                "statement": "This expression is not callable",
-                "question": "is it defined as a function?",
-            },
-        }
+    "statement": "statement0",
+    "question": "question0 what are you searching for?",
+    "children": {
+        1: {
+            "statement": "statement1",
+            "question": "question1",
+            "children": {}
+        },
+        2: {
+            "statement": "statement2",
+            "question": "question2",
+            "children": {}
+        },
     }
 };
 let myShift = function (queue) {
@@ -65,19 +61,18 @@ let breadthFirstSearch = function (userInput, startTree) {
     }
     return firstTreeNode;
 };
-let searchForQuestionNode = function (search, tree) {
-    let yay = tree['yay'];
-    let nay = tree['nay'];
-    if (fuzzyMatch(search, yay?.question) === 1) { // 100% match
-        console.log('found node: ' + yay?.question);
-        return yay;
+/*
+let searchForQuestionNode = function(search: string, tree: Tree | TreeLiteral) : Tree {
+    let child = tree['children'];
+    if(fuzzyMatch(search, child.question) === 1) { // 100% match
+        console.log('found node: ' + child.question);
+        return child as Tree;
+    } else if(fuzzyMatch(search, child.question) === 1) { // 100% match
+        console.log('found node: ' + child.question);
+        return child as Tree;
     }
-    else if (fuzzyMatch(search, nay?.question) === 1) { // 100% match
-        console.log('found node: ' + nay?.question);
-        return nay;
-    }
-    return tree;
-};
+    return tree as unknown as Tree;
+}*/
 var nextNode = function (currentNode, userInput) {
     //return currentNode[userInput] as NodeTree;
     return currentNode;
@@ -99,7 +94,8 @@ function waitForCommandLine(tree) {
                 let key = "yay";
                 waitForCommandLine(tree[key]);
             }
-            let nextNode = searchForQuestionNode(userInput, tree);
+            //let nextNode : Tree = searchForQuestionNode(userInput, tree);
+            let nextNode = tree;
             waitForCommandLine(nextNode);
         });
     }

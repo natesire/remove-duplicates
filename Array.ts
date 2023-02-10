@@ -2,10 +2,10 @@ export {};
 
 declare global { // this spec is inside a module
     interface Array<T> {
-        first(): T;
+        root(): T;
     }
 }
 
-Array.prototype.first = function () {
+Array.prototype.root = function () {
     return this[0];
 }

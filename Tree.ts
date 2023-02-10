@@ -4,14 +4,19 @@ export default class Tree {
     public statement? : string;
     public question? : string;
     public solution? : string;
-    public yay? : Tree; // sentiment, not boolean
-    public nay? : Tree; // and both three letters looks pretty
+    public yay? : Tree; // only one allowed per node
+    public nay? : Tree; // only one allowed per node
     public queue : Array<Tree>;
     public root;
+    public children : Array<Tree> = [];
 
     constructor(treeFileOrLiteral: any) {
         this.root = treeFileOrLiteral;
         this.queue = []; // breadth first search
+    }
+
+    addChild(child : Tree) {
+        this.children.push(child);
     }
 
     toString() {

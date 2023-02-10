@@ -2,9 +2,10 @@
 export default interface TreeLiteral {
     statement: string,
     question: string,
+    children: {},
     solution?: string,
-    yay?: TreeLiteral,
-    nay?: TreeLiteral,
+    //yay?: TreeLiteral,
+    //nay?: TreeLiteral,
     getTree?: () => TreeLiteral
 }
 
