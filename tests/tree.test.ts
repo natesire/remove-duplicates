@@ -8,7 +8,7 @@ import '../Array'; // bad practice modiying global array prototype
 let dataTreeJS0 : TreeLiteral = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "children": {
+    "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
@@ -25,7 +25,7 @@ let dataTreeJS0 : TreeLiteral = {
 let dataTreeJS1 : TreeLiteral = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "children": {
+    "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
@@ -42,7 +42,7 @@ let dataTreeJS1 : TreeLiteral = {
 let dataTreeJS2 : TreeLiteral = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "children": {
+    "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
@@ -59,7 +59,7 @@ let dataTreeJS2 : TreeLiteral = {
 let dataTreeJS3 : TreeLiteral = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "children": {
+    "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
@@ -162,10 +162,17 @@ describe("class Tree", () => {
             expect(queue.length).toBe(2);
         });
 
-        it('add child node under node', () => {
-            let treeAlgoOn = new Tree({});
-            treeAlgoOn.addChild(trees[1])
-            expect(treeAlgoOn.children.length).toBe(1);
+        it('add sub node', () => {
+            let wholeTree = new Tree({});
+            wholeTree.addSubNode(trees[1])
+            expect(wholeTree.subNodes.length).toBe(1);
+        });
+
+        it('add sub node to sub node', () => {
+            let wholeTree = new Tree({});
+            let subNode1 = wholeTree.addSubNode(trees[1]);
+            subNode1.addSubNode(trees[2]);
+            expect(wholeTree.subNodes.length).toBe(1);
         });
 
 

@@ -4,12 +4,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // covers all the Tree Nodes
 class Tree {
     constructor(treeFileOrLiteral) {
-        this.children = [];
+        this.subNodes = [];
         this.root = treeFileOrLiteral;
         this.queue = []; // breadth first search
     }
-    addChild(child) {
-        this.children.push(child);
+    addSubNode(subNode) {
+        this.subNodes.push(subNode);
+        let length = this.subNodes.length;
+        return this.subNodes[length - 1];
     }
     toString() {
         return JSON.stringify(this);

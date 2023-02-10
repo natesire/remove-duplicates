@@ -10,7 +10,7 @@ require("../Array"); // bad practice modiying global array prototype
 let dataTreeJS0 = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "children": {
+    "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
@@ -26,7 +26,7 @@ let dataTreeJS0 = {
 let dataTreeJS1 = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "children": {
+    "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
@@ -42,7 +42,7 @@ let dataTreeJS1 = {
 let dataTreeJS2 = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "children": {
+    "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
@@ -58,7 +58,7 @@ let dataTreeJS2 = {
 let dataTreeJS3 = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "children": {
+    "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
@@ -144,10 +144,16 @@ describe("class Tree", () => {
             let queue = treeAlgoOn.addChildrenToQueue(secondChildNode); // queue for breadth first search
             expect(queue.length).toBe(2);
         });
-        it('add child node under node', () => {
-            let treeAlgoOn = new Tree_1.default({});
-            treeAlgoOn.addChild(trees[1]);
-            expect(treeAlgoOn.children.length).toBe(1);
+        it('add sub node', () => {
+            let wholeTree = new Tree_1.default({});
+            wholeTree.addSubNode(trees[1]);
+            expect(wholeTree.subNodes.length).toBe(1);
+        });
+        it('add sub node to sub node', () => {
+            let wholeTree = new Tree_1.default({});
+            let subNode1 = wholeTree.addSubNode(trees[1]);
+            subNode1.addSubNode(trees[2]);
+            expect(wholeTree.subNodes.length).toBe(1);
         });
         /*it('should match concatenated TreeNode', () => {
             trees[0].addChildrenToQueue([trees[1]]);

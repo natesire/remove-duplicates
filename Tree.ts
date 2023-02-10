@@ -8,15 +8,17 @@ export default class Tree {
     public nay? : Tree; // only one allowed per node
     public queue : Array<Tree>;
     public root;
-    public children : Array<Tree> = [];
+    public subNodes : Array<Tree> = [];
 
     constructor(treeFileOrLiteral: any) {
         this.root = treeFileOrLiteral;
         this.queue = []; // breadth first search
     }
 
-    addChild(child : Tree) {
-        this.children.push(child);
+    addSubNode(subNode : Tree) {
+        this.subNodes.push(subNode);
+        let length = this.subNodes.length;
+        return this.subNodes[length - 1];
     }
 
     toString() {

@@ -12,7 +12,7 @@ const commandLine = readline.createInterface({
 let dataTreeLiteral : TreeLiteral = {
     "statement": "statement0",
     "question": "question0 what are you searching for?",
-    "children": {
+    "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
