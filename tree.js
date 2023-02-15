@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Tree {
     constructor(treeFileOrLiteral) {
         this.subNodes = [];
-        this.root = treeFileOrLiteral;
+        this.rootNode = treeFileOrLiteral;
         this.queue = []; // breadth first search
     }
     addSubNode(subNode) {
@@ -30,7 +30,7 @@ class Tree {
         return this.queue;
     }
     search(str) {
-        return this.root['statement'];
+        return this.rootNode['statement'];
     }
 }
 exports.default = Tree;

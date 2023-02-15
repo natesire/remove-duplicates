@@ -1,6 +1,6 @@
 // class Tree
 export default interface TreeLiteral {
-    statement: string,
+    fact: string,
     question: string,
     subNodes: {},
     solution?: string,
@@ -8,10 +8,11 @@ export default interface TreeLiteral {
 }
 
 export interface TreeNode {
-    statement: string,
+    fact: string,
     question: string,
     solution?: string,
     yay?: TreeNode,
     nay?: TreeNode,
-    getTree?: () => TreeNode
+    getTree?: () => TreeNode,
+    subNodes: Array<TreeNode>
 }

@@ -8,21 +8,21 @@ describe(".FileManager", () => {
         treeFile = new FileManager('data/schedule.tree.yaml');
     });
 
-    it("should return value for statement", () => {
+    it("should return value for fact", () => {
         let fileContents = treeFile.read();
         let tree = new Tree(fileContents);
-        expect(tree['root']['statement']).toMatch(/schedule/)
+        expect(tree['rootNode']['fact']).toMatch(/schedule/)
     });
 
     it("should return value for question", () => {
         let fileContents = treeFile.read();
         let tree = new Tree(fileContents);
-        expect(tree['root']['question']).toMatch(/schedule/)
+        expect(tree['rootNode']['question']).toMatch(/schedule/)
     });
 
     it("should return value for first node", () => {
         let fileContents = treeFile.read();
         let tree = new Tree(fileContents);
-        expect(tree['root']['q1']['question']).toMatch(/hours/)
+        expect(tree['rootNode']['q1']['question']).toMatch(/hours/)
     });
 });

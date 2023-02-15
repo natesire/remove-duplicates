@@ -5,8 +5,57 @@ import TreeNode from '../Types';
 import '../Array'; // bad practice modiying global array prototype
 
 // in case we want to deal with code
-let dataTreeJS0 : TreeLiteral = {
-    "statement": "statement0",
+let dataTreeJS0 : TreeNode = {
+    "fact": "statement0",
+    "question": "question0 what are you searching for?",
+    "subNodes": {
+        1: {
+            "fact": "javascript",
+            "question": "do you have a question about javascript?",
+            "children": { }
+        },
+        2: {
+            "fact": "College",
+            "question": "do you have a question about College?",
+            "children": {
+                1: {
+                    "statement": "calculus",
+                    "question": "do you have a question about calculus?",
+                    "children": { }
+                },
+                2: {
+                    "statement": "physics",
+                    "question": "do you have a question about physics?",
+                    "children": { }
+                }
+            }
+        },
+        4: {
+            "statement": "health",
+            "question": "do you have a question about health?",
+            "children": { 
+                1: { 
+                    "statement": "Scoliosis",
+                    "question": "do you have a question about Scoliosis?",
+                    "children": { }
+                },
+                2: { 
+                    "statement": "Weight",
+                    "question": "do you have a question about Weight?",
+                    "children": { }
+                }
+            }
+        },
+        5: {
+            "statement": "AWS",
+            "question": "do you have a question about AWS?",
+            "children": { }
+        },
+    }
+}
+
+let dataTreeJS1 : TreeNode = {
+    "fact": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
@@ -22,8 +71,8 @@ let dataTreeJS0 : TreeLiteral = {
     }
 }
 
-let dataTreeJS1 : TreeLiteral = {
-    "statement": "statement0",
+let dataTreeJS2 : TreeNode = {
+    "fact": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
@@ -39,25 +88,8 @@ let dataTreeJS1 : TreeLiteral = {
     }
 }
 
-let dataTreeJS2 : TreeLiteral = {
-    "statement": "statement0",
-    "question": "question0 what are you searching for?",
-    "subNodes": {
-        1: {
-            "statement": "statement1",
-            "question": "question1",
-            "children": { }
-        },
-        2: {
-            "statement": "statement2",
-            "question": "question2",
-            "children": { }
-        },
-    }
-}
-
-let dataTreeJS3 : TreeLiteral = {
-    "statement": "statement0",
+let dataTreeJS3 : TreeNode = {
+    "fact": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
@@ -75,20 +107,24 @@ let dataTreeJS3 : TreeLiteral = {
 
 describe("class Tree", () => {
     describe('from file', () => {
-        let treeFile : FileManager;
-        let dataObj : Object;
+        let fileManager : FileManager;
+        let dataFromFile : Object;
         let tree : Tree;
-        let treeRoot : TreeNode; 
+        let rootNode : TreeNode; 
 
         beforeEach(() => {
-            treeFile = new FileManager('data/schedule.tree.yaml');
-            dataObj = treeFile.read();
-            tree = new Tree(dataObj);
-            treeRoot = tree.root;
+            fileManager = new FileManager('data/schedule.tree.yaml');
+            dataFromFile = fileManager.read();
+            tree = new Tree(dataFromFile);
+            rootNode = tree.rootNode;
         });
 
-        it("should load tree from file", () => {
-            expect(treeRoot['question']).toMatch('schedule')
+        it("should match question", () => {
+            expect(rootNode['question']).toMatch(/schedule/)
+        });
+
+        it("should match fact", () => {
+            expect(rootNode['fact']).toMatch(/schedule/)
         });
     });
 
@@ -98,7 +134,7 @@ describe("class Tree", () => {
 
         beforeEach(() => {
             tree = new Tree(dataTreeJS0);
-            treeRoot = tree.root;
+            treeRoot = tree.rootNode;
         });
 
         it("should load tree from literal", () => {
@@ -107,7 +143,7 @@ describe("class Tree", () => {
 
     
         it("should return tree data", () => {
-            expect(treeRoot['statement']).toMatch('statement0')
+            expect(treeRoot['fact']).toMatch('statement0')
         });
     });
 

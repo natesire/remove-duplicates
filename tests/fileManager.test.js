@@ -10,19 +10,19 @@ describe(".FileManager", () => {
     beforeAll(() => {
         treeFile = new FileManager_1.default('data/schedule.tree.yaml');
     });
-    it("should return value for statement", () => {
+    it("should return value for fact", () => {
         let fileContents = treeFile.read();
         let tree = new Tree_1.default(fileContents);
-        expect(tree['root']['statement']).toMatch(/schedule/);
+        expect(tree['rootNode']['fact']).toMatch(/schedule/);
     });
     it("should return value for question", () => {
         let fileContents = treeFile.read();
         let tree = new Tree_1.default(fileContents);
-        expect(tree['root']['question']).toMatch(/schedule/);
+        expect(tree['rootNode']['question']).toMatch(/schedule/);
     });
     it("should return value for first node", () => {
         let fileContents = treeFile.read();
         let tree = new Tree_1.default(fileContents);
-        expect(tree['root']['q1']['question']).toMatch(/hours/);
+        expect(tree['rootNode']['q1']['question']).toMatch(/hours/);
     });
 });

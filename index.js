@@ -12,7 +12,7 @@ const commandLine = readline.createInterface({
     output: process.stdout
 });
 let dataTreeLiteral = {
-    "statement": "statement0",
+    "fact": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {

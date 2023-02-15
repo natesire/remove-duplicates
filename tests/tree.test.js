@@ -8,23 +8,55 @@ const FileManager_1 = __importDefault(require("../FileManager"));
 require("../Array"); // bad practice modiying global array prototype
 // in case we want to deal with code
 let dataTreeJS0 = {
-    "statement": "statement0",
+    "fact": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
-            "statement": "statement1",
-            "question": "question1",
+            "fact": "javascript",
+            "question": "do you have a question about javascript?",
             "children": {}
         },
         2: {
-            "statement": "statement2",
-            "question": "question2",
+            "fact": "College",
+            "question": "do you have a question about College?",
+            "children": {
+                1: {
+                    "statement": "calculus",
+                    "question": "do you have a question about calculus?",
+                    "children": {}
+                },
+                2: {
+                    "statement": "physics",
+                    "question": "do you have a question about physics?",
+                    "children": {}
+                }
+            }
+        },
+        4: {
+            "statement": "health",
+            "question": "do you have a question about health?",
+            "children": {
+                1: {
+                    "statement": "Scoliosis",
+                    "question": "do you have a question about Scoliosis?",
+                    "children": {}
+                },
+                2: {
+                    "statement": "Weight",
+                    "question": "do you have a question about Weight?",
+                    "children": {}
+                }
+            }
+        },
+        5: {
+            "statement": "AWS",
+            "question": "do you have a question about AWS?",
             "children": {}
         },
     }
 };
 let dataTreeJS1 = {
-    "statement": "statement0",
+    "fact": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
@@ -40,7 +72,7 @@ let dataTreeJS1 = {
     }
 };
 let dataTreeJS2 = {
-    "statement": "statement0",
+    "fact": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
@@ -56,7 +88,7 @@ let dataTreeJS2 = {
     }
 };
 let dataTreeJS3 = {
-    "statement": "statement0",
+    "fact": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
@@ -73,18 +105,21 @@ let dataTreeJS3 = {
 };
 describe("class Tree", () => {
     describe('from file', () => {
-        let treeFile;
-        let dataObj;
+        let fileManager;
+        let dataFromFile;
         let tree;
-        let treeRoot;
+        let rootNode;
         beforeEach(() => {
-            treeFile = new FileManager_1.default('data/schedule.tree.yaml');
-            dataObj = treeFile.read();
-            tree = new Tree_1.default(dataObj);
-            treeRoot = tree.root;
+            fileManager = new FileManager_1.default('data/schedule.tree.yaml');
+            dataFromFile = fileManager.read();
+            tree = new Tree_1.default(dataFromFile);
+            rootNode = tree.rootNode;
         });
-        it("should load tree from file", () => {
-            expect(treeRoot['question']).toMatch('schedule');
+        it("should match question", () => {
+            expect(rootNode['question']).toMatch(/schedule/);
+        });
+        it("should match fact", () => {
+            expect(rootNode['fact']).toMatch(/schedule/);
         });
     });
     describe('from literal', () => {
@@ -92,13 +127,13 @@ describe("class Tree", () => {
         let treeRoot;
         beforeEach(() => {
             tree = new Tree_1.default(dataTreeJS0);
-            treeRoot = tree.root;
+            treeRoot = tree.rootNode;
         });
         it("should load tree from literal", () => {
             expect(treeRoot['question']).toMatch('question0');
         });
         it("should return tree data", () => {
-            expect(treeRoot['statement']).toMatch('statement0');
+            expect(treeRoot['fact']).toMatch('statement0');
         });
     });
     describe('breadth first search', () => {
@@ -159,7 +194,7 @@ describe("class Tree", () => {
             let wholeTree = new Tree_1.default({});
             let subNode1 = wholeTree.addSubNode(trees[1]);
             subNode1.addSubNode(trees[2]);
-            //subNode1.addSubNode(trees[3]);
+            subNode1.addSubNode(trees[3]);
             expect(subNode1.subNodes.length).toBe(2);
         });
         /*it('should match concatenated TreeNode', () => {

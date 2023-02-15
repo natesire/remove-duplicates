@@ -1,17 +1,17 @@
 // handle the tree data structure and algorithms
 // covers all the Tree Nodes
 export default class Tree {
-    public statement? : string;
+    public fact? : string;
     public question? : string;
     public solution? : string;
     public yay? : Tree; // only one allowed per node
     public nay? : Tree; // only one allowed per node
     public queue : Array<Tree>;
-    public root;
+    public rootNode;
     public subNodes : Array<Tree> = [];
 
     constructor(treeFileOrLiteral: any) {
-        this.root = treeFileOrLiteral;
+        this.rootNode = treeFileOrLiteral;
         this.queue = []; // breadth first search
     }
 
@@ -43,6 +43,6 @@ export default class Tree {
     }
 
     search(str:string) {
-        return this.root['statement'];
+        return this.rootNode['statement'];
     }
 }

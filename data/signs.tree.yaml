@@ -1,0 +1,23 @@
+statement: Humming Bird on plate with mushrooms, rodent, flowers 
+question: What kind of mushrooms are those? 
+q1:
+  statement: the mushrooms have gills 
+  question: how mant types of smooth brown topped gilled mushrooms?
+  nay:
+    question: do you prefer interviews towards the end of the day? 
+    solution: Take n name of mushroom for me and cousin
+q2:
+  statement: prettier not adding semicolon
+  question: Does the Trillium Flower mean anything?
+'yes':
+  statement: This expression is not callable
+  question: Does Brittney Have? Asthma, Estrogen Imbalance
+  'yes':
+    statement: This expression is not callable
+    question: is it defined as a function?
+    'yes':
+      statement: This expression is not callable
+      question: imports
+    'no':
+      statement: This expression is not callable
+      question: is it defined as a function?

@@ -1,24 +1,24 @@
-statement: When is the best time to schedule an interview? 
+fact: When is the best time to schedule an interview? 
 question: what would you like to schedule?
 q1:
-  statement: let's not disturb your work time
+  fact: let's not disturb your work time
   question: which hours are you available? 9 to 5? after 5?
   nay:
     question: do you prefer interviews towards the end of the day? 
     solution: 'In VSCode, open command pallete, and type ''Debug: Javascript Debug
       Terminal'''
 q2:
-  statement: prettier not adding semicolon
+  fact: prettier not adding semicolon
   question: how to run prettier continuously?
 'yes':
-  statement: This expression is not callable
+  fact: This expression is not callable
   question: javascript
   'yes':
-    statement: This expression is not callable
+    fact: This expression is not callable
     question: is it defined as a function?
     'yes':
-      statement: This expression is not callable
+      fact: This expression is not callable
       question: imports
     'no':
-      statement: This expression is not callable
+      fact: This expression is not callable
       question: is it defined as a function?
