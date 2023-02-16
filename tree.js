@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Tree {
     constructor(treeFileOrLiteral) {
         this.subNodes = [];
+        // data mapping, lously coupled
+        this.dataMap = {
+            'response': 'fact',
+        };
         this.rootNode = treeFileOrLiteral;
         this.queue = []; // breadth first search
     }
@@ -30,7 +34,7 @@ class Tree {
         return this.queue;
     }
     search(str) {
-        return this.rootNode['statement'];
+        return this.rootNode[this.dataMap['response']];
     }
 }
 exports.default = Tree;

@@ -12,7 +12,13 @@ let dataTreeJS0 : TreeNode = {
         1: {
             "fact": "javascript",
             "question": "do you have a question about javascript?",
-            "children": { }
+            "children": {
+                1: {
+                    "fact": "react",
+                    "question": "do you have a question about react?",
+                    "children": { }
+                },
+             }
         },
         2: {
             "fact": "College",
@@ -125,6 +131,12 @@ describe("class Tree", () => {
 
         it("should match fact", () => {
             expect(rootNode['fact']).toMatch(/schedule/)
+        });
+
+        describe('search', () => {
+            it("should search for schedule", () => {
+                expect(tree.search('schedule')).toMatch(/schedule/i)
+            });
         });
     });
 

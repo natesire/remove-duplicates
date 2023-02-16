@@ -14,7 +14,13 @@ let dataTreeJS0 = {
         1: {
             "fact": "javascript",
             "question": "do you have a question about javascript?",
-            "children": {}
+            "children": {
+                1: {
+                    "fact": "react",
+                    "question": "do you have a question about react?",
+                    "children": {}
+                },
+            }
         },
         2: {
             "fact": "College",
@@ -114,6 +120,9 @@ describe("class Tree", () => {
             dataFromFile = fileManager.read();
             tree = new Tree_1.default(dataFromFile);
             rootNode = tree.rootNode;
+        });
+        it("should search for schedule", () => {
+            expect(tree.search('schedule')).toMatch(/schedule/i);
         });
         it("should match question", () => {
             expect(rootNode['question']).toMatch(/schedule/);

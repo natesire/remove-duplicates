@@ -10,6 +10,11 @@ export default class Tree {
     public rootNode;
     public subNodes : Array<Tree> = [];
 
+    // data mapping, lously coupled
+    public dataMap = {
+        'response' : 'fact',
+    }
+
     constructor(treeFileOrLiteral: any) {
         this.rootNode = treeFileOrLiteral;
         this.queue = []; // breadth first search
@@ -43,6 +48,6 @@ export default class Tree {
     }
 
     search(str:string) {
-        return this.rootNode['statement'];
+        return this.rootNode[this.dataMap['response']];
     }
 }
