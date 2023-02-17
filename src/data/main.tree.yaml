@@ -1,0 +1,38 @@
+text: Welcome to the main tree
+question: What question are you searching for? 
+q2:
+  text: Education
+  question: do you have a question about education? 
+q3:
+  text: spirtual signs
+  question: do you have a question about spiritual signs?
+q4:
+  text: Career
+  question: do you have a question about career?
+    qCareer1:
+      text: Javascript
+      question: Do you have a question about Javascript?
+    qCareer2:
+      text: Interviewing
+      question: do you have question about interviewing?
+        q1Interviewing:
+          text: scaling
+          question: What's the largest you scaled?
+        q2Interviewing:
+          text: leadership
+          question: What's the largest team you lead? 
+q5:
+  text: Health
+  question: do you have a question about health?
+  qHealth1:
+    text: Mushrooms
+    question: do you have a question about mushrooms?
+  qHealth2:
+    text: Herbs
+    question: do you have a question about herbs?
+q6:
+  text: office
+  question: do you have a question about office?
+q7:
+  text: financial
+  question: do you have a question about financial?

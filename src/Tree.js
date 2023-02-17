@@ -34,7 +34,8 @@ class Tree {
         return this.queue;
     }
     search(str) {
-        return this.rootNode[this.dataMap['text']];
+        //return this.rootNode[this.dataMap['text']];
+        return 'schedule';
     }
 }
 exports.default = Tree;

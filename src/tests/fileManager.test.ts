@@ -5,7 +5,7 @@ describe(".FileManager", () => {
     let treeFile : FileManager;
 
     beforeAll(() => {
-        treeFile = new FileManager('data/schedule.tree.yaml');
+        treeFile = new FileManager('./src/data/schedule.tree.yaml');
     });
 
     it("should return value for fact", () => {

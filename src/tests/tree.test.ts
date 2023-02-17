@@ -1,171 +1,186 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const Tree_1 = __importDefault(require("../Tree"));
-const FileManager_1 = __importDefault(require("../FileManager"));
-require("../Array"); // bad practice modiying global array prototype
+import Tree from '../Tree';
+import FileManager from '../FileManager';
+import TreeLiteral from '../Types';
+import TreeNode from '../Types';
+import '../Array'; // bad practice modiying global array prototype
+
 // in case we want to deal with code
-let dataTreeJS0 = {
-    "fact": "statement0",
+let dataTreeJS0 : TreeNode = {
+    "text": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
-            "fact": "javascript",
+            "text": "javascript",
             "question": "do you have a question about javascript?",
             "children": {
                 1: {
-                    "fact": "react",
+                    "text": "react",
                     "question": "do you have a question about react?",
-                    "children": {}
+                    "children": { }
                 },
-            }
+             }
         },
         2: {
-            "fact": "College",
+            "text": "College",
             "question": "do you have a question about College?",
             "children": {
                 1: {
                     "statement": "calculus",
                     "question": "do you have a question about calculus?",
-                    "children": {}
+                    "children": { }
                 },
                 2: {
                     "statement": "physics",
                     "question": "do you have a question about physics?",
-                    "children": {}
+                    "children": { }
                 }
             }
         },
         4: {
             "statement": "health",
             "question": "do you have a question about health?",
-            "children": {
-                1: {
+            "children": { 
+                1: { 
                     "statement": "Scoliosis",
                     "question": "do you have a question about Scoliosis?",
-                    "children": {}
+                    "children": { }
                 },
-                2: {
+                2: { 
                     "statement": "Weight",
                     "question": "do you have a question about Weight?",
-                    "children": {}
+                    "children": { }
                 }
             }
         },
         5: {
             "statement": "AWS",
             "question": "do you have a question about AWS?",
-            "children": {}
+            "children": { }
         },
     }
-};
-let dataTreeJS1 = {
-    "fact": "statement0",
+}
+
+let dataTreeJS1 : TreeNode = {
+    "text": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
-            "children": {}
+            "children": { }
         },
         2: {
             "statement": "statement2",
             "question": "question2",
-            "children": {}
+            "children": { }
         },
     }
-};
-let dataTreeJS2 = {
-    "fact": "statement0",
+}
+
+let dataTreeJS2 : TreeNode = {
+    "text": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
-            "children": {}
+            "children": { }
         },
         2: {
             "statement": "statement2",
             "question": "question2",
-            "children": {}
+            "children": { }
         },
     }
-};
-let dataTreeJS3 = {
-    "fact": "statement0",
+}
+
+let dataTreeJS3 : TreeNode = {
+    "text": "statement0",
     "question": "question0 what are you searching for?",
     "subNodes": {
         1: {
             "statement": "statement1",
             "question": "question1",
-            "children": {}
+            "children": { }
         },
         2: {
             "statement": "statement2",
             "question": "question2",
-            "children": {}
+            "children": { }
         },
     }
-};
+}
+
 describe("class Tree", () => {
     describe('from file', () => {
-        let fileManager;
-        let dataFromFile;
-        let tree;
-        let rootNode;
+        let fileManager : FileManager;
+        let dataFromFile : Object;
+        let tree : Tree;
+        let rootNode : TreeNode; 
+
         beforeEach(() => {
-            fileManager = new FileManager_1.default('data/schedule.tree.yaml');
+            // need a main tree to search for topics
+            fileManager = new FileManager('./src/data/schedule.tree.yaml');
             dataFromFile = fileManager.read();
-            tree = new Tree_1.default(dataFromFile);
+            tree = new Tree(dataFromFile);
             rootNode = tree.rootNode;
         });
-        it("should search for schedule", () => {
-            expect(tree.search('schedule')).toMatch(/schedule/i);
-        });
-        it("should match question", () => {
-            expect(rootNode['question']).toMatch(/schedule/);
-        });
-        it("should match fact", () => {
-            expect(rootNode['fact']).toMatch(/schedule/);
+
+        describe('search', () => {
+            it("should find schedule", () => {
+                expect(tree.search('schedule')).toMatch(/schedule/i)
+            });
+
+            it("should find interview", () => {
+                expect(tree.search('interview')).toMatch(/schedule/i)
+            });
         });
     });
+
     describe('from literal', () => {
-        let tree;
-        let treeRoot;
+        let tree : Tree;
+        let treeRoot : TreeNode;
+
         beforeEach(() => {
-            tree = new Tree_1.default(dataTreeJS0);
+            tree = new Tree(dataTreeJS0);
             treeRoot = tree.rootNode;
         });
+
         it("should load tree from literal", () => {
-            expect(treeRoot['question']).toMatch('question0');
+            expect(treeRoot['question']).toMatch('question0')
         });
+
+    
         it("should return tree data", () => {
-            expect(treeRoot['fact']).toMatch('statement0');
+            expect(treeRoot['text']).toMatch('statement0')
         });
     });
+
     describe('breadth first search', () => {
-        let trees = [];
+        let trees : Array<Tree> = [];
+
         beforeEach(() => {
             trees = [];
-            trees.push(new Tree_1.default(dataTreeJS0));
-            trees.push(new Tree_1.default(dataTreeJS1));
-            trees.push(new Tree_1.default(dataTreeJS2));
-            trees.push(new Tree_1.default(dataTreeJS3)); // what if one is a copy?
+            trees.push(new Tree(dataTreeJS0));
+            trees.push(new Tree(dataTreeJS1));
+            trees.push(new Tree(dataTreeJS2));
+            trees.push(new Tree(dataTreeJS3)); // what if one is a copy?
         });
+
         it('should add one child to queue for breadth first search BFS', () => {
             let treeAlgoOn = trees.root();
-            let firstChildNode = trees[1];
-            let queueBFS = treeAlgoOn.addChildrenToQueue(firstChildNode);
+            let firstChildNode = trees[1]
+            let queueBFS = treeAlgoOn.addChildrenToQueue(firstChildNode); 
             expect(queueBFS.length).toBe(1);
         });
+
         it('should add children Array to queue for breadth first search', () => {
             let treeAlgoOn = trees.root();
-            let secondChildNode = trees[2];
+            let secondChildNode = trees[2]
             let queue = treeAlgoOn.addChildrenToQueue([secondChildNode]); // queue for breadth first search
             expect(queue.length).toBe(1);
         });
+
         it('should add two children to queue for breadth first search BFS', () => {
             let treeAlgoOn = trees.root();
             let thirdChildNode = trees[3];
@@ -173,12 +188,15 @@ describe("class Tree", () => {
             let queue = treeAlgoOn.addChildrenToQueue([thirdChildNode]); // queue for breadth first search
             expect(queue.length).toBe(2);
         });
+
         //               0
         //          /          \
         //        1             2
         //     3    4        5    6
         //   7 8    9 10  11 12   13 14
+
         // queue: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+
         // when searched or next level is complete, keep two levels in memory
         it('should remove first child from queue when ???', () => {
             let treeAlgoOn = trees.root();
@@ -188,24 +206,29 @@ describe("class Tree", () => {
             let queue = treeAlgoOn.addChildrenToQueue(secondChildNode); // queue for breadth first search
             expect(queue.length).toBe(2);
         });
+
         it('add sub node', () => {
-            let wholeTree = new Tree_1.default({});
-            wholeTree.addSubNode(trees[1]);
+            let wholeTree = new Tree({});
+            wholeTree.addSubNode(trees[1])
             expect(wholeTree.subNodes.length).toBe(1);
         });
+
         it('add sub node to sub node', () => {
-            let wholeTree = new Tree_1.default({});
+            let wholeTree = new Tree({});
             let subNode1 = wholeTree.addSubNode(trees[1]);
             subNode1.addSubNode(trees[2]);
             expect(wholeTree.subNodes.length).toBe(1);
         });
+
         it('add 2 sub nodes to sub node', () => {
-            let wholeTree = new Tree_1.default({});
+            let wholeTree = new Tree({});
             let subNode1 = wholeTree.addSubNode(trees[1]);
             subNode1.addSubNode(trees[2]);
             subNode1.addSubNode(trees[3]);
             expect(subNode1.subNodes.length).toBe(2);
         });
+
+
         /*it('should match concatenated TreeNode', () => {
             trees[0].addChildrenToQueue([trees[1]]);
             let queue = trees[0].addChildrenToQueue([trees[2]]); // queue for breadth first search
@@ -213,6 +236,7 @@ describe("class Tree", () => {
             expect(queue.length).toBe(2);
         });*/
     });
+    
     /*
     it("should search first level", () => {
         const tree = new Tree(dataTreeJS);

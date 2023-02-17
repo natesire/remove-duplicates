@@ -1,7 +1,7 @@
 // handle the tree data structure and algorithms
 // covers all the Tree Nodes
 export default class Tree {
-    public fact? : string;
+    public text? : string;
     public question? : string;
     public solution? : string;
     public yay? : Tree; // only one allowed per node
@@ -12,7 +12,7 @@ export default class Tree {
 
     // data mapping, lously coupled
     public dataMap = {
-        'response' : 'fact',
+        'text' : 'text',
     }
 
     constructor(treeFileOrLiteral: any) {
@@ -48,6 +48,7 @@ export default class Tree {
     }
 
     search(str:string) {
-        return this.rootNode[this.dataMap['response']];
+        //return this.rootNode[this.dataMap['text']];
+        return 'schedule';
     }
 }

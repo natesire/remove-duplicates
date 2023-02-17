@@ -7,7 +7,7 @@ const FileManager_1 = __importDefault(require("../FileManager"));
 describe(".FileManager", () => {
     let treeFile;
     beforeAll(() => {
-        treeFile = new FileManager_1.default('data/schedule.tree.yaml');
+        treeFile = new FileManager_1.default('./src/data/schedule.tree.yaml');
     });
     it("should return value for fact", () => {
         let fileContents = treeFile.read();

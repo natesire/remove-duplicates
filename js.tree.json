@@ -1,1 +1,1 @@
-{"subNodes":[],"rootNode":{"fact":"statement0","question":"question0 what are you searching for?","subNodes":{"1":{"statement":"statement1","question":"question1","children":{}},"2":{"statement":"statement2","question":"question2","children":{}}}},"queue":[]}
+{"subNodes":[],"rootNode":{"text":"statement0","question":"question0 what are you searching for?","subNodes":{"1":{"statement":"statement1","question":"question1","children":{}},"2":{"statement":"statement2","question":"question2","children":{}}}},"queue":[]}
