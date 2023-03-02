@@ -6,8 +6,10 @@
   "scripts": {
     "pretests": "tsc",
     "pretest": "tsc",
+    "predebugTest": "tsc",
     "tests": "jest --watch",
-    "test": "jest -t DEBUG"
+    "test": "jest",
+    "debugTest": "jest -t DEBUG"
   },
   "repository": {
     "type": "git",

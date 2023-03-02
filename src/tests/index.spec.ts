@@ -49,6 +49,16 @@ describe('schema', () => {
     expect(getFieldsFromSchema(schema)).toEqual('object');
   });
 
+  // try writing the map to a file
+  it('should count fields', () => {
+    let schema = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
+    let fields = getFieldsFromSchema(schema);
+
+    // write file
+    fs.writeFileSync("output.json", JSON.stringify(fields));
+    
+  });
+
   it('should remove duplicate field by key', () => {
     let schemaNormalized = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
     fs.writeFileSync('src/clean_application.json', JSON.stringify(schemaNormalized, null, 2));

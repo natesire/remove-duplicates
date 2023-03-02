@@ -1,2 +1,3 @@
-# chatbot-trainer
-Train Chat Bot on Repeat Questions
+# Run Tests 
+
+npm run test
