@@ -4,7 +4,7 @@ class Scheme {
     constructor(schema) {
         //if(!!schema) { throw new Error('Schema is Falsy'); }
         console.log(schema);
-        this.schemaData = JSON.parse(schema);
+        this.schemaData = schema;
     }
     cleanedSubSchema(schemaFile) {
         return [];

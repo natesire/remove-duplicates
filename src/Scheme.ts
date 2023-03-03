@@ -1,11 +1,12 @@
 export default class Scheme {
     schemaData;
     
-    constructor(schema: string) {
+    constructor(schema: any) {
         //if(!!schema) { throw new Error('Schema is Falsy'); }
         console.log(schema);
         
-        this.schemaData = JSON.parse(schema);
+        this.schemaData = schema;
+        
      }
 
     public cleanedSubSchema(schemaFile: unknown): Array<object> {

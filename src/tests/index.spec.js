@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
+const Scheme_js_1 = __importDefault(require("../Scheme.js"));
 describe('schema', () => {
     let schemaFilenameWithPath;
     let schemaInstance;
@@ -25,15 +26,13 @@ describe('schema', () => {
             let schemaContent = fs_1.default.readFileSync(schemaFilenameWithPath, 'utf8');
             expect(JSON.parse(schemaContent)).toBeTruthy();
         });
+        it('should receive an object', () => {
+            let schemaContent = fs_1.default.readFileSync(schemaFilenameWithPath, 'utf8');
+            let schemaObj = JSON.parse(schemaContent);
+            schemaInstance = new Scheme_js_1.default(schemaObj);
+            expect(schemaInstance).toBeTruthy();
+        });
         /*
-                it('should receive an object', () => {
-                  let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
-                  let schemaObj = JSON.parse(schemaContent);
-        
-                  schemaInstance = new Scheme(schemaObj);
-                  expect(schemaInstance).toBeTruthy();
-                });
-                
             
                 it('should count fields', () => {
                   let schema = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
