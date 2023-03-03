@@ -6,12 +6,12 @@ describe('schema', () => {
   let schemaInstance: Scheme;
 
   beforeAll(() => {
-    //schemaFilenameWithPath = 'mock_application.versions.json';
+    schemaFilenameWithPath = 'mock_application.versions.json';
     //schemaInstance = new Scheme(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
   });
 
   describe('setup', () => {
-    it('should accept schema as a string', () => {
+    it('should stringify schema as a string', () => {
       let schemaObj = {
         test: "test"
       }
@@ -23,12 +23,12 @@ describe('schema', () => {
   });
 
   describe('misc', () => {
-    /*
+    
         it('should find versions element', () => {
           let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8')
           expect(JSON.parse(schemaContent).versions).toBeTruthy();
         });
-    
+   /* 
         it('should find versions element', () => {
           let schemaInt = new Scheme(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
     
