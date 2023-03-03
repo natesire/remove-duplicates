@@ -6,7 +6,7 @@ describe('schema', () => {
   let schemaInstance: Scheme;
 
   beforeAll(() => {
-    schemaFilenameWithPath = 'mock_application.versions.json';
+    schemaFilenameWithPath = 'mock.json';
     //schemaInstance = new Scheme(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
   });
 
@@ -22,23 +22,21 @@ describe('schema', () => {
     });
   });
 
-  describe('misc', () => {
+  describe('scheme', () => {
     
-        it('should find versions element', () => {
+        it('should find content', () => {
           let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8')
-          expect(JSON.parse(schemaContent).versions).toBeTruthy();
+          expect(JSON.parse(schemaContent)).toBeTruthy();
         });
-   /* 
-        it('should find versions element', () => {
-          let schemaInt = new Scheme(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
-    
-          expect(schemaInt.schemaData).toBeTruthy();
-        });
-    
+/*    
         it('should receive an object', () => {
-          let schema = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
-          expect(typeof schemaInstance.getFieldsFromSchema()).toEqual('object');
+          let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
+          let schemaObj = JSON.parse(schemaContent);
+
+          schemaInstance = new Scheme(schemaObj);
+          expect(schemaInstance).toBeTruthy();
         });
+        
     
         it('should count fields', () => {
           let schema = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));

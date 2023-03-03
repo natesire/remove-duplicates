@@ -2,7 +2,9 @@ export default class Scheme {
     schemaData;
     
     constructor(schema: string) {
-        if(!!schema) { throw new Error('Schema is Falsy'); }
+        //if(!!schema) { throw new Error('Schema is Falsy'); }
+        console.log(schema);
+        
         this.schemaData = JSON.parse(schema);
      }
 
