@@ -17,6 +17,5 @@ it('dir path should not contain duplicate files', () => {
     expect(__dirname).toContain('src\\tests');
 });
 it('dir path should not contain duplicate files', () => {
-    //expect file to exist
     expect(fs_1.default.existsSync('src\\tests\\mock.json')).toBe(true);
 });

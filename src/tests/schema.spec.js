@@ -43,6 +43,10 @@ describe("Class Schema", () => {
                 let schemaObj = JSON.parse(schemaContentFromFile);
                 expect(Object.entries(schemaObj).length).toBe(2);
             });
+            it("should remove first duplicate key 'versions'", () => {
+                let schemaObj = JSON.parse(schemaContentFromFile);
+                expect(Object.entries(schemaObj['versions']).length).toBe(1);
+            });
         });
     });
     /*
