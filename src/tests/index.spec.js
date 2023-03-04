@@ -33,6 +33,11 @@ describe('Schema', () => {
         schemaInstance = new Schema_js_1.default(schemaObj);
         expect(schemaInstance.getSchema()).toBeTruthy();
     });
+    it('should get Gloss', () => {
+        let schemaObj = JSON.parse(schemaContent);
+        schemaInstance = new Schema_js_1.default(schemaObj);
+        expect(schemaInstance.getSchema()['glossary']).toBeTruthy();
+    });
     /*
         
             it('should count fields', () => {

@@ -1,40 +1,46 @@
-import fs from 'fs';
+import fs from "fs";
 import Schema from "../Schema.js";
 
-describe('Schema', () => {
+describe("Schema", () => {
   let schemaFilenameWithPath: string;
   let schemaInstance: Schema;
   let schemaContent: string;
 
   let schemaObj = {
-    test: "test"
-  }
+    test: "test",
+  };
 
   beforeAll(() => {
-    schemaFilenameWithPath = 'mock.json';
-    schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
+    schemaFilenameWithPath = "mock.json";
+    schemaContent = fs.readFileSync(schemaFilenameWithPath, "utf8");
   });
 
-  it('should receive an object', () => {
+  it("should receive an object", () => {
     let schemaObj = JSON.parse(schemaContent);
 
     schemaInstance = new Schema(schemaObj);
     expect(schemaInstance).toBeTruthy();
   });
 
-  it('should stringify schema as a string', () => {
+  it("should stringify schema as a string", () => {
     let str = JSON.stringify(schemaObj);
-    expect(str).toMatch('test');
+    expect(str).toMatch("test");
   });
 
-  it('should find content', () => {
+  it("should find content", () => {
     expect(JSON.parse(schemaContent)).toBeTruthy();
   });
 
-  it('should get schema', () => {
+  it("should get schema", () => {
     let schemaObj = JSON.parse(schemaContent);
     schemaInstance = new Schema(schemaObj);
     expect(schemaInstance.getSchema()).toBeTruthy();
+  });
+
+  it("should get Gloss", () => {
+    let schemaObj = JSON.parse(schemaContent);
+    schemaInstance = new Schema(schemaObj);
+    expect(schemaInstance.getSchema()["glossary"]).toBeTruthy();
   });
 
   /*        
