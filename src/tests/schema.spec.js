@@ -5,12 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const Schema_js_1 = __importDefault(require("../Schema.js"));
+const path_1 = __importDefault(require("path"));
 describe("Class Schema", () => {
     let schemaFilename;
     let schemaInstance;
     let schemaContentFromFile;
     beforeAll(() => {
-        schemaFilename = "mock.json";
+        //schemaFilename = "mock.json";
+        schemaFilename = path_1.default.join(__dirname, 'mock.json');
         schemaContentFromFile = fs_1.default.readFileSync(schemaFilename, "utf8");
     });
     it("should instantiate Schema", () => {
@@ -46,10 +48,7 @@ describe("Class Schema", () => {
     });
     /*
         
-            it('should count fields', () => {
-              let schema = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
-              expect(schemaInstance.getFieldsFromSchema()).toEqual('object');
-            });
+           
         
             it('should remove duplicate field by key', () => {
               let schemaNormalized = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));

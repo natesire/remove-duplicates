@@ -1,5 +1,6 @@
 import fs from "fs";
 import Schema from "../Schema.js";
+import path from "path";
 
 describe("Class Schema", () => {
   let schemaFilename: string;
@@ -7,7 +8,8 @@ describe("Class Schema", () => {
   let schemaContentFromFile: string;
 
   beforeAll(() => {
-    schemaFilename = "mock.json";
+    //schemaFilename = "mock.json";
+    schemaFilename = path.join(__dirname, 'mock.json');
     schemaContentFromFile = fs.readFileSync(schemaFilename, "utf8");
   });
 
@@ -40,18 +42,18 @@ describe("Class Schema", () => {
     expect(schemaInstance.getSchema('versions')).toBeTruthy();
   });
 
-  // JSON.parse removes duplicate keys
-  it("should remove duplicate key", () => {
-    let schemaObj = JSON.parse(schemaContentFromFile);
-    expect(Object.entries(schemaObj).length).toBe(2);
+  describe('standard NodeJS behavior', () => {
+    describe('JSON', () => {
+      it("parse should remove duplicate key", () => {
+        let schemaObj = JSON.parse(schemaContentFromFile);
+        expect(Object.entries(schemaObj).length).toBe(2);
+      });
+    });
   });
 
   /*        
       
-          it('should count fields', () => {
-            let schema = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
-            expect(schemaInstance.getFieldsFromSchema()).toEqual('object');
-          });
+         
       
           it('should remove duplicate field by key', () => {
             let schemaNormalized = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
