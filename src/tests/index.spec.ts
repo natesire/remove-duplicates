@@ -7,7 +7,6 @@ describe('schema', () => {
 
   beforeAll(() => {
     schemaFilenameWithPath = 'mock.json';
-    //schemaInstance = new Scheme(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
   });
 
   describe('setup', () => {
@@ -22,31 +21,29 @@ describe('schema', () => {
     });
   });
 
-  describe('scheme', () => {
-    let schemaContent: string;
-    
+  describe('schema', () => {
+    let schemaContent: string;    
 
     beforeAll(() => {
       schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
     });
-      
     
-        it('should find content', () => {
-          //let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8')
-          expect(JSON.parse(schemaContent)).toBeTruthy();
-        });
-   
-        it('should receive an object', () => {
-          //let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
-          let schemaObj = JSON.parse(schemaContent);
+    it('should find content', () => {
+      expect(JSON.parse(schemaContent)).toBeTruthy();
+    });
 
-          schemaInstance = new Schema(schemaObj);
-          expect(schemaInstance).toBeTruthy();
-        });
+    it('should receive an object', () => {
+      let schemaObj = JSON.parse(schemaContent);
 
-        it('should get versions in schema', () => {
+      schemaInstance = new Schema(schemaObj);
+      expect(schemaInstance).toBeTruthy();
+    });
 
-        });
+    it('should get schema', () => {
+      let schemaObj = JSON.parse(schemaContent);
+      schemaInstance = new Schema(schemaObj);
+      expect(schemaInstance.getSchema()).toBeTruthy();
+    });
 
 /*        
     
