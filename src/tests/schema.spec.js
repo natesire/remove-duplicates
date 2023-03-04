@@ -41,11 +41,11 @@ describe("Class Schema", () => {
         describe('JSON', () => {
             it("parse should remove duplicate key", () => {
                 let schemaObj = JSON.parse(schemaContentFromFile);
-                expect(Object.entries(schemaObj).length).toBe(2);
+                expect(Object.entries(schemaObj).length).toBe(1);
             });
             it("should remove first duplicate key 'versions'", () => {
                 let schemaObj = JSON.parse(schemaContentFromFile);
-                expect(Object.entries(schemaObj['versions']).length).toBe(1);
+                expect(Object.entries(schemaObj['versions'][0]['thirdKey'])).toEqual([["test", "test"]]);
             });
         });
     });

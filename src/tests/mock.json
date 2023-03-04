@@ -1,13 +1,16 @@
 {
-    "versions": {
+    "versions": [ {
         "firstKey": {
             "test": "test"
         },
         "title": "example"
-    },
-    "versions": {
-        "lastKey": {
+    } ],
+    "versions": [ {
+        "secondKey": {
             "test": "test" }
-    },
-    "uniqueVersions": true
+    } ],
+    "versions": [ {
+        "thirdKey": {
+            "test": "test" }
+    } ]
 }

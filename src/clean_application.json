@@ -1,8 +1,9 @@
 {
-  "versions": {
-    "lastKey": {
-      "test": "test"
+  "versions": [
+    {
+      "thirdKey": {
+        "test": "test"
+      }
     }
-  },
-  "uniqueVersions": true
+  ]
 }
