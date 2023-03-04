@@ -23,19 +23,31 @@ describe('schema', () => {
   });
 
   describe('scheme', () => {
+    let schemaContent: string;
+    
+
+    beforeAll(() => {
+      schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
+    });
+      
     
         it('should find content', () => {
-          let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8')
+          //let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8')
           expect(JSON.parse(schemaContent)).toBeTruthy();
         });
    
         it('should receive an object', () => {
-          let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
+          //let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
           let schemaObj = JSON.parse(schemaContent);
 
           schemaInstance = new Schema(schemaObj);
           expect(schemaInstance).toBeTruthy();
         });
+
+        it('should get versions in schema', () => {
+
+        });
+
 /*        
     
         it('should count fields', () => {

@@ -22,15 +22,21 @@ describe('schema', () => {
         });
     });
     describe('scheme', () => {
+        let schemaContent;
+        beforeAll(() => {
+            schemaContent = fs_1.default.readFileSync(schemaFilenameWithPath, 'utf8');
+        });
         it('should find content', () => {
-            let schemaContent = fs_1.default.readFileSync(schemaFilenameWithPath, 'utf8');
+            //let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8')
             expect(JSON.parse(schemaContent)).toBeTruthy();
         });
         it('should receive an object', () => {
-            let schemaContent = fs_1.default.readFileSync(schemaFilenameWithPath, 'utf8');
+            //let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
             let schemaObj = JSON.parse(schemaContent);
             schemaInstance = new Schema_js_1.default(schemaObj);
             expect(schemaInstance).toBeTruthy();
+        });
+        it('should get versions in schema', () => {
         });
         /*
             
