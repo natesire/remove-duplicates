@@ -7,7 +7,7 @@ describe("Schema", () => {
   let schemaContent: string;
 
   let schemaObj = {
-    test: "test",
+    versions: "test",
   };
 
   beforeAll(() => {
@@ -40,7 +40,14 @@ describe("Schema", () => {
   it("should get Gloss", () => {
     let schemaObj = JSON.parse(schemaContent);
     schemaInstance = new Schema(schemaObj);
-    expect(schemaInstance.getSchema()["glossary"]).toBeTruthy();
+    expect(schemaInstance.getSchema()["versions"]).toBeTruthy();
+  });
+
+  /*
+  it("should get item", () => {
+    let schemaObj = JSON.parse(schemaContent);
+    schemaInstance = new Schema(schemaObj);
+    expect(schemaInstance.getSchemaItem('versions')).toBeTruthy();
   });
 
   /*        

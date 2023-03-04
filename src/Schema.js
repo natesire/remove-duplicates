@@ -12,6 +12,9 @@ class Schema {
     getSchema() {
         return this.schemaData;
     }
+    getSchemaItem(item) {
+        return this.schemaData[item];
+    }
     getFieldsFromSchema() {
         let mapFields = new Map(); // will a Map automatically remove duplicate keys?
         // "versions" contains an array of 1, which has a key named "objects", which holds an array of objects, which each object has a "fields" that is an array of objects
