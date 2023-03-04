@@ -19,3 +19,16 @@ it('dir path should not contain duplicate files', () => {
 it('dir path should not contain duplicate files', () => {
     expect(fs_1.default.existsSync('src\\tests\\mock.json')).toBe(true);
 });
+it('writes the clean file', () => {
+    let test = "test";
+    // write to file
+    fs_1.default.writeFileSync('clean.output.json', test);
+    expect(fs_1.default.existsSync('clean.output.json')).toBe(true);
+});
+it('writes the clean file', () => {
+    let test = "test";
+    // write to file
+    fs_1.default.writeFileSync('clean.output.json', test);
+    let read = fs_1.default.readFileSync('clean.output.json', 'utf8');
+    expect(read).toBe(test);
+});

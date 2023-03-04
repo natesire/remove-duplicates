@@ -49,18 +49,4 @@ describe("Class Schema", () => {
             });
         });
     });
-    /*
-        
-           
-        
-            it('should remove duplicate field by key', () => {
-              let schemaNormalized = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
-              fs.writeFileSync('src/clean_application.json', JSON.stringify(schemaNormalized, null, 2));
-            });
-        
-            it('should count number of objects', () => {
-              let schema = JSON.parse(fs.readFileSync(schemaFilenameWithPath, 'utf8'));
-              expect(Object.entries(schema).length).toEqual(1);
-            });
-            */
 });
