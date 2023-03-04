@@ -1,4 +1,4 @@
-export default class Scheme {
+export default class Schema {
     schemaData;
     
     constructor(schema: any) {

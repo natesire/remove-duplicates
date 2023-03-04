@@ -1,9 +1,9 @@
 import fs from 'fs';
-import Scheme from "../Scheme.js";
+import Schema from "../Schema.js";
 
 describe('schema', () => {
   let schemaFilenameWithPath: string;
-  let schemaInstance: Scheme;
+  let schemaInstance: Schema;
 
   beforeAll(() => {
     schemaFilenameWithPath = 'mock.json';
@@ -33,7 +33,7 @@ describe('schema', () => {
           let schemaContent = fs.readFileSync(schemaFilenameWithPath, 'utf8');
           let schemaObj = JSON.parse(schemaContent);
 
-          schemaInstance = new Scheme(schemaObj);
+          schemaInstance = new Schema(schemaObj);
           expect(schemaInstance).toBeTruthy();
         });
 /*        

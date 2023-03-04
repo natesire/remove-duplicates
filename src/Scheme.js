@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Scheme {
+class Schema {
     constructor(schema) {
         //if(!!schema) { throw new Error('Schema is Falsy'); }
         console.log(schema);
@@ -23,4 +23,4 @@ class Scheme {
         return mapFields;
     }
 }
-exports.default = Scheme;
+exports.default = Schema;
