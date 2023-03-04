@@ -8,7 +8,6 @@ describe("Class Schema", () => {
   let schemaContentFromFile: string;
 
   beforeAll(() => {
-    //schemaFilename = "mock.json";
     schemaFilename = path.join(__dirname, 'mock.json');
     schemaContentFromFile = fs.readFileSync(schemaFilename, "utf8");
   });

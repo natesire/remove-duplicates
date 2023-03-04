@@ -11,7 +11,6 @@ describe("Class Schema", () => {
     let schemaInstance;
     let schemaContentFromFile;
     beforeAll(() => {
-        //schemaFilename = "mock.json";
         schemaFilename = path_1.default.join(__dirname, 'mock.json');
         schemaContentFromFile = fs_1.default.readFileSync(schemaFilename, "utf8");
     });

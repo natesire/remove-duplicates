@@ -12,7 +12,10 @@ it('should remove duplicate field by key', () => {
     fs.writeFileSync('src/clean_application.json', JSON.stringify(schemaNormalized, null, 2));
 });
 
-// looks for duplicate files starting from the root dir
 it('dir path should not contain duplicate files', () => {
     expect(__dirname).toContain('src\\tests');
+});
+
+it('dir path should not contain duplicate files', () => {
+    expect(fs.existsSync('src\\tests\\mock.json')).toBe(true);
 });
