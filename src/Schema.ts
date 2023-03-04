@@ -4,21 +4,16 @@ export default class Schema {
     constructor(schema: any) {
         //if(!!schema) { throw new Error('Schema is Falsy'); }
         console.log(schema);
-        
         this.schemaData = schema;
-        
      }
 
     public cleanedSubSchema(schemaFile: unknown): Array<object> {
         return [];
     }
 
-    public getSchema() {
+    public getSchema(key?: string) {
+        if(key) return this.schemaData[key];
         return this.schemaData;
-    }
-
-    public getSchemaItem(item:string) {
-        return this.schemaData[item]
     }
 
     public getFieldsFromSchema() : Map<string, any> { 

@@ -5,46 +5,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const Schema_js_1 = __importDefault(require("../Schema.js"));
-describe("Schema", () => {
-    let schemaFilenameWithPath;
+describe("Class Schema", () => {
+    let schemaFilename;
     let schemaInstance;
-    let schemaContent;
-    let schemaObj = {
-        versions: "test",
-    };
+    let schemaContentFromFile;
     beforeAll(() => {
-        schemaFilenameWithPath = "mock.json";
-        schemaContent = fs_1.default.readFileSync(schemaFilenameWithPath, "utf8");
+        schemaFilename = "mock.json";
+        schemaContentFromFile = fs_1.default.readFileSync(schemaFilename, "utf8");
     });
-    it("should receive an object", () => {
-        let schemaObj = JSON.parse(schemaContent);
+    it("should instantiate Schema", () => {
+        let schemaObj = JSON.parse(schemaContentFromFile);
         schemaInstance = new Schema_js_1.default(schemaObj);
         expect(schemaInstance).toBeTruthy();
     });
-    it("should stringify schema as a string", () => {
-        let str = JSON.stringify(schemaObj);
-        expect(str).toMatch("test");
-    });
-    it("should find content", () => {
-        expect(JSON.parse(schemaContent)).toBeTruthy();
+    it("should parse JSON from file", () => {
+        expect(JSON.parse(schemaContentFromFile)).toBeTruthy();
     });
     it("should get schema", () => {
-        let schemaObj = JSON.parse(schemaContent);
+        let schemaObj = JSON.parse(schemaContentFromFile);
         schemaInstance = new Schema_js_1.default(schemaObj);
         expect(schemaInstance.getSchema()).toBeTruthy();
     });
-    it("should get Gloss", () => {
-        let schemaObj = JSON.parse(schemaContent);
+    it("should get schema", () => {
+        let schemaObj = JSON.parse(schemaContentFromFile);
         schemaInstance = new Schema_js_1.default(schemaObj);
-        expect(schemaInstance.getSchema()["versions"]).toBeTruthy();
+        expect(schemaInstance.getSchema()).toBeTruthy();
     });
-    /*
-    it("should get item", () => {
-      let schemaObj = JSON.parse(schemaContent);
-      schemaInstance = new Schema(schemaObj);
-      expect(schemaInstance.getSchemaItem('versions')).toBeTruthy();
+    it("should get schema item by key", () => {
+        let schemaObj = JSON.parse(schemaContentFromFile);
+        schemaInstance = new Schema_js_1.default(schemaObj);
+        expect(schemaInstance.getSchema('versions')).toBeTruthy();
     });
-  
+    it("should remove duplicate key", () => {
+        let schemaObj = JSON.parse(schemaContentFromFile);
+        expect(Object.entries(schemaObj).length).toBe(1);
+    });
     /*
         
             it('should count fields', () => {

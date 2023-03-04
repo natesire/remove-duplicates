@@ -9,11 +9,10 @@ class Schema {
     cleanedSubSchema(schemaFile) {
         return [];
     }
-    getSchema() {
+    getSchema(key) {
+        if (key)
+            return this.schemaData[key];
         return this.schemaData;
-    }
-    getSchemaItem(item) {
-        return this.schemaData[item];
     }
     getFieldsFromSchema() {
         let mapFields = new Map(); // will a Map automatically remove duplicate keys?
