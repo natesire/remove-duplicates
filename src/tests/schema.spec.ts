@@ -16,22 +16,6 @@ describe("#Schema", () => {
     objectsFromSchema = schemaFile.objectsFromSchema();
   });
 
-  it("should setup instance with schema data", () => {
-    let schemaObj = JSON.parse(schemaContentFromFile);
-    schemaInstance = new Schema(schemaObj);
-    expect(schemaInstance.schemaData).toBeTruthy();
-  });
-
-  it("should parse JSON from file", () => {
-    expect(JSON.parse(schemaContentFromFile)).toBeTruthy();
-  });
-
-  it("should find key for duplicate object", () => {
-    let schemaObj = JSON.parse(schemaContentFromFile);
-    let lastObj = schemaObj["versions"][0]["objects"];
-    expect(lastObj[0]).toEqual({ key: "object_1" });
-  });
-
   it("should find duplicate keys inside object", () => {
     let literal2: Array<any> = [];
     let literal = [{ key: 1 }, { key: 2 }];

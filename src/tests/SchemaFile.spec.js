@@ -21,6 +21,12 @@ describe("SchemaFile", () => {
         let lastObj = schemaData["versions"][0]["objects"];
         expect(schemaData["versions"][0]["objects"][0].key).toMatch(/object/);
     });
+    it("should find key for duplicate object", () => {
+        let schemaFile = new SchemaFile_js_1.default(schemaFilename);
+        let schemaObj = schemaFile.jsonParse();
+        let lastObj = schemaObj["versions"][0]["objects"];
+        expect(lastObj[0]).toEqual({ key: "object_1" });
+    });
     it("should create unique array of objects", () => {
         let uniqueSet = new Set();
         let actualItem;
