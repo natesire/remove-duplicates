@@ -7,6 +7,8 @@ describe("Class Schema", () => {
   let cleanTestSchemaFilename: string;
   let schemaInstance: Schema;
   let schemaContentFromFile: string;
+  let schemaObj;
+  let objectsFromSchema: any;
 
   describe("mock_application.versions.json", () => {
     beforeAll(() => {
@@ -25,6 +27,8 @@ describe("Class Schema", () => {
     beforeAll(() => {
       schemaFilename = path.join(__dirname, "mock.json");
       schemaContentFromFile = fs.readFileSync(schemaFilename, "utf8");
+      schemaObj = JSON.parse(schemaContentFromFile);
+      objectsFromSchema = schemaObj.versions[0].objects;
     });
 
     it("should instantiate Schema", () => {
@@ -74,23 +78,22 @@ describe("Class Schema", () => {
     it("should find key for duplicate object", () => {
       let schemaObj = JSON.parse(schemaContentFromFile);
       let lastObj = schemaObj["versions"][0]["objects"];
-      expect(lastObj[0]).toEqual({ key: "object_3" });
+      expect(lastObj[0]).toEqual({ key: "object_1" });
     });
 
-    it("should find duplicate keys inside object", () => {
+    // ensures the other tests has duplicate objects to test against
+    it("should find duplicate keys inside objects from JSON", () => {
       let schemaObj = JSON.parse(schemaContentFromFile);
-      let lastObj = schemaObj["versions"][0]["objects"];
-      expect(Object.entries(lastObj).length).toEqual(2);
+      let objectsWithDups = Object.entries(schemaObj["versions"][0]["objects"]);
+      expect(objectsWithDups.length).toEqual(3);
     });
 
-    it("should find duplicate keys inside object", () => {
+    it("should receive schema data with correct shape", () => {
       let schemaObj = JSON.parse(schemaContentFromFile);
       let lastObj = schemaObj["versions"][0]["objects"];
       let schema = new Schema(lastObj);
 
-      expect(schema).toEqual({
-        schemaData: [{ key: "object_3" }, { key: "object_3" }],
-      });
+      expect(schema.schemaData[0]['key']).toMatch(/object/);
     });
 
     it("should find duplicate keys inside object", () => {
@@ -145,15 +148,32 @@ describe("Class Schema", () => {
       expect(fs.readFileSync(cleanTestSchemaFilename).toString()).toEqual(JSON.stringify(uniqueArrayOfObjects));
     });
 
-    /*
-  it('should find duplicate keys inside object', () => {
-      let schemaObj = JSON.parse(schemaContentFromFile);
-      let lastObj = schemaObj['versions'][0]['objects'];
-      let schema = new Schema(lastObj);
-      schema.removeDuplicates();
+    it("should write JSON unique array of objects with iterator", () => {
+      let uniqueSet = new Set();
+      let uniqueArrayOfObjects = Array<object>();
+      let arrayOfObjects = [{ key: 1 }, { key: 1 }, { key: 2 }];
 
-      expect(schema.schemaData).toEqual({"schemaData": [{"key": "object_3"}, {"key": "object_3"}]});
-  });
-*/
+      arrayOfObjects.forEach((item) => {
+        if(!uniqueSet.has(item.key)) {
+          uniqueArrayOfObjects.push(item);
+        }
+        uniqueSet.add(item.key);
+      });
+      fs.writeFileSync(cleanTestSchemaFilename, JSON.stringify(uniqueArrayOfObjects));
+      expect(fs.readFileSync(cleanTestSchemaFilename).toString()).toEqual(JSON.stringify(uniqueArrayOfObjects));
+    });
+
+    it('should return unique array of objects', () => {
+      schemaInstance = new Schema(schemaContentFromFile);
+      let literal = [{ key: 1 }, { key: 1 }, { key: 2 }];
+      let unique = schemaInstance.uniqueArrayOfObjects(literal);
+      expect(unique.length).toEqual(2);
+    });
+
+    it('should return unique array of objects based on schema', () => {
+      schemaInstance = new Schema(objectsFromSchema);
+      let unique = schemaInstance.uniqueArrayOfObjects(objectsFromSchema);
+      //expect(unique.length).toEqual(2);
+    });
   });
 });

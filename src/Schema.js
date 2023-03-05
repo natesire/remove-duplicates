@@ -1,10 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Schema {
+    // Schema doesn't know anything about files. It expects an Object.
     constructor(schema) {
         //if(!!schema) { throw new Error('Schema is Falsy'); }
         console.log(schema);
         this.schemaData = schema;
+        this.versions = this.schemaData.versions;
+        this.objectsFromSchema = this.versions?.objects;
     }
     cleanedSubSchema(schemaFile) {
         return [];
@@ -14,23 +17,16 @@ class Schema {
             return this.schemaData[key];
         return this.schemaData;
     }
-    removeDuplicates() {
-        let cleaned = {};
-        //let cleanedSubSchema = this.schemaData.map(([k,v]) => cleaned[k] = v);
-        //return cleanedSubSchema;
-    }
-    getFieldsFromSchema() {
-        let mapFields = new Map(); // will a Map automatically remove duplicate keys?
-        // "versions" contains an array of 1, which has a key named "objects", which holds an array of objects, which each object has a "fields" that is an array of objects
-        let fieldsArrayOfObjects = this.schemaData['versions'][0].objects[0].fields; // returns an array of objects, named "fields"
-        // iterate through and map each field as unique
-        Object.entries(fieldsArrayOfObjects).forEach(field => {
-            // field[0] // where is this coming from ?
-            let key = field[1]['key'];
-            let value = field[1];
-            mapFields.set(key, value);
+    // arrayOfObjects should have shape: [{ key: 1 }, { key: 1 }, { key: 2 }] from the schema file
+    uniqueArrayOfObjects(arrayOfObjects) {
+        let uniqueArrayOfObjects = Array();
+        let uniqueSetOfKeys = new Set();
+        arrayOfObjects.forEach((objectInJSONSchema) => {
+            if (!uniqueSetOfKeys.has(objectInJSONSchema.key))
+                uniqueArrayOfObjects.push(objectInJSONSchema);
+            uniqueSetOfKeys.add(objectInJSONSchema.key);
         });
-        return mapFields;
+        return uniqueArrayOfObjects;
     }
 }
 exports.default = Schema;
