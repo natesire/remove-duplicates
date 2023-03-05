@@ -26,9 +26,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const yaml = require('js-yaml');
 class SchemaFile {
-    constructor(fileName = 'js.tree.json') {
+    constructor(fileName = "js.tree.json") {
         this.contents = {};
-        this.fileName = 'js.tree.json';
+        this.fileName = "js.tree.json";
         this.fileName = fileName;
         this.read();
     }
@@ -40,25 +40,21 @@ class SchemaFile {
         return this.schema().versions[0].objects;
     }
     fileType(filename) {
-        return this.fileName.split('.').pop() || '';
+        return this.fileName.split(".").pop() || "";
     }
     read() {
-        //if(this.fileType(this.fileName) == 'yaml') this.contents = this.readYAMLToObject();
-        if (this.fileType(this.fileName) == 'json')
+        if (this.fileType(this.fileName) == "json")
             this.contents = this.rawContents();
         return this.contents;
     }
     rawContents() {
-        return fs.readFileSync(this.fileName, 'utf8');
+        return fs.readFileSync(this.fileName, "utf8");
     }
     writeToFile(data) {
-        fs.writeFile('js.tree.json', data, function (err) {
+        fs.writeFile("js.tree.json", data, function (err) {
             if (err)
                 return console.log(err);
         });
-    }
-    yamlToObject(data) {
-        return JSON.parse(data);
     }
 }
 exports.default = SchemaFile;
