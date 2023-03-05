@@ -150,10 +150,10 @@ describe("Class Schema", () => {
             let unique = schemaInstance.uniqueArrayOfObjects(literal);
             expect(unique.length).toEqual(2);
         });
-        it('should return unique array of objects based on schema', () => {
+        it('should return unique array of objects retreived from schema', () => {
             schemaInstance = new Schema_js_1.default(objectsFromSchema);
             let unique = schemaInstance.uniqueArrayOfObjects(objectsFromSchema);
-            //expect(unique.length).toEqual(2);
+            expect(unique.length).toEqual(2);
         });
     });
 });
