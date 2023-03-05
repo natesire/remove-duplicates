@@ -2,25 +2,24 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Schema {
     // Schema doesn't know anything about files. It expects an Object.
-    constructor(schema) {
+    constructor(schemaObj) {
         //if(!!schema) { throw new Error('Schema is Falsy'); }
-        console.log(schema);
-        this.schemaData = schema;
-        this.versions = this.schemaData.versions;
-        this.objectsFromSchema = this.versions?.objects;
+        this.schemaData = schemaObj;
+        //this.versions = this.schemaData.versions;
+        //this.objectsFromSchema = this.versions?.objects;
     }
     cleanedSubSchema(schemaFile) {
         return [];
-    }
-    getSchema(key) {
-        if (key)
-            return this.schemaData[key];
-        return this.schemaData;
     }
     // arrayOfObjects should have shape: [{ key: 1 }, { key: 1 }, { key: 2 }] from the schema file
     uniqueArrayOfObjects(arrayOfObjects) {
         let uniqueArrayOfObjects = Array();
         let uniqueSetOfKeys = new Set();
+        // production ready tests for specific errors
+        if (arrayOfObjects === undefined)
+            throw new Error('arrayOfObjects is undefined');
+        if (!(typeof arrayOfObjects.forEach === 'function'))
+            throw new Error('arrayOfObjects is Falsy');
         arrayOfObjects.forEach((objectInJSONSchema) => {
             if (!uniqueSetOfKeys.has(objectInJSONSchema.key))
                 uniqueArrayOfObjects.push(objectInJSONSchema);

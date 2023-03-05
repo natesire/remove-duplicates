@@ -1,12 +1,21 @@
 import * as fs from 'fs';
 const yaml = require('js-yaml');
 
-export default class FileManager {
-    contents: Object = {};
+export default class SchemaFile {
+    contents = {};
     fileName: string = 'js.tree.json';
     constructor(fileName:string = 'js.tree.json') {
         this.fileName = fileName
         this.read();
+    }
+
+    jsonParse() : any {
+        this.contents = JSON.parse(this.rawContents());
+        return this.contents;
+    }
+
+    objectsFromSchema() {
+        return this.jsonParse().versions[0].objects;
     }
 
     fileType(filename: string) : string {
@@ -14,17 +23,13 @@ export default class FileManager {
     }
 
     read() : Object {
-        if(this.fileType(this.fileName) == 'yaml') this.contents = this.readYAMLToObject();
-        if(this.fileType(this.fileName) == 'json') this.contents = this.readJsonToString();
+        //if(this.fileType(this.fileName) == 'yaml') this.contents = this.readYAMLToObject();
+        if(this.fileType(this.fileName) == 'json') this.contents = this.rawContents();
         return this.contents;
     }
 
-    readJsonToString() : string {
+    rawContents() : string {
         return fs.readFileSync(this.fileName, 'utf8')
-    }
-
-    readYAMLToObject() : Object {
-        return yaml.load(fs.readFileSync(this.fileName, {encoding: 'utf-8'}));
     }
 
     writeToFile(data: string) {

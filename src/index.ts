@@ -1,7 +1,7 @@
 const readline = require("readline");
 const mongoose = require("mongoose");
 import TreeLiteral from './Types';
-import FileManager from './FileManager';
+import SchemaFile from './SchemaFile';
 import Tree from './Tree';
 
 const commandLine = readline.createInterface({
@@ -116,6 +116,6 @@ commandLine.on("close", function() {
 });
 
 let tree = new Tree(dataTreeLiteral);
-let file = new FileManager('js.tree.json');
+let file = new SchemaFile('js.tree.json');
 file.writeToFile(tree.toString());
 
