@@ -14,6 +14,11 @@ class Schema {
             return this.schemaData[key];
         return this.schemaData;
     }
+    removeDuplicates() {
+        let cleaned = {};
+        //let cleanedSubSchema = this.schemaData.map(([k,v]) => cleaned[k] = v);
+        //return cleanedSubSchema;
+    }
     getFieldsFromSchema() {
         let mapFields = new Map(); // will a Map automatically remove duplicate keys?
         // "versions" contains an array of 1, which has a key named "objects", which holds an array of objects, which each object has a "fields" that is an array of objects

@@ -1,15 +1,18 @@
 {
     "versions": [ {
+        "objects": [ { "key" : "object_1" }, { "key" : "object_1" } ],
         "firstKey": {
             "test": "test"
         },
         "title": "example"
     } ],
     "versions": [ {
+        "objects": [ { "key" : "object_1" }, { "key" : "object_1" }  ],
         "secondKey": {
             "test": "test" }
     } ],
     "versions": [ {
+        "objects": [ { "key" : "object_3" }, { "key" : "object_3" } ],
         "thirdKey": {
             "test": "test" }
     } ]

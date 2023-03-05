@@ -43,15 +43,75 @@ describe("Class Schema", () => {
 
   describe('standard NodeJS behavior', () => {
     describe('JSON', () => {
-      it("parse should remove duplicate key", () => {
+      it("parse should remove duplicate JSON object by key", () => {
         let schemaObj = JSON.parse(schemaContentFromFile);
         expect(Object.entries(schemaObj).length).toBe(1);
       });
 
-      it("should return last duplicate 'versions' according to IEEE", () => {
+      it("should return last duplicate JSON object according to IEEE", () => {
         let schemaObj = JSON.parse(schemaContentFromFile);
         expect(Object.entries(schemaObj['versions'][0]['thirdKey'])).toEqual([[ "test", "test" ]]);
       });
     });
   });
+
+  it('should find key for duplicate object', () => {
+      let schemaObj = JSON.parse(schemaContentFromFile);
+      let lastObj = schemaObj['versions'][0]['objects'];
+      expect(lastObj[0]).toEqual({ "key": "object_3" });
+  });
+
+  it('should find duplicate keys inside object', () => {
+      let schemaObj = JSON.parse(schemaContentFromFile);
+      let lastObj = schemaObj['versions'][0]['objects'];
+      expect(Object.entries(lastObj).length).toEqual(2);
+  });
+
+  it('should find duplicate keys inside object', () => {
+      let schemaObj = JSON.parse(schemaContentFromFile);
+      let lastObj = schemaObj['versions'][0]['objects'];
+      let schema = new Schema(lastObj);
+
+      expect(schema).toEqual({"schemaData": [{"key": "object_3"}, {"key": "object_3"}]});
+  });
+
+  it('should find duplicate keys inside object', () => {
+    let literal2 : Array<any> = [];
+    let literal = [ { 'key': 1 }, { 'key': 2} ];
+    literal.map(item => {
+      literal2.push(item);
+    });
+    expect(literal2.length).toEqual(2);
+  });
+
+  it('should create unique map', () => {
+    let uniqueObjects = new Map();
+    let literal = [ { 'key': 1 }, { 'key': 1 } ];
+    literal.map(item => {
+      uniqueObjects.set(item.key, item);
+    });
+    expect(uniqueObjects.size).toEqual(1);
+  });
+
+  it('should create unique map of two items', () => {
+    let uniqueObjects = new Map();
+    let literal = [ { 'key': 1 }, { 'key': 1 }, { 'key': 2 } ];
+
+    literal.map(item => {
+      uniqueObjects.set(item.key, item);
+    });
+    expect(uniqueObjects.size).toEqual(2);
+  });
+
+  /*
+  it('should find duplicate keys inside object', () => {
+      let schemaObj = JSON.parse(schemaContentFromFile);
+      let lastObj = schemaObj['versions'][0]['objects'];
+      let schema = new Schema(lastObj);
+      schema.removeDuplicates();
+
+      expect(schema.schemaData).toEqual({"schemaData": [{"key": "object_3"}, {"key": "object_3"}]});
+  });
+*/
+
 });

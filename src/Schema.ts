@@ -16,6 +16,13 @@ export default class Schema {
         return this.schemaData;
     }
 
+    public removeDuplicates() {
+        let cleaned : any = {};
+
+        //let cleanedSubSchema = this.schemaData.map(([k,v]) => cleaned[k] = v);
+        //return cleanedSubSchema;
+    }
+
     public getFieldsFromSchema() : Map<string, any> { 
 
         let mapFields = new Map(); // will a Map automatically remove duplicate keys?
