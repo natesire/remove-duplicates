@@ -9,13 +9,13 @@ export default class SchemaFile {
         this.read();
     }
 
-    jsonParse() : any {
+    schema() : any {
         this.contents = JSON.parse(this.rawContents());
         return this.contents;
     }
 
     objectsFromSchema() {
-        return this.jsonParse().versions[0].objects;
+        return this.schema().versions[0].objects;
     }
 
     fileType(filename: string) : string {

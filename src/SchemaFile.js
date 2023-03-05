@@ -32,12 +32,12 @@ class SchemaFile {
         this.fileName = fileName;
         this.read();
     }
-    jsonParse() {
+    schema() {
         this.contents = JSON.parse(this.rawContents());
         return this.contents;
     }
     objectsFromSchema() {
-        return this.jsonParse().versions[0].objects;
+        return this.schema().versions[0].objects;
     }
     fileType(filename) {
         return this.fileName.split('.').pop() || '';

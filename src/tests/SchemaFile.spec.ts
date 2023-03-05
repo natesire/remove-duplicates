@@ -15,7 +15,7 @@ describe("SchemaFile", () => {
 
   it("should receive schema data with correct shape", () => {
     let schemaFile = new SchemaFile(schemaFilename);
-    let schemaData = schemaFile.jsonParse();
+    let schemaData = schemaFile.schema();
     let lastObj = schemaData["versions"][0]["objects"];
 
     expect(schemaData["versions"][0]["objects"][0].key).toMatch(/object/);
@@ -23,7 +23,7 @@ describe("SchemaFile", () => {
 
   it("should find key for duplicate object", () => {
     let schemaFile = new SchemaFile(schemaFilename);
-    let schemaObj = schemaFile.jsonParse();
+    let schemaObj = schemaFile.schema();
     let lastObj = schemaObj["versions"][0]["objects"];
     expect(lastObj[0]).toEqual({ key: "object_1" });
   });
