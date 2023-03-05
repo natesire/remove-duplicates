@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import SchemaFile from "../SchemaFile.js";
 
 let schemaFilename: string;
 let cleanTestSchemaFilename: string;
@@ -10,6 +11,14 @@ describe("SchemaFile", () => {
     schemaFilename = path.join(__dirname, "mock.json");
     cleanTestSchemaFilename = path.join(__dirname, "cleanTestSchema.json");
     schemaContentFromFile = fs.readFileSync(schemaFilename, "utf8");
+  });
+
+  it("should receive schema data with correct shape", () => {
+    let schemaFile = new SchemaFile(schemaFilename);
+    let schemaData = schemaFile.jsonParse();
+    let lastObj = schemaData["versions"][0]["objects"];
+
+    expect(schemaData["versions"][0]["objects"][0].key).toMatch(/object/);
   });
 
   it("should create unique array of objects", () => {
@@ -106,9 +115,9 @@ describe("SchemaFile", () => {
   });
 
   // ensures the other tests has duplicate objects to test against
-    it("should find duplicate keys inside objects from JSON", () => {
-      let schemaObj = JSON.parse(schemaContentFromFile);
-      let objectsWithDups = Object.entries(schemaObj["versions"][0]["objects"]);
-      expect(objectsWithDups.length).toEqual(3);
-    });
+  it("should find duplicate keys inside objects from JSON", () => {
+    let schemaObj = JSON.parse(schemaContentFromFile);
+    let objectsWithDups = Object.entries(schemaObj["versions"][0]["objects"]);
+    expect(objectsWithDups.length).toEqual(3);
+  });
 });

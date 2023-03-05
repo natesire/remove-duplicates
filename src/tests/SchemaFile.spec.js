@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const SchemaFile_js_1 = __importDefault(require("../SchemaFile.js"));
 let schemaFilename;
 let cleanTestSchemaFilename;
 let schemaContentFromFile;
@@ -13,6 +14,12 @@ describe("SchemaFile", () => {
         schemaFilename = path_1.default.join(__dirname, "mock.json");
         cleanTestSchemaFilename = path_1.default.join(__dirname, "cleanTestSchema.json");
         schemaContentFromFile = fs_1.default.readFileSync(schemaFilename, "utf8");
+    });
+    it("should receive schema data with correct shape", () => {
+        let schemaFile = new SchemaFile_js_1.default(schemaFilename);
+        let schemaData = schemaFile.jsonParse();
+        let lastObj = schemaData["versions"][0]["objects"];
+        expect(schemaData["versions"][0]["objects"][0].key).toMatch(/object/);
     });
     it("should create unique array of objects", () => {
         let uniqueSet = new Set();

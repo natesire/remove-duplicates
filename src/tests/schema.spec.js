@@ -31,12 +31,6 @@ describe("#Schema", () => {
         let lastObj = schemaObj["versions"][0]["objects"];
         expect(lastObj[0]).toEqual({ key: "object_1" });
     });
-    it("should receive schema data with correct shape", () => {
-        let schemaObj = JSON.parse(schemaContentFromFile);
-        let lastObj = schemaObj["versions"][0]["objects"];
-        let schema = new Schema_js_1.default(lastObj);
-        expect(schema.schemaData[0]["key"]).toMatch(/object/);
-    });
     it("should find duplicate keys inside object", () => {
         let literal2 = [];
         let literal = [{ key: 1 }, { key: 2 }];

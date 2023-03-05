@@ -1,4 +1,3 @@
-import fs from "fs";
 import Schema from "../Schema.js";
 import path from "path";
 import SchemaFile from "../SchemaFile.js";
@@ -31,14 +30,6 @@ describe("#Schema", () => {
     let schemaObj = JSON.parse(schemaContentFromFile);
     let lastObj = schemaObj["versions"][0]["objects"];
     expect(lastObj[0]).toEqual({ key: "object_1" });
-  });
-
-  it("should receive schema data with correct shape", () => {
-    let schemaObj = JSON.parse(schemaContentFromFile);
-    let lastObj = schemaObj["versions"][0]["objects"];
-    let schema = new Schema(lastObj);
-
-    expect(schema.schemaData[0]["key"]).toMatch(/object/);
   });
 
   it("should find duplicate keys inside object", () => {
