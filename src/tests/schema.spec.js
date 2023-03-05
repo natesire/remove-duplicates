@@ -96,13 +96,19 @@ describe("Class Schema", () => {
             });
             expect(uniqueObjects.size).toEqual(1);
         });
-        it("should create unique map of two objects", () => {
-            let uniqueMapObjects = new Map();
+        it("should create unique array of objects", () => {
+            let uniqueSet = new Set();
+            let actualItem;
+            let uniqueArrayOfObjects = Array();
             let literal = [{ key: 1 }, { key: 1 }, { key: 2 }];
-            literal.map((item) => {
-                uniqueMapObjects.set(item.key, item);
+            Object.entries(literal).forEach((item) => {
+                actualItem = item[1];
+                if (!uniqueSet.has(actualItem.key)) {
+                    uniqueArrayOfObjects.push(actualItem);
+                }
+                uniqueSet.add(actualItem.key); // value (key) is at index 0
             });
-            expect(uniqueMapObjects.size).toEqual(2);
+            expect(uniqueArrayOfObjects.length).toEqual(2);
         });
         /*
       it('should find duplicate keys inside object', () => {
