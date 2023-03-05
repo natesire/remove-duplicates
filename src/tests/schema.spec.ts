@@ -4,12 +4,14 @@ import path from "path";
 
 describe("Class Schema", () => {
   let schemaFilename: string;
+  let cleanTestSchemaFilename: string;
   let schemaInstance: Schema;
   let schemaContentFromFile: string;
 
   describe("mock_application.versions.json", () => {
     beforeAll(() => {
       schemaFilename = path.join(__dirname, "mock_application.versions.json");
+      cleanTestSchemaFilename = path.join(__dirname, "clean_test_application.json");
       schemaContentFromFile = fs.readFileSync(schemaFilename, "utf8");
     });
 
@@ -122,7 +124,25 @@ describe("Class Schema", () => {
         }
         uniqueSet.add(actualItem.key); // value (key) is at index 0
       });
+      fs.writeFileSync(cleanTestSchemaFilename, JSON.stringify(uniqueArrayOfObjects));
       expect(uniqueArrayOfObjects.length).toEqual(2);
+    });
+
+    it("should write JSON unique array of objects", () => {
+      let uniqueSet = new Set();
+      let actualItem;
+      let uniqueArrayOfObjects = Array<object>();
+      let literal = [{ key: 1 }, { key: 1 }, { key: 2 }];
+
+      Object.entries(literal).forEach((item) => {
+        actualItem = item[1];
+        if(!uniqueSet.has(actualItem.key)) {
+          uniqueArrayOfObjects.push(actualItem);
+        }
+        uniqueSet.add(actualItem.key); // value (key) is at index 0
+      });
+      fs.writeFileSync(cleanTestSchemaFilename, JSON.stringify(uniqueArrayOfObjects));
+      expect(fs.readFileSync(cleanTestSchemaFilename).toString()).toEqual(JSON.stringify(uniqueArrayOfObjects));
     });
 
     /*

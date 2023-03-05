@@ -8,11 +8,13 @@ const Schema_js_1 = __importDefault(require("../Schema.js"));
 const path_1 = __importDefault(require("path"));
 describe("Class Schema", () => {
     let schemaFilename;
+    let cleanTestSchemaFilename;
     let schemaInstance;
     let schemaContentFromFile;
     describe("mock_application.versions.json", () => {
         beforeAll(() => {
             schemaFilename = path_1.default.join(__dirname, "mock_application.versions.json");
+            cleanTestSchemaFilename = path_1.default.join(__dirname, "clean_test_application.json");
             schemaContentFromFile = fs_1.default.readFileSync(schemaFilename, "utf8");
         });
         it("should return a schema instance", () => {
@@ -108,7 +110,23 @@ describe("Class Schema", () => {
                 }
                 uniqueSet.add(actualItem.key); // value (key) is at index 0
             });
+            fs_1.default.writeFileSync(cleanTestSchemaFilename, JSON.stringify(uniqueArrayOfObjects));
             expect(uniqueArrayOfObjects.length).toEqual(2);
+        });
+        it("should write JSON unique array of objects", () => {
+            let uniqueSet = new Set();
+            let actualItem;
+            let uniqueArrayOfObjects = Array();
+            let literal = [{ key: 1 }, { key: 1 }, { key: 2 }];
+            Object.entries(literal).forEach((item) => {
+                actualItem = item[1];
+                if (!uniqueSet.has(actualItem.key)) {
+                    uniqueArrayOfObjects.push(actualItem);
+                }
+                uniqueSet.add(actualItem.key); // value (key) is at index 0
+            });
+            fs_1.default.writeFileSync(cleanTestSchemaFilename, JSON.stringify(uniqueArrayOfObjects));
+            expect(fs_1.default.readFileSync(cleanTestSchemaFilename).toString()).toEqual(JSON.stringify(uniqueArrayOfObjects));
         });
         /*
       it('should find duplicate keys inside object', () => {
