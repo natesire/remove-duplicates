@@ -50,8 +50,8 @@ class SchemaFile {
     rawContents() {
         return fs.readFileSync(this.fileName, "utf8");
     }
-    writeToFile(data) {
-        fs.writeFile("js.tree.json", data, function (err) {
+    writeFile(data) {
+        fs.writeFile("schemaOutput/clean_application.json", data, function (err) {
             if (err)
                 return console.log(err);
         });

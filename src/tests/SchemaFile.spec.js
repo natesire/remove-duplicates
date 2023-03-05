@@ -12,8 +12,12 @@ let schemaContentFromFile;
 describe("SchemaFile", () => {
     beforeAll(() => {
         schemaFilename = path_1.default.join(__dirname, "mock.json");
-        cleanTestSchemaFilename = path_1.default.join(__dirname, "cleanTestSchema.json");
+        cleanTestSchemaFilename = path_1.default.join(__dirname, "../../schemaOutput/clean_application.test.json");
         schemaContentFromFile = fs_1.default.readFileSync(schemaFilename, "utf8");
+    });
+    it("should write to output file", () => {
+        let schemaFile = new SchemaFile_js_1.default(schemaFilename);
+        schemaFile.writeFile(schemaContentFromFile);
     });
     it("should receive schema data with correct shape", () => {
         let schemaFile = new SchemaFile_js_1.default(schemaFilename);

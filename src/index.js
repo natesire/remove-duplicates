@@ -107,4 +107,4 @@ commandLine.on("close", function () {
 });
 let tree = new Tree_1.default(dataTreeLiteral);
 let file = new SchemaFile_1.default('js.tree.json');
-file.writeToFile(tree.toString());
+file.writeFile(tree.toString());

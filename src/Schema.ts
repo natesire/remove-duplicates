@@ -7,8 +7,6 @@ export default class Schema {
   constructor(schemaObj: any) {
     //if(!!schema) { throw new Error('Schema is Falsy'); }
     this.schemaData = schemaObj;
-    //this.versions = this.schemaData.versions;
-    //this.objectsFromSchema = this.versions?.objects;
   }
 
   public cleanedSubSchema(schemaFile: unknown): Array<object> {

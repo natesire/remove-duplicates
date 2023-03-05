@@ -5,8 +5,6 @@ class Schema {
     constructor(schemaObj) {
         //if(!!schema) { throw new Error('Schema is Falsy'); }
         this.schemaData = schemaObj;
-        //this.versions = this.schemaData.versions;
-        //this.objectsFromSchema = this.versions?.objects;
     }
     cleanedSubSchema(schemaFile) {
         return [];
