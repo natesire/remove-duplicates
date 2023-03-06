@@ -25,15 +25,6 @@ describe("#Schema", () => {
     expect(literal2.length).toEqual(2);
   });
 
-  it("should create unique map", () => {
-    let uniqueObjects = new Map();
-    let literal = [{ key: 1 }, { key: 1 }];
-    literal.map((item) => {
-      uniqueObjects.set(item.key, item);
-    });
-    expect(uniqueObjects.size).toEqual(1);
-  });
-
   it("should return unique array of objects", () => {
     schemaInstance = new Schema(schemaFile.schemaDataObj);
     let literal = [{ key: 1 }, { key: 1 }, { key: 2 }];
