@@ -7,7 +7,7 @@ describe('App', () => {
 
         let schemaFilename = path.join(__dirname, "mock.json");
         let schemaFile = new SchemaFile(schemaFilename);
-        let schemaObj = schemaFile.schema;
+        let schemaObj = schemaFile.schemaDataObj;
 
         let schema = new Schema(schemaObj);
 
@@ -16,6 +16,5 @@ describe('App', () => {
 
         schemaFile.setObjects(dupsRemovedObjects);
         schemaFile.writeFile();
-
     });
 });

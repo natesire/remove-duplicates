@@ -1,37 +1,34 @@
 import * as fs from 'fs';
-const yaml = require('js-yaml');
 
 export default class SchemaFile {
   contents = {};
   fileName: string = "js.tree.json";
+  schemaDataObj: any = {};
+
   constructor(fileName: string = "js.tree.json") {
     this.fileName = fileName;
-    this.read();
-  }
-
-  schema(): any {
-    this.contents = JSON.parse(this.read());
-    return this.contents;
+    this.schemaDataObj = this.read();
   }
 
   objectsFromSchema() {
-    return this.schema().versions[0].objects;
+    return this.schemaDataObj.versions[0].objects;
   }
 
   setObjects(objects: any) {
-    this.schema().versions[0].objects = objects;
+    this.schemaDataObj.versions[0].objects = objects;
   }
 
   fileType(filename: string): string {
     return this.fileName.split(".").pop() || "";
   }
 
-  read(): string {
-    return fs.readFileSync(this.fileName, "utf8");
+  read(): Object {
+    let contents = fs.readFileSync(this.fileName, "utf8");
+    return JSON.parse(contents);
   }
 
   writeFile() {
-    fs.writeFile("schemaOutput/clean_application.json", JSON.stringify(this.schema()), function (err) {
+    fs.writeFile("schemaOutput/clean_application.test.json", JSON.stringify(this.schemaDataObj), function (err) {
       if (err) return console.log(err);
     });
   }

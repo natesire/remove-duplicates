@@ -24,32 +24,29 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
-const yaml = require('js-yaml');
 class SchemaFile {
     constructor(fileName = "js.tree.json") {
         this.contents = {};
         this.fileName = "js.tree.json";
+        this.schemaDataObj = {};
         this.fileName = fileName;
-        this.read();
-    }
-    schema() {
-        this.contents = JSON.parse(this.read());
-        return this.contents;
+        this.schemaDataObj = this.read();
     }
     objectsFromSchema() {
-        return this.schema().versions[0].objects;
+        return this.schemaDataObj.versions[0].objects;
     }
     setObjects(objects) {
-        this.schema().versions[0].objects = objects;
+        this.schemaDataObj.versions[0].objects = objects;
     }
     fileType(filename) {
         return this.fileName.split(".").pop() || "";
     }
     read() {
-        return fs.readFileSync(this.fileName, "utf8");
+        let contents = fs.readFileSync(this.fileName, "utf8");
+        return JSON.parse(contents);
     }
     writeFile() {
-        fs.writeFile("schemaOutput/clean_application.json", JSON.stringify(this.schema()), function (err) {
+        fs.writeFile("schemaOutput/clean_application.test.json", JSON.stringify(this.schemaDataObj), function (err) {
             if (err)
                 return console.log(err);
         });

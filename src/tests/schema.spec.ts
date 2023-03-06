@@ -35,7 +35,7 @@ describe("#Schema", () => {
   });
 
   it("should return unique array of objects", () => {
-    schemaInstance = new Schema(schemaFile.schema());
+    schemaInstance = new Schema(schemaFile.schemaDataObj);
     let literal = [{ key: 1 }, { key: 1 }, { key: 2 }];
     let unique = schemaInstance.uniqueArrayOfObjects(literal);
     unique;
@@ -43,7 +43,7 @@ describe("#Schema", () => {
   });
 
   it("DEBUG should return unique array of objects retreived from schema", () => {
-    let schema = new Schema(schemaFile.schema());
+    let schema = new Schema(schemaFile.schemaDataObj);
     let objects = schemaFile.objectsFromSchema();
     let unique = schema.uniqueArrayOfObjects(objects);
     expect(unique.length).toEqual(2);
