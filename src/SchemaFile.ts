@@ -2,10 +2,10 @@ import * as fs from 'fs';
 
 export default class SchemaFile {
   contents = {};
-  fileName: string = "js.tree.json";
+  fileName: string;
   schemaDataObj: any = {};
 
-  constructor(fileName: string = "js.tree.json") {
+  constructor(fileName: string) {
     this.fileName = fileName;
     this.schemaDataObj = this.read();
   }
@@ -23,12 +23,23 @@ export default class SchemaFile {
   }
 
   read(): Object {
+    let output : Object = {};
     let contents = fs.readFileSync(this.fileName, "utf8");
-    return JSON.parse(contents);
+    try {
+        output = JSON.parse(contents);
+    } catch(e) {
+        throw new Error(`${this.fileName} file cannot be parsed as JSON`);
+    }
+    return output;
   }
 
   writeFile() {
-    fs.writeFile("schemaOutput/clean_application.test.json", JSON.stringify(this.schemaDataObj), function (err) {
+
+    // validate the JSON
+    let jsonStr = JSON.stringify(this.schemaDataObj, null, 2);
+    let jsonObj = JSON.parse(jsonStr);
+
+    fs.writeFile("schemaOutput/clean_application.test.json", jsonStr, function (err) {
       if (err) return console.log(err);
     });
   }

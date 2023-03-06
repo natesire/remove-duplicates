@@ -25,9 +25,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 class SchemaFile {
-    constructor(fileName = "js.tree.json") {
+    constructor(fileName) {
         this.contents = {};
-        this.fileName = "js.tree.json";
         this.schemaDataObj = {};
         this.fileName = fileName;
         this.schemaDataObj = this.read();
@@ -42,11 +41,21 @@ class SchemaFile {
         return this.fileName.split(".").pop() || "";
     }
     read() {
+        let output = {};
         let contents = fs.readFileSync(this.fileName, "utf8");
-        return JSON.parse(contents);
+        try {
+            output = JSON.parse(contents);
+        }
+        catch (e) {
+            throw new Error(`${this.fileName} file cannot be parsed as JSON`);
+        }
+        return output;
     }
     writeFile() {
-        fs.writeFile("schemaOutput/clean_application.test.json", JSON.stringify(this.schemaDataObj), function (err) {
+        // validate the JSON
+        let jsonStr = JSON.stringify(this.schemaDataObj, null, 2);
+        let jsonObj = JSON.parse(jsonStr);
+        fs.writeFile("schemaOutput/clean_application.test.json", jsonStr, function (err) {
             if (err)
                 return console.log(err);
         });

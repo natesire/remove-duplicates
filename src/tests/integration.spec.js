@@ -16,5 +16,28 @@ describe('App', () => {
         let dupsRemovedObjects = schema.uniqueArrayOfObjects(objectsWithDups);
         schemaFile.setObjects(dupsRemovedObjects);
         schemaFile.writeFile();
+        // ensure no duplicates by counting number of objects
+        let fileCleanOutput = new SchemaFile_js_1.default("schemaOutput/clean_application.test.json");
+        let outputFileObj = fileCleanOutput.read();
+        expect(outputFileObj.versions[0].objects.length).toEqual(2);
+    });
+    it('should read file and remove duplicate objects', () => {
+        let schemaFilename = path_1.default.join(__dirname, "mock.json");
+        let schemaFile = new SchemaFile_js_1.default(schemaFilename);
+        let schemaObj = schemaFile.schemaDataObj;
+        let schema = new Schema_js_1.default(schemaObj);
+        let objectsWithDups = schemaFile.objectsFromSchema();
+        let dupsRemovedObjects = schema.uniqueArrayOfObjects(objectsWithDups);
+        expect(dupsRemovedObjects.length).toEqual(2);
+    });
+    it('should read file and remove duplicate objects and set clean objects', () => {
+        let schemaFilename = path_1.default.join(__dirname, "mock.json");
+        let schemaFile = new SchemaFile_js_1.default(schemaFilename);
+        let schemaObj = schemaFile.schemaDataObj;
+        let schema = new Schema_js_1.default(schemaObj);
+        let objectsWithDups = schemaFile.objectsFromSchema();
+        let dupsRemovedObjects = schema.uniqueArrayOfObjects(objectsWithDups);
+        schemaFile.setObjects(dupsRemovedObjects);
+        expect(schemaFile.objectsFromSchema().length).toEqual(2);
     });
 });
