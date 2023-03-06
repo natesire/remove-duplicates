@@ -48,4 +48,13 @@ describe("#Schema", () => {
     let unique = schema.uniqueArrayOfObjects(objects);
     expect(unique.length).toEqual(2);
   });
+
+  describe("fields", () => {
+    it("should find seven fields since field_4 is duplicated", () => {
+      schemaFilename = path.join(__dirname, "../schema/mock_application.json");
+      schemaFile = new SchemaFile(schemaFilename);
+      let fieldsFirstObject = schemaFile.objectsFromSchema()[0];
+      expect(fieldsFirstObject.fields.length).toEqual(7);
+    });
+  });
 });

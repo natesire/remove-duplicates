@@ -3,7 +3,7 @@ import path from "path";
 import Schema from "../Schema.js";
 
 describe('App', () => {
-    it('DEBUG should read file, clean and then output new file', () => {
+    it('should read file, clean and then output new file', () => {
 
         // object_4 is duplicated in file, six total
         let schemaFilename = path.join(__dirname, "../schema/mock_application.json");

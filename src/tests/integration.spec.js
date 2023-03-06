@@ -7,7 +7,7 @@ const SchemaFile_js_1 = __importDefault(require("../SchemaFile.js"));
 const path_1 = __importDefault(require("path"));
 const Schema_js_1 = __importDefault(require("../Schema.js"));
 describe('App', () => {
-    it('DEBUG should read file, clean and then output new file', () => {
+    it('should read file, clean and then output new file', () => {
         // object_4 is duplicated in file, six total
         let schemaFilename = path_1.default.join(__dirname, "../schema/mock_application.json");
         let schemaFile = new SchemaFile_js_1.default(schemaFilename);
