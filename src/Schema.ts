@@ -9,10 +9,6 @@ export default class Schema {
     this.schemaData = schemaObj;
   }
 
-  public cleanedSubSchema(schemaFile: unknown): Array<object> {
-    return [];
-  }
-
   // arrayOfObjects should have shape: [{ key: 1 }, { key: 1 }, { key: 2 }] from the schema file
   public uniqueArrayOfObjects(arrayOfObjects: Array<any>): Array<object> {
     let uniqueArrayOfObjects = Array<object>();

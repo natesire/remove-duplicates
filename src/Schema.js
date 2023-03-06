@@ -6,9 +6,9 @@ class Schema {
         //if(!!schema) { throw new Error('Schema is Falsy'); }
         this.schemaData = schemaObj;
     }
-    cleanedSubSchema(schemaFile) {
-        return [];
-    }
+    /*public cleanedSubSchema(schemaFile: unknown): Array<object> {
+      return [];
+    }*/
     // arrayOfObjects should have shape: [{ key: 1 }, { key: 1 }, { key: 2 }] from the schema file
     uniqueArrayOfObjects(arrayOfObjects) {
         let uniqueArrayOfObjects = Array();
