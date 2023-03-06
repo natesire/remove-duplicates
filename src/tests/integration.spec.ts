@@ -15,7 +15,7 @@ describe('App', () => {
         let dupsRemovedObjects = schema.uniqueArrayOfObjects(objectsWithDups);
 
         schemaFile.setObjects(dupsRemovedObjects);
-        schemaFile.writeFile();
+        schemaFile.writeOutputFile();
 
         // ensure no duplicates by counting number of objects
         let fileCleanOutput = new SchemaFile("schemaOutput/clean_application.test.json");

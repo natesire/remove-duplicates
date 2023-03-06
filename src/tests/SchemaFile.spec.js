@@ -17,7 +17,7 @@ describe("SchemaFile", () => {
     });
     it("should write to output file", () => {
         let schemaFile = new SchemaFile_js_1.default(schemaFilename);
-        schemaFile.writeFile();
+        schemaFile.writeOutputFile();
     });
     it("should receive schema data with correct shape", () => {
         let schemaFile = new SchemaFile_js_1.default(schemaFilename);
@@ -43,7 +43,10 @@ describe("SchemaFile", () => {
             }
             uniqueSet.add(actualItem.key); // value (key) is at index 0
         });
-        fs_1.default.writeFileSync(cleanTestSchemaFilename, JSON.stringify(uniqueArrayOfObjects));
+        /*fs.writeFileSync(
+          cleanTestSchemaFilename,
+          JSON.stringify(uniqueArrayOfObjects)
+        );*/
         expect(uniqueArrayOfObjects.length).toEqual(2);
     });
     it("should write JSON unique array of objects", () => {
