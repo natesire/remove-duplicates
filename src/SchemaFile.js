@@ -51,11 +51,11 @@ class SchemaFile {
         }
         return output;
     }
-    writeOutputFile() {
+    writeOutputFile(outputFile) {
         // validate the JSON
         let jsonStr = JSON.stringify(this.schemaDataObj, null, 2);
         let jsonObj = JSON.parse(jsonStr);
-        fs.writeFileSync("schemaOutput/clean_application.test.json", jsonStr);
+        fs.writeFileSync(outputFile || "schemaOutput/clean_application.test.json", jsonStr);
     }
 }
 exports.default = SchemaFile;

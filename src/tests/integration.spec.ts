@@ -15,10 +15,10 @@ describe('App', () => {
         let dupsRemovedObjects = schema.uniqueArrayOfObjects(objectsWithDups);
 
         schemaFile.setObjects(dupsRemovedObjects);
-        schemaFile.writeOutputFile();
+        schemaFile.writeOutputFile("schemaOutput/clean_application.test.1.json");
 
         // ensure no duplicates by counting number of objects
-        let fileCleanOutput = new SchemaFile("schemaOutput/clean_application.test.json");
+        let fileCleanOutput = new SchemaFile("schemaOutput/clean_application.test.1.json");
         let outputFileObj : any = fileCleanOutput.read();
         expect(outputFileObj.versions[0].objects.length).toEqual(2);
     });
