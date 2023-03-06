@@ -56,5 +56,15 @@ describe("#Schema", () => {
       let fieldsFirstObject = schemaFile.objectsFromSchema()[0];
       expect(fieldsFirstObject.fields.length).toEqual(7);
     });
+
+    it("should remove the one duplicate of field_4", () => {
+      schemaFilename = path.join(__dirname, "../schema/mock_application.json");
+      schemaFile = new SchemaFile(schemaFilename);
+      let schema = new Schema(schemaFile.schemaDataObj);
+
+      let uniqueFields = schema.uniqueArrayOfObjects(schemaFile.objectsFromSchema()[0].fields);
+
+      expect(uniqueFields.length).toEqual(6);
+    });
   });
 });
