@@ -41,7 +41,7 @@ describe("#Schema", () => {
         unique;
         expect(unique.length).toEqual(2);
     });
-    it("DEBUG should return unique array of objects retreived from schema", () => {
+    it("should return unique array of objects retreived from schema", () => {
         let schema = new Schema_js_1.default(schemaFile.schemaDataObj);
         let objects = schemaFile.objectsFromSchema();
         let unique = schema.uniqueArrayOfObjects(objects);
