@@ -33,25 +33,23 @@ class SchemaFile {
         this.read();
     }
     schema() {
-        this.contents = JSON.parse(this.rawContents());
+        this.contents = JSON.parse(this.read());
         return this.contents;
     }
     objectsFromSchema() {
         return this.schema().versions[0].objects;
     }
+    setObjects(objects) {
+        this.schema().versions[0].objects = objects;
+    }
     fileType(filename) {
         return this.fileName.split(".").pop() || "";
     }
     read() {
-        if (this.fileType(this.fileName) == "json")
-            this.contents = this.rawContents();
-        return this.contents;
-    }
-    rawContents() {
         return fs.readFileSync(this.fileName, "utf8");
     }
-    writeFile(data) {
-        fs.writeFile("schemaOutput/clean_application.json", data, function (err) {
+    writeFile() {
+        fs.writeFile("schemaOutput/clean_application.json", JSON.stringify(this.schema()), function (err) {
             if (err)
                 return console.log(err);
         });

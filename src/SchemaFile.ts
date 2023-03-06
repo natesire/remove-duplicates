@@ -10,7 +10,7 @@ export default class SchemaFile {
   }
 
   schema(): any {
-    this.contents = JSON.parse(this.rawContents());
+    this.contents = JSON.parse(this.read());
     return this.contents;
   }
 
@@ -18,22 +18,20 @@ export default class SchemaFile {
     return this.schema().versions[0].objects;
   }
 
+  setObjects(objects: any) {
+    this.schema().versions[0].objects = objects;
+  }
+
   fileType(filename: string): string {
     return this.fileName.split(".").pop() || "";
   }
 
-  read(): Object {
-    if (this.fileType(this.fileName) == "json")
-      this.contents = this.rawContents();
-    return this.contents;
-  }
-
-  rawContents(): string {
+  read(): string {
     return fs.readFileSync(this.fileName, "utf8");
   }
 
-  writeFile(data: string) {
-    fs.writeFile("schemaOutput/clean_application.json", data, function (err) {
+  writeFile() {
+    fs.writeFile("schemaOutput/clean_application.json", JSON.stringify(this.schema()), function (err) {
       if (err) return console.log(err);
     });
   }

@@ -15,7 +15,7 @@ describe("SchemaFile", () => {
 
   it("should write to output file", () => {
     let schemaFile = new SchemaFile(schemaFilename);
-    schemaFile.writeFile(schemaContentFromFile);
+    schemaFile.writeFile();
   });
 
   it("should receive schema data with correct shape", () => {
