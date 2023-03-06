@@ -1,17 +1,1 @@
-{
-  "versions": [
-    {
-      "objects": [
-        {
-          "key": "object_1"
-        },
-        {
-          "key": "object_2"
-        }
-      ],
-      "thirdKey": {
-        "test": "test"
-      }
-    }
-  ]
-}
+[{"key":1},{"key":2}]

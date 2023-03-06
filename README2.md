@@ -1,3 +1,6 @@
+# Run the app tests
+
+npm run tests
 # Clarification
 
 Objects could mean any JSON object or the actual key named "objects" in the JSON schema.
