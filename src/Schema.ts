@@ -9,7 +9,7 @@ export default class Schema {
     this.schemaData = schemaObj;
   }
 
-  // arrayOfObjects should have shape: [{ key: 1 }, { key: 1 }, { key: 2 }] from the schema file
+  // can be applied to Objects or fields 
   public uniqueArrayOfObjects(arrayOfObjects: Array<any>): Array<object> {
     let uniqueArrayOfObjects = Array<object>();
     let uniqueSetOfKeys = new Set();
