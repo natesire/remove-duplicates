@@ -16,3 +16,7 @@ IEEE keeps the last key/value pair based on order. There's no timestamp in the d
 # Architecture
 
 The algorithm to normalize clean the schema is n^2 worse case. Fields are a loop inside of Objects loop. Loop inside a loop. It also depends on how much data schema we are working with. n fields and n objects. I would recommend the cleaner be run async off the monolith. An async node worker pool can be setup to alert the frontend when it is done.
+
+# Ultimate Solution
+
+Identify how to keep duplicates from being entered in the first place.
