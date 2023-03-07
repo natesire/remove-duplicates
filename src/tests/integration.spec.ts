@@ -6,9 +6,10 @@ describe('App', () => {
     it('DEBUG should read file, clean and then output new file', () => {
 
         // object_4 is duplicated in file, six total
-        let schemaFilename = path.join(__dirname, "../schema/mock_application.json");
-        let schemaFile = new SchemaFile(schemaFilename);
+        let schemaFilenameInput = path.join(__dirname, "../schema/mock_application.json");
+        let schemaFile = new SchemaFile(schemaFilenameInput);
         let schemaObj = schemaFile.schemaDataObj;
+        let cleanFilenameOutput1 = "schemaOutput/clean_application.integration.test.1.json";
 
         let schema = new Schema(schemaObj);
 
@@ -16,10 +17,10 @@ describe('App', () => {
         let dupsRemovedObjects = schema.uniqueArrayOfObjects(objectsWithDups);
 
         schemaFile.setObjects(dupsRemovedObjects);
-        schemaFile.writeOutputFile("schemaOutput/clean_application.test.1.json");
+        schemaFile.writeOutputFile(cleanFilenameOutput1);
 
         // ensure no duplicates by counting number of objects
-        let fileCleanOutput = new SchemaFile("schemaOutput/clean_application.test.1.json");
+        let fileCleanOutput = new SchemaFile(cleanFilenameOutput1);
         let outputFileObj : any = fileCleanOutput.read();
         expect(outputFileObj.versions[0].objects.length).toEqual(5); // remove 1 duplicated object
 
