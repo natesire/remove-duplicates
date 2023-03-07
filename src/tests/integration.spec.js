@@ -8,7 +8,7 @@ const path_1 = __importDefault(require("path"));
 const Schema_js_1 = __importDefault(require("../Schema.js"));
 describe('App', () => {
     it('DEBUG should read file, clean and then output new file', () => {
-        // object_4 is duplicated in file, six total
+        // object_4 is duplicated in the schema file
         let schemaFilenameInput = path_1.default.join(__dirname, "../schema/mock_application.json");
         let schemaFile = new SchemaFile_js_1.default(schemaFilenameInput);
         let schemaObj = schemaFile.schemaDataObj;
@@ -21,7 +21,7 @@ describe('App', () => {
         // ensure no duplicates by counting number of objects
         let fileCleanOutput = new SchemaFile_js_1.default(cleanFilenameOutput1);
         let outputFileObj = fileCleanOutput.read();
-        expect(outputFileObj.versions[0].objects.length).toEqual(5); // remove 1 duplicated object
+        expect(fileCleanOutput.objectsFromSchema().length).toEqual(5); // remove 1 duplicated object
         let i = 0;
         outputFileObj.versions[0].objects.forEach((object) => {
             schemaObj.versions[0].objects[i].fields = schema.uniqueArrayOfObjects(object.fields);

@@ -31,6 +31,11 @@ class SchemaFile {
         this.fileName = fileName;
         this.schemaDataObj = this.read();
     }
+    // this will replace getters and setters and make the code more maintainable
+    // save the key path to a cache for later use
+    findKeyInSchema(key) {
+        // search for objects key in schema
+    }
     objectsFromSchema() {
         // there should only be one versions, [0]
         return this.schemaDataObj.versions[0].objects;
