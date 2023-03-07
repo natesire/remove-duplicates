@@ -11,11 +11,12 @@ export default class SchemaFile {
   }
 
   objectsFromSchema() {
+    // there should only be one versions, [0]
     return this.schemaDataObj.versions[0].objects;
   }
 
   fieldsFromSchema(objectIndex: number) {
-    let fields = this.schemaDataObj.versions[0].objects[objectIndex].fields;
+    let fields = this.objectsFromSchema()[objectIndex].fields;
     return fields;
   }
 
