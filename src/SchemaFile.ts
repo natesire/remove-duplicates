@@ -14,6 +14,11 @@ export default class SchemaFile {
     return this.schemaDataObj.versions[0].objects;
   }
 
+  fieldsFromSchema(objectIndex: number) {
+    let fields = this.schemaDataObj.versions[0].objects[objectIndex].fields;
+    return fields;
+  }
+
   setObjects(objects: any) {
     this.schemaDataObj.versions[0].objects = objects;
   }

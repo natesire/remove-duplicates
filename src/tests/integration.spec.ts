@@ -33,10 +33,8 @@ describe('App', () => {
         schemaFile.schemaDataObj = schemaObj;
         schemaFile.writeOutputFile("schemaOutput/clean_application.test.2.json");
 
-        //read file
         let finalFile : any = new SchemaFile("schemaOutput/clean_application.test.2.json");
-        let fields = finalFile.schemaDataObj.versions[0].objects[0].fields;
-        expect(fields.length).toBe(6);
+        expect(finalFile.fieldsFromSchema(0).length).toBe(6);
 
     });
 

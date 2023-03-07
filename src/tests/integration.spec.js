@@ -29,10 +29,8 @@ describe('App', () => {
         });
         schemaFile.schemaDataObj = schemaObj;
         schemaFile.writeOutputFile("schemaOutput/clean_application.test.2.json");
-        //read file
         let finalFile = new SchemaFile_js_1.default("schemaOutput/clean_application.test.2.json");
-        let fields = finalFile.schemaDataObj.versions[0].objects[0].fields;
-        expect(fields.length).toBe(6);
+        expect(finalFile.fieldsFromSchema(0).length).toBe(6);
     });
     it('should read file and remove duplicate objects', () => {
         let schemaFilename = path_1.default.join(__dirname, "mock.json");
