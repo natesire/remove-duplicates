@@ -44,6 +44,9 @@ class SchemaFile {
         let fields = this.objectsFromSchema()[objectIndex].fields;
         return fields;
     }
+    setFields(objectIndex, fields) {
+        this.objectsFromSchema()[objectIndex].fields = fields;
+    }
     setObjects(objects) {
         this.schemaDataObj.versions[0].objects = objects;
     }

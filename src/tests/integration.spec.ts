@@ -24,10 +24,10 @@ describe('App', () => {
         let outputFileObj : any = fileCleanOutput.read();
         expect(fileCleanOutput.objectsFromSchema().length).toEqual(5); // remove 1 duplicated object
 
-        let i = 0;
+        let objectIndex = 0;
         outputFileObj.versions[0].objects.forEach((object:any) => {
-            schemaObj.versions[0].objects[i].fields = schema.uniqueArrayOfObjects(object.fields);
-            i++;
+            schemaFile.setFields(objectIndex, schema.uniqueArrayOfObjects(object.fields))
+            objectIndex++;
         });
 
         schemaFile.schemaDataObj = schemaObj;
