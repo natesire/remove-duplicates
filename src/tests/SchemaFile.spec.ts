@@ -15,8 +15,9 @@ describe("SchemaFile", () => {
 
   describe("findKey", () => {
     it("should return first key found", () => {
-      let schemaFile = new SchemaFile(schemaFilename);
-      expect(schemaFile.findKeyInSchema("versions")).toBeTruthy();
+      let treeFilename = path.join(__dirname, "tree.json");
+      let treeFile = new SchemaFile(treeFilename);
+      expect(treeFile.findKeyInSchema("versions")).toBeTruthy();
     });
   });
 

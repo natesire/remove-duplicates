@@ -17,7 +17,8 @@ export default class SchemaFile {
     if(this.schemaDataObj[key]) {
         return this.schemaDataObj[key];
     } else {
-        // traverse down one level for each each key
+        // traverse down one level for each each object
+        // look for the first object
     }
   }
 
