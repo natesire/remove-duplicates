@@ -21,6 +21,10 @@ The algorithm to normalize clean the schema is n^2 worse case. Fields are a loop
 
 Identify how to keep duplicates from being entered in the first place.
 
+# Alternative Solution
+
+Instead of using a pre-existing npm package, we can build our own package that can normalize any JSON schema. The first step is to build a findKey method that allows the code to be easily applied to any schema. Branch DFS is the start of this. It removed one less dependency and and can be cuztomized into the architecture.
+
 # ORIGINAL Instructions
 
 
