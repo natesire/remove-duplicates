@@ -11,9 +11,14 @@ export default class SchemaFile {
   }
 
   // this will replace getters and setters and make the code more maintainable
-  // save the key path to a cache for later use
+  // save the key path to a cache to prevent from re-running this function 
   findKeyInSchema(key: string) {
-    // search for objects key in schema
+    // search for key in schema with Depth first search
+    if(this.schemaDataObj[key]) {
+        return this.schemaDataObj[key];
+    } else {
+        // traverse down one level for each each key
+    }
   }
 
   objectsFromSchema() {

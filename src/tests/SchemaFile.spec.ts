@@ -13,6 +13,13 @@ describe("SchemaFile", () => {
     schemaContentFromFile = fs.readFileSync(schemaFilename, "utf8");
   });
 
+  describe("findKey", () => {
+    it("should return first key found", () => {
+      let schemaFile = new SchemaFile(schemaFilename);
+      expect(schemaFile.findKeyInSchema("versions")).toBeTruthy();
+    });
+  });
+
   it("should write to output file", () => {
     let schemaFile = new SchemaFile(schemaFilename);
     schemaFile.writeOutputFile();

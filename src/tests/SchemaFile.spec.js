@@ -15,6 +15,12 @@ describe("SchemaFile", () => {
         cleanTestSchemaFilename = path_1.default.join(__dirname, "../../schemaOutput/clean_application.test.json");
         schemaContentFromFile = fs_1.default.readFileSync(schemaFilename, "utf8");
     });
+    describe("findKey", () => {
+        it("should return first key found", () => {
+            let schemaFile = new SchemaFile_js_1.default(schemaFilename);
+            expect(schemaFile.findKeyInSchema("versions")).toBeTruthy();
+        });
+    });
     it("should write to output file", () => {
         let schemaFile = new SchemaFile_js_1.default(schemaFilename);
         schemaFile.writeOutputFile();
