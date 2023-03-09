@@ -14,10 +14,18 @@ describe("SchemaFile", () => {
   });
 
   describe("findKey", () => {
-    it("should return first key found", () => {
+    it("should findKey objects3", () => {
       let treeFilename = path.join(__dirname, "tree.json");
       let treeFile = new SchemaFile(treeFilename);
-      expect(treeFile.findKeyInSchema("versions")).toBeTruthy();
+      let found = treeFile.findKeyInSchema("objects3", treeFile.schemaDataObj);
+      expect(found).toEqual(["versions", "objects1", "objects2"]);
+    });
+
+    it("should findKey objects6", () => {
+      let treeFilename = path.join(__dirname, "tree.json");
+      let treeFile = new SchemaFile(treeFilename);
+      let found = treeFile.findKeyInSchema("objects6", treeFile.schemaDataObj);
+      expect(found).toBeTruthy();
     });
   });
 

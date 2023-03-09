@@ -16,10 +16,17 @@ describe("SchemaFile", () => {
         schemaContentFromFile = fs_1.default.readFileSync(schemaFilename, "utf8");
     });
     describe("findKey", () => {
-        it("should return first key found", () => {
+        it("should findKey objects3", () => {
             let treeFilename = path_1.default.join(__dirname, "tree.json");
             let treeFile = new SchemaFile_js_1.default(treeFilename);
-            expect(treeFile.findKeyInSchema("versions")).toBeTruthy();
+            let found = treeFile.findKeyInSchema("objects3", treeFile.schemaDataObj);
+            expect(found).toEqual(["versions", "objects1", "objects2"]);
+        });
+        it("should findKey objects6", () => {
+            let treeFilename = path_1.default.join(__dirname, "tree.json");
+            let treeFile = new SchemaFile_js_1.default(treeFilename);
+            let found = treeFile.findKeyInSchema("objects6", treeFile.schemaDataObj);
+            expect(found).toBeTruthy();
         });
     });
     it("should write to output file", () => {

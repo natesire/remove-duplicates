@@ -30,17 +30,26 @@ class SchemaFile {
         this.schemaDataObj = {};
         this.fileName = fileName;
         this.schemaDataObj = this.read();
+        this.keyPath = [];
     }
     // this will replace getters and setters and make the code more maintainable
-    // save the key path to a cache to prevent from re-running this function 
-    findKeyInSchema(key) {
-        // search for key in schema with Depth first search
-        if (this.schemaDataObj[key]) {
-            return this.schemaDataObj[key];
+    // save the key path to a cache to prevent from re-running this function
+    // use recursion to find key with depth first search
+    findKeyInSchema(findKey, schema) {
+        if (schema[findKey]) {
+            console.log("found key in schema");
+            console.log(schema);
+            return this.keyPath;
         }
         else {
-            // traverse down one level for each each key
+            for (const [k, value] of Object.entries(schema)) {
+                if (typeof schema[k] === "object") {
+                    this.keyPath.push(k);
+                    return this.findKeyInSchema(findKey, schema[k]);
+                }
+            }
         }
+        return this.keyPath;
     }
     objectsFromSchema() {
         // there should only be one versions, [0]

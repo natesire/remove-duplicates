@@ -4,22 +4,31 @@ export default class SchemaFile {
   contents = {};
   fileName: string;
   schemaDataObj: any = {};
+  keyPath: string[];
 
   constructor(fileName: string) {
     this.fileName = fileName;
     this.schemaDataObj = this.read();
+    this.keyPath = [];
   }
 
   // this will replace getters and setters and make the code more maintainable
-  // save the key path to a cache to prevent from re-running this function 
-  findKeyInSchema(key: string) {
-    // search for key in schema with Depth first search
-    if(this.schemaDataObj[key]) {
-        return this.schemaDataObj[key];
+  // save the key path to a cache to prevent from re-running this function
+  // use recursion to find key with depth first search
+  findKeyInSchema(findKey: string, schema : any) : Array<string> {
+    if (schema[findKey]) {
+        console.log("found key in schema");
+        console.log(schema);
+        return this.keyPath;
     } else {
-        // traverse down one level for each each object
-        // look for the first object
+      for (const [k, value] of Object.entries(schema)) {
+        if (typeof schema[k] === "object") {
+            this.keyPath.push(k);
+          return this.findKeyInSchema(findKey, schema[k]);
+        }
+      }
     }
+    return this.keyPath;
   }
 
   objectsFromSchema() {
@@ -32,7 +41,7 @@ export default class SchemaFile {
     return fields;
   }
 
-  setFields(objectIndex: number, fields : Object) {
+  setFields(objectIndex: number, fields: Object) {
     this.objectsFromSchema()[objectIndex].fields = fields;
   }
 
@@ -45,22 +54,24 @@ export default class SchemaFile {
   }
 
   read(): Object {
-    let output : Object = {};
+    let output: Object = {};
     let contents = fs.readFileSync(this.fileName, "utf8");
     try {
-        output = JSON.parse(contents);
-    } catch(e) {
-        throw new Error(`${this.fileName} file cannot be parsed as JSON`);
+      output = JSON.parse(contents);
+    } catch (e) {
+      throw new Error(`${this.fileName} file cannot be parsed as JSON`);
     }
     return output;
   }
 
   writeOutputFile(outputFile?: string) {
-
     // validate the JSON
     let jsonStr = JSON.stringify(this.schemaDataObj, null, 2);
     let jsonObj = JSON.parse(jsonStr);
 
-    fs.writeFileSync(outputFile || "schemaOutput/clean_application.test.json", jsonStr);
+    fs.writeFileSync(
+      outputFile || "schemaOutput/clean_application.test.json",
+      jsonStr
+    );
   }
 }
