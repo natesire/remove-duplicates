@@ -4,7 +4,7 @@ The unit tests show the solution working. There is an integration test that runs
 
 # Run the app tests
 
-npm run tests
+npm run test
 # Clarification
 
 Objects could mean any JSON object or the actual key named "objects" in the JSON schema.

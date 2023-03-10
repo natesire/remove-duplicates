@@ -110,8 +110,8 @@ describe("SchemaFile", () => {
     );
   });
 
-  it("dir path should not contain duplicate files", () => {
-    expect(__dirname).toContain("src\\tests");
+  it("should have tests in path", () => {
+    expect(__dirname).toContain("tests");
   });
 
   it("dir path should not contain duplicate files", () => {
