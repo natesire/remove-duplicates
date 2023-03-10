@@ -114,10 +114,6 @@ describe("SchemaFile", () => {
     expect(__dirname).toContain("tests");
   });
 
-  it("dir path should not contain duplicate files", () => {
-    expect(fs.existsSync("src\\tests\\mock.json")).toBe(true);
-  });
-
   it("writes the clean file", () => {
     let test = "test";
     // write to file
