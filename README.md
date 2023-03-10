@@ -9,11 +9,15 @@ npm i
 npm run test
 # Clarification
 
-Objects could mean any JSON object or the actual key named "objects" in the JSON schema.
+Objects and Fields could mean any JSON object or field. The directions really point to the actual key named "objects" in the JSON schema. There is also the danger of using reserved words in Nodes JS. The schema needs better naming. e.g. Objects of something, fields of something. Clean code!
 
 # Policy for Removing Duplicates
 
-IEEE keeps the last key/value pair based on order. There's no timestamp in the data to create a more robust policy.
+IEEE keeps the last key/value pair based on order. There's no timestamp in the data to create a more robust policy. We don't want to assume this is correct.
+
+# Cross Platform
+
+Time needs to spent setting up the repo for windows, linux and osx. I don't know the target platform for the code. So I have to assume this needs to work for all major platforms.
 
 # Architecture
 
