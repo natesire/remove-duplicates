@@ -4,6 +4,8 @@ The unit tests show the solution working. There is an integration test that runs
 
 # Run the app tests
 
+npm i
+
 npm run test
 # Clarification
 
